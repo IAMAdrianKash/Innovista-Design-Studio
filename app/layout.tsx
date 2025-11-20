@@ -1,9 +1,33 @@
 import type { Metadata } from 'next'
+import { Plus_Jakarta_Sans, Outfit, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ScrollProgress from '@/components/ui/ScrollProgress'
 import MobileStickyBar from '@/components/ui/MobileStickyBar'
+
+// Optimized Google Fonts with Next.js
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-heading',
+  display: 'swap',
+})
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Innovista Design Studio - Conversion-Focused Web Design',
@@ -29,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${plusJakartaSans.variable} ${outfit.variable} ${playfairDisplay.variable}`}>
       <body className="bg-cream min-h-screen font-sans text-dark selection:bg-dark selection:text-white overflow-x-hidden">
         <div className="relative">
           {/* Global UX Enhancements */}

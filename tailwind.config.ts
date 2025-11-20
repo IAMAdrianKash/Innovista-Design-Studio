@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-        heading: ['Outfit', 'sans-serif'],
-        serif: ['"Playfair Display"', 'serif'],
+        sans: ['var(--font-sans)', 'sans-serif'],
+        heading: ['var(--font-heading)', 'sans-serif'],
+        serif: ['var(--font-serif)', 'serif'],
       },
       colors: {
         cream: '#F3F4F6', // Cool Platinum (Gray-100 equivalent)
