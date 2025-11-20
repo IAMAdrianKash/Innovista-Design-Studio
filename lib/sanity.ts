@@ -122,6 +122,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         description
       },
       featuredImage,
+      content,
       estimatedReadTime,
       seo
     }`
