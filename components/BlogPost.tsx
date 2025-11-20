@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { PortableText } from '@portabletext/react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, Tag } from 'lucide-react';
-import { getBlogPostBySlug, BlogPost as BlogPostType, urlFor } from '../lib/sanity';
+import { getBlogPostBySlug, BlogPost as BlogPostType, urlForImage } from '../lib/sanity';
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -74,8 +74,8 @@ const BlogPost: React.FC = () => {
   const metaTitle = post.seo?.metaTitle || `${post.title} | Innovista Design Studio`;
   const metaDescription = post.seo?.metaDescription || post.excerpt;
   const ogImageUrl = post.seo?.ogImage
-    ? urlFor(post.seo.ogImage).width(1200).height(630).url()
-    : urlFor(post.featuredImage).width(1200).height(630).url();
+    ? urlForImage(post.seo.ogImage).width(1200).height(630).url()
+    : urlForImage(post.featuredImage).width(1200).height(630).url();
 
   return (
     <>
@@ -148,7 +148,7 @@ const BlogPost: React.FC = () => {
               <div className="flex items-center gap-3">
                 {post.author.image && (
                   <img
-                    src={urlFor(post.author.image).width(48).height(48).url()}
+                    src={urlForImage(post.author.image).width(48).height(48).url()}
                     alt={post.author.name}
                     className="w-12 h-12 rounded-full object-cover"
                   />
@@ -187,7 +187,7 @@ const BlogPost: React.FC = () => {
             className="max-w-6xl mx-auto px-8 pb-16"
           >
             <img
-              src={urlFor(post.featuredImage).width(1200).height(630).url()}
+              src={urlForImage(post.featuredImage).width(1200).height(630).url()}
               alt={post.featuredImage.alt || post.title}
               className="w-full rounded-[2rem] shadow-2xl"
             />
@@ -216,7 +216,7 @@ const BlogPost: React.FC = () => {
                   image: ({ value }) => (
                     <figure className="my-8">
                       <img
-                        src={urlFor(value).width(800).url()}
+                        src={urlForImage(value).width(800).url()}
                         alt={value.alt || ''}
                         className="w-full rounded-2xl"
                       />
@@ -255,7 +255,7 @@ const BlogPost: React.FC = () => {
               <div className="flex items-start gap-6">
                 {post.author.image && (
                   <img
-                    src={urlFor(post.author.image).width(80).height(80).url()}
+                    src={urlForImage(post.author.image).width(80).height(80).url()}
                     alt={post.author.name}
                     className="w-20 h-20 rounded-full object-cover"
                   />

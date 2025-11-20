@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Tag, Quote } from 'lucide-react';
-import { getCaseStudyBySlug, CaseStudy as CaseStudyType, urlFor } from '../lib/sanity';
+import { getCaseStudyBySlug, CaseStudy as CaseStudyType, urlForImageImage } from '../lib/sanity';
 
 const CaseStudyDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -71,8 +71,8 @@ const CaseStudyDetail: React.FC = () => {
   const metaTitle = caseStudy.seo?.metaTitle || `${caseStudy.client}: ${caseStudy.title} | Innovista Design Studio`;
   const metaDescription = caseStudy.seo?.metaDescription || caseStudy.excerpt;
   const ogImageUrl = caseStudy.seo?.ogImage
-    ? urlFor(caseStudy.seo.ogImage).width(1200).height(630).url()
-    : urlFor(caseStudy.featuredImage).width(1200).height(630).url();
+    ? urlForImage(caseStudy.seo.ogImage).width(1200).height(630).url()
+    : urlForImage(caseStudy.featuredImage).width(1200).height(630).url();
 
   const industryLabels: Record<string, string> = {
     'law': 'Law Firms',
@@ -185,7 +185,7 @@ const CaseStudyDetail: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <img
-                src={urlFor(caseStudy.featuredImage).width(800).height(600).url()}
+                src={urlForImage(caseStudy.featuredImage).width(800).height(600).url()}
                 alt={caseStudy.featuredImage.alt || caseStudy.client}
                 className="w-full rounded-[2rem] shadow-2xl"
               />
@@ -281,7 +281,7 @@ const CaseStudyDetail: React.FC = () => {
                     viewport={{ once: true }}
                   >
                     <img
-                      src={urlFor(image).width(800).height(600).url()}
+                      src={urlForImage(image).width(800).height(600).url()}
                       alt={image.alt || `Gallery image ${index + 1}`}
                       className="w-full rounded-2xl shadow-lg"
                     />
