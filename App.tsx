@@ -10,6 +10,8 @@ import ServiceLeadGen from './components/services/ServiceLeadGen';
 import ServiceAutomation from './components/services/ServiceAutomation';
 import ServiceSEO from './components/services/ServiceSEO';
 import CaseStudies from './components/CaseStudies';
+import CaseStudyDetail from './components/CaseStudyDetail';
+import BlogPost from './components/BlogPost';
 import Contact from './components/Contact';
 import Careers from './components/Careers';
 import FAQ from './components/FAQ';
@@ -58,6 +60,8 @@ const App: React.FC = () => {
               <Route path="/services/automation" element={<ServiceAutomation />} />
               <Route path="/services/seo" element={<ServiceSEO />} />
               <Route path="/case-studies" element={<CaseStudies />} />
+              <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+              <Route path="/insights/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/faq" element={<FAQ />} />
