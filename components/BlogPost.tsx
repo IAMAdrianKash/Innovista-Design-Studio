@@ -38,7 +38,7 @@ const BlogPost: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-cream flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-forest border-r-transparent"></div>
           <p className="mt-4 text-gray-600">Loading article...</p>
@@ -49,7 +49,7 @@ const BlogPost: React.FC = () => {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen bg-cream flex items-center justify-center px-8">
+      <div className="min-h-screen bg-white flex items-center justify-center px-8">
         <div className="text-center max-w-md">
           <h1 className="text-4xl font-heading font-bold text-dark mb-4">Article Not Found</h1>
           <p className="text-gray-600 mb-8">The article you're looking for doesn't exist or has been removed.</p>
@@ -98,117 +98,80 @@ const BlogPost: React.FC = () => {
         <meta name="twitter:image" content={ogImageUrl} />
       </Helmet>
 
-      <article className="bg-cream min-h-screen">
+      <article className="bg-white min-h-screen">
         {/* Back Button */}
-        <div className="max-w-4xl mx-auto px-8 pt-32 pb-8">
+        <div className="max-w-4xl mx-auto px-6 pt-24 pb-8">
           <Link
             to="/insights"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-dark transition-colors"
+            className="group inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-forest transition-colors"
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             Back to Insights
           </Link>
         </div>
 
         {/* Article Header */}
-        <header className="max-w-4xl mx-auto px-8 pb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Categories */}
+        <header className="max-w-4xl mx-auto px-6 pb-8">
+          {/* Meta: Category + Date */}
+          <div className="flex items-center gap-4 text-sm text-gray-500 mb-6 uppercase tracking-wide font-medium">
             {post.categories && post.categories.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-6">
-                {post.categories.map((category) => (
-                  <span
-                    key={category._id}
-                    className="inline-flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full"
-                  >
-                    <Tag size={14} />
-                    {category.title}
-                  </span>
-                ))}
+              <span className="bg-gray-100 px-3 py-1 rounded-full text-dark">
+                {post.categories[0].title}
+              </span>
+            )}
+            <div className="flex items-center gap-1">
+              <Calendar size={14} /> {formattedDate}
+            </div>
+          </div>
+
+          {/* Title */}
+          <h1 className="font-heading font-bold text-3xl md:text-5xl text-[#1A1A1A] mb-8 leading-tight">
+            {post.title}
+          </h1>
+
+          {/* Author */}
+          <div className="flex items-center gap-3 pb-12 border-b border-gray-100">
+            {post.author.image && (
+              <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                <img
+                  src={urlForImage(post.author.image).width(48).height(48).url()}
+                  alt={post.author.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
             )}
-
-            {/* Title */}
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-dark mb-6 leading-tight">
-              {post.title}
-            </h1>
-
-            {/* Excerpt */}
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              {post.excerpt}
-            </p>
-
-            {/* Meta Info */}
-            <div className="flex flex-wrap items-center gap-6 text-gray-600">
-              {/* Author */}
-              <div className="flex items-center gap-3">
-                {post.author.image && (
-                  <img
-                    src={urlForImage(post.author.image).width(48).height(48).url()}
-                    alt={post.author.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                )}
-                <div>
-                  <p className="font-medium text-dark">{post.author.name}</p>
-                  {post.author.bio && (
-                    <p className="text-sm text-gray-500">{post.author.bio.substring(0, 50)}...</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Date */}
-              <div className="flex items-center gap-2">
-                <Calendar size={18} />
-                <span>{formattedDate}</span>
-              </div>
-
-              {/* Read Time */}
-              {post.estimatedReadTime && (
-                <div className="flex items-center gap-2">
-                  <Clock size={18} />
-                  <span>{post.estimatedReadTime} min read</span>
-                </div>
-              )}
+            <div>
+              <p className="font-bold text-dark text-sm">{post.author.name}</p>
+              <p className="text-xs text-gray-500">Strategist @ Innovista</p>
             </div>
-          </motion.div>
+          </div>
         </header>
 
         {/* Featured Image */}
         {post.featuredImage && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-6xl mx-auto px-8 pb-16"
-          >
+          <div className="max-w-4xl mx-auto px-6 pb-12">
             <img
               src={urlForImage(post.featuredImage).width(1200).height(630).url()}
               alt={post.featuredImage.alt || post.title}
-              className="w-full rounded-[2rem] shadow-2xl"
+              className="w-full aspect-video rounded-2xl object-cover bg-gray-100"
             />
-          </motion.div>
+          </div>
         )}
 
         {/* Article Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="max-w-3xl mx-auto px-8 pb-24"
-        >
-          <div className="prose prose-lg prose-gray max-w-none
-                          prose-headings:font-heading prose-headings:font-bold prose-headings:text-dark
-                          prose-p:text-gray-700 prose-p:leading-relaxed
+        <div className="max-w-4xl mx-auto px-6 pb-24">
+          <div className="prose prose-lg max-w-none
+                          prose-headings:font-heading prose-headings:font-bold prose-headings:text-dark prose-headings:mb-4 prose-headings:mt-8
+                          prose-h3:text-2xl
+                          prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-6
+                          prose-ul:my-6 prose-ul:space-y-2 prose-ul:list-disc prose-ul:pl-6
+                          prose-li:text-gray-600
                           prose-a:text-forest prose-a:no-underline hover:prose-a:underline
                           prose-strong:text-dark prose-strong:font-bold
-                          prose-code:text-forest prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded
-                          prose-blockquote:border-l-4 prose-blockquote:border-forest prose-blockquote:pl-6 prose-blockquote:italic
-                          prose-img:rounded-2xl prose-img:shadow-lg">
+                          prose-code:text-forest prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm
+                          prose-pre:bg-dark prose-pre:text-white
+                          prose-blockquote:border-l-4 prose-blockquote:border-forest prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600
+                          prose-img:rounded-2xl prose-img:my-8">
             <PortableText
               value={post.content}
               components={{
@@ -228,7 +191,7 @@ const BlogPost: React.FC = () => {
                     </figure>
                   ),
                   code: ({ value }) => (
-                    <pre className="bg-dark text-white p-6 rounded-xl overflow-x-auto">
+                    <pre className="bg-dark text-white p-6 rounded-xl overflow-x-auto my-6">
                       <code className="text-sm">{value.code}</code>
                     </pre>
                   ),
@@ -245,50 +208,46 @@ const BlogPost: React.FC = () => {
                     </a>
                   ),
                 },
+                block: {
+                  h3: ({ children }) => (
+                    <h3 className="text-2xl font-bold mb-4 mt-8">{children}</h3>
+                  ),
+                  normal: ({ children }) => (
+                    <p className="mb-6 text-gray-600 leading-relaxed">{children}</p>
+                  ),
+                },
+                list: {
+                  bullet: ({ children }) => (
+                    <ul className="list-disc pl-6 mb-6 space-y-2">{children}</ul>
+                  ),
+                  number: ({ children }) => (
+                    <ol className="list-decimal pl-6 mb-6 space-y-2">{children}</ol>
+                  ),
+                },
+                listItem: {
+                  bullet: ({ children }) => (
+                    <li className="text-gray-600">{children}</li>
+                  ),
+                  number: ({ children }) => (
+                    <li className="text-gray-600">{children}</li>
+                  ),
+                },
               }}
             />
           </div>
 
-          {/* Author Bio */}
-          {post.author.bio && (
-            <div className="mt-16 pt-8 border-t border-gray-200">
-              <div className="flex items-start gap-6">
-                {post.author.image && (
-                  <img
-                    src={urlForImage(post.author.image).width(80).height(80).url()}
-                    alt={post.author.name}
-                    className="w-20 h-20 rounded-full object-cover"
-                  />
-                )}
-                <div>
-                  <p className="text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">
-                    About the Author
-                  </p>
-                  <p className="font-heading text-2xl font-bold text-dark mb-2">
-                    {post.author.name}
-                  </p>
-                  <p className="text-gray-600 leading-relaxed">{post.author.bio}</p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* CTA */}
-          <div className="mt-16 p-8 bg-forest text-white rounded-[2rem] text-center">
-            <h3 className="font-heading text-2xl md:text-3xl font-bold mb-4">
-              Ready to Transform Your Business?
-            </h3>
-            <p className="text-white/80 mb-6">
-              Get a free website audit and discover how we can help you grow.
-            </p>
+          {/* Article Footer CTA */}
+          <div className="mt-20 p-8 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+            <h3 className="font-bold text-2xl mb-4">Enjoyed this perspective?</h3>
+            <p className="text-gray-600 mb-6">We apply this same strategic thinking to our client projects.</p>
             <Link
               to="/audit"
-              className="inline-block px-8 py-4 bg-white text-forest font-bold rounded-xl hover:bg-gray-100 transition-colors"
+              className="inline-block bg-forest text-white px-8 py-3 rounded-full font-bold hover:bg-forest/90 transition-colors"
             >
-              Get Your Free Audit
+              Get a Free Audit
             </Link>
           </div>
-        </motion.div>
+        </div>
       </article>
     </>
   );
