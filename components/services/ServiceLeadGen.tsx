@@ -1,14 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, TrendingUp, Target, Users } from 'lucide-react';
-import { PageType } from '../../App';
 import ContentSection from '../ContentSection';
 
-interface ServiceProps {
-  onNavigate: (page: PageType) => void;
-}
-
-const ServiceLeadGen: React.FC<ServiceProps> = ({ onNavigate }) => {
+const ServiceLeadGen: React.FC = () => {
   return (
     <div className="pt-12">
       <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-20">

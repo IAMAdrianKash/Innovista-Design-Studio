@@ -12,3 +12,6 @@ cmds = ["npm run build"]
 
 [start]
 cmd = "npx serve dist -s -p 3000"
+
+# -s flag enables SPA mode (redirects all routes to index.html)
+# Required for React Router to work correctly

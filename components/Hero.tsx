@@ -1,14 +1,10 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronRight, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { PageType } from '../App';
 
-interface HeroProps {
-  onNavigate?: (page: PageType) => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
+const Hero: React.FC = () => {
   return (
     <section className="relative pt-12 pb-24 px-6 md:px-12 max-w-[90rem] mx-auto overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -54,23 +50,23 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
 
           <div className="flex flex-wrap gap-4">
-            <button 
-              onClick={() => onNavigate && onNavigate('audit')}
+            <Link
+              to="/audit"
               className="group bg-forest text-white px-8 py-4 rounded-full text-[15px] font-medium hover:bg-forest/90 transition-all flex items-center gap-3 shadow-2xl shadow-forest/20 hover:shadow-forest/30 hover:-translate-y-1 duration-300"
             >
               Get Your Free Website Audit
               <div className="bg-white/20 rounded-full p-1 group-hover:translate-x-1 transition-transform">
                 <ChevronRight size={14} />
               </div>
-            </button>
-            
-            <button 
-              onClick={() => onNavigate && onNavigate('case-studies')}
+            </Link>
+
+            <Link
+              to="/case-studies"
               className="group px-8 py-4 rounded-full text-[15px] font-medium text-[#1A1A1A] border border-gray-200 hover:border-gray-400 hover:bg-white transition-all flex items-center gap-2"
             >
               View Selected Work
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform opacity-0 group-hover:opacity-100" />
-            </button>
+            </Link>
           </div>
         </motion.div>
 

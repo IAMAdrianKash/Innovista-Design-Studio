@@ -1,14 +1,11 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { PageType } from '../App';
 import SEO from './SEO';
 
-interface NotFoundProps {
-  onNavigate: (page: PageType) => void;
-}
-
-const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
+const NotFound: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="pt-12 min-h-[80vh] flex items-center justify-center bg-cream">
       <SEO 
@@ -43,7 +40,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          onClick={() => onNavigate('home')}
+          onClick={() => navigate('/')}
           className="bg-dark text-white px-8 py-4 rounded-full font-bold hover:bg-black transition-colors"
         >
           Back to Home

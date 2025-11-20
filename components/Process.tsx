@@ -2,15 +2,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Search, PenTool, Code, Rocket, TrendingUp } from 'lucide-react';
-import { PageType } from '../App';
 import ContentSection from './ContentSection';
 import SEO from './SEO';
 
-interface ProcessProps {
-  onNavigate: (page: PageType) => void;
-}
-
-const Process: React.FC<ProcessProps> = ({ onNavigate }) => {
+const Process: React.FC = () => {
   const steps = [
     {
       id: "01",

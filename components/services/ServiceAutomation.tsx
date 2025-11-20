@@ -1,14 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Zap, Mail, Database } from 'lucide-react';
-import { PageType } from '../../App';
 import ContentSection from '../ContentSection';
 
-interface ServiceProps {
-  onNavigate: (page: PageType) => void;
-}
-
-const ServiceAutomation: React.FC<ServiceProps> = ({ onNavigate }) => {
+const ServiceAutomation: React.FC = () => {
   return (
     <div className="pt-12">
       <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-20">

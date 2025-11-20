@@ -2,15 +2,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, BarChart, Globe, Search } from 'lucide-react';
-import { PageType } from '../../App';
 import ContentSection from '../ContentSection';
 import SEO from '../SEO';
 
-interface ServiceProps {
-  onNavigate: (page: PageType) => void;
-}
-
-const ServiceSEO: React.FC<ServiceProps> = ({ onNavigate }) => {
+const ServiceSEO: React.FC = () => {
   return (
     <div className="pt-12">
       <SEO 

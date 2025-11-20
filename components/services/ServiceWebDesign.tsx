@@ -2,15 +2,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Monitor, Smartphone, Zap } from 'lucide-react';
-import { PageType } from '../../App';
 import ContentSection from '../ContentSection';
 import SEO from '../SEO';
 
-interface ServiceProps {
-  onNavigate: (page: PageType) => void;
-}
-
-const ServiceWebDesign: React.FC<ServiceProps> = ({ onNavigate }) => {
+const ServiceWebDesign: React.FC = () => {
   return (
     <div className="pt-12">
       <SEO 

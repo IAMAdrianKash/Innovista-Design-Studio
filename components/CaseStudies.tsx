@@ -1,14 +1,10 @@
 
 import React, { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, ArrowLeft, CheckCircle2, BarChart3 } from 'lucide-react';
-import { PageType } from '../App';
 import ContentSection from './ContentSection';
 import { projectsData } from '../data/content';
-
-interface CaseStudiesProps {
-  onNavigate: (page: PageType) => void;
-}
 
 const ProjectCard: React.FC<{ project: any; index: number; onClick: () => void }> = ({ project, index, onClick }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -66,11 +62,12 @@ const ProjectCard: React.FC<{ project: any; index: number; onClick: () => void }
   );
 };
 
-const CaseStudies: React.FC<CaseStudiesProps> = ({ onNavigate }) => {
+const CaseStudies: React.FC = () => {
+  const navigate = useNavigate();
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
-  const activeProject = selectedProjectId 
-    ? projectsData.find(p => p.id === selectedProjectId) 
+  const activeProject = selectedProjectId
+    ? projectsData.find(p => p.id === selectedProjectId)
     : null;
 
   const handleProjectClick = (id: string) => {
@@ -168,7 +165,7 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ onNavigate }) => {
 
           <div className="mt-24 text-center">
              <h2 className="font-heading font-bold text-3xl mb-8">Ready for similar results?</h2>
-             <button onClick={() => onNavigate('audit')} className="bg-dark text-white px-8 py-4 rounded-full font-bold hover:bg-black transition-colors">
+             <button onClick={() => navigate('/audit')} className="bg-dark text-white px-8 py-4 rounded-full font-bold hover:bg-black transition-colors">
                 Get Your Free Audit
              </button>
           </div>
