@@ -1,0 +1,48 @@
+import { defineConfig } from 'sanity';
+import { deskTool } from 'sanity/desk';
+import { visionTool } from '@sanity/vision';
+import { schemaTypes } from './sanity/schemas';
+
+export default defineConfig({
+  name: 'default',
+  title: 'Innovista Design Studio',
+
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'your-project-id',
+  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
+
+  plugins: [
+    deskTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            S.listItem()
+              .title('Blog Posts')
+              .child(
+                S.documentTypeList('post')
+                  .title('Blog Posts')
+                  .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+              ),
+            S.listItem()
+              .title('Case Studies')
+              .child(
+                S.documentTypeList('caseStudy')
+                  .title('Case Studies')
+                  .defaultOrdering([{ field: 'projectDate', direction: 'desc' }])
+              ),
+            S.divider(),
+            S.listItem()
+              .title('Authors')
+              .child(S.documentTypeList('author').title('Authors')),
+            S.listItem()
+              .title('Categories')
+              .child(S.documentTypeList('category').title('Categories')),
+          ]),
+    }),
+    visionTool(), // Query testing tool
+  ],
+
+  schema: {
+    types: schemaTypes,
+  },
+});
