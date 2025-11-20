@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, ArrowRight } from 'lucide-react';
@@ -85,6 +86,29 @@ const Contact: React.FC = () => {
                 <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2">Email Address</label>
                     <input type="email" className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors" placeholder="jane@company.com" />
+                </div>
+
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2">Service Needed</label>
+                        <select className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors appearance-none text-gray-600 cursor-pointer">
+                            <option>Web Design & Build</option>
+                            <option>Lead Generation Strategy</option>
+                            <option>Business Automation</option>
+                            <option>SEO & Growth Retainer</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2">Estimated Budget</label>
+                        <select className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors appearance-none text-gray-600 cursor-pointer">
+                            <option value="" disabled selected>Select Range</option>
+                            <option>$8k - $15k</option>
+                            <option>$15k - $30k</option>
+                            <option>$30k - $50k</option>
+                            <option>$50k+</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div className="space-y-2">

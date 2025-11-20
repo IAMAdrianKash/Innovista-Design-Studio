@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Monitor, Smartphone, Zap } from 'lucide-react';
 import { PageType } from '../../App';
 import ContentSection from '../ContentSection';
+import SEO from '../SEO';
 
 interface ServiceProps {
   onNavigate: (page: PageType) => void;
@@ -11,6 +13,11 @@ interface ServiceProps {
 const ServiceWebDesign: React.FC<ServiceProps> = ({ onNavigate }) => {
   return (
     <div className="pt-12">
+      <SEO 
+        title="Custom Web Design Services Edmonton | React & Next.js Experts"
+        description="High-performance web design services in Edmonton. We build fast, mobile-first websites using React and Next.js designed to convert visitors into leads."
+        canonicalUrl="/services/web-design"
+      />
       <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -60,6 +67,45 @@ const ServiceWebDesign: React.FC<ServiceProps> = ({ onNavigate }) => {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Industries We Excel In */}
+      <section className="py-24 bg-gray-50 border-b border-gray-200">
+            <div className="max-w-[90rem] mx-auto px-6 md:px-12">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div>
+                        <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#1A1A1A] mb-4">Industries We Excel In</h2>
+                        <p className="text-gray-600 max-w-xl text-lg">We don't build for everyone. We build for industries where trust, clarity, and technical capability are non-negotiable.</p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="bg-white p-10 rounded-2xl border border-gray-100 hover:shadow-md transition-shadow">
+                        <h3 className="font-heading font-bold text-xl mb-6">Law & Professional Services</h3>
+                        <ul className="space-y-4">
+                            <li className="flex items-center gap-3 text-sm font-medium text-gray-600"><div className="w-1.5 h-1.5 bg-forest rounded-full"></div>Practice Area Silos</li>
+                            <li className="flex items-center gap-3 text-sm font-medium text-gray-600"><div className="w-1.5 h-1.5 bg-forest rounded-full"></div>Attorney Bio Strategy</li>
+                            <li className="flex items-center gap-3 text-sm font-medium text-gray-600"><div className="w-1.5 h-1.5 bg-forest rounded-full"></div>Trust Signal Integration</li>
+                        </ul>
+                    </div>
+                    <div className="bg-white p-10 rounded-2xl border border-gray-100 hover:shadow-md transition-shadow">
+                        <h3 className="font-heading font-bold text-xl mb-6">Industrial & Energy</h3>
+                        <ul className="space-y-4">
+                            <li className="flex items-center gap-3 text-sm font-medium text-gray-600"><div className="w-1.5 h-1.5 bg-forest rounded-full"></div>Equipment Cataloging</li>
+                            <li className="flex items-center gap-3 text-sm font-medium text-gray-600"><div className="w-1.5 h-1.5 bg-forest rounded-full"></div>Safety Certification Showcases</li>
+                            <li className="flex items-center gap-3 text-sm font-medium text-gray-600"><div className="w-1.5 h-1.5 bg-forest rounded-full"></div>RFP Optimization</li>
+                        </ul>
+                    </div>
+                    <div className="bg-white p-10 rounded-2xl border border-gray-100 hover:shadow-md transition-shadow">
+                        <h3 className="font-heading font-bold text-xl mb-6">Medical & Health</h3>
+                        <ul className="space-y-4">
+                            <li className="flex items-center gap-3 text-sm font-medium text-gray-600"><div className="w-1.5 h-1.5 bg-forest rounded-full"></div>Patient Booking Flows</li>
+                            <li className="flex items-center gap-3 text-sm font-medium text-gray-600"><div className="w-1.5 h-1.5 bg-forest rounded-full"></div>Service Education</li>
+                            <li className="flex items-center gap-3 text-sm font-medium text-gray-600"><div className="w-1.5 h-1.5 bg-forest rounded-full"></div>Clinic Virtual Tours</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
       </section>
 
       <section className="py-24 px-6 md:px-12 max-w-5xl mx-auto">

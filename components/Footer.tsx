@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Linkedin, Twitter, Globe } from 'lucide-react';
 import { PageType } from '../App';
@@ -36,8 +37,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h5 className="font-heading font-bold text-xs uppercase tracking-wider mb-6 text-gray-500">Work</h5>
             <ul className="space-y-3">
               <li><button onClick={() => handleNav('case-studies')} className="text-sm text-gray-600 hover:text-dark text-left">Case Studies</button></li>
-              <li><button onClick={() => handleNav('home')} className="text-sm text-gray-600 hover:text-dark text-left">Process</button></li>
-              <li><button onClick={() => handleNav('services')} className="text-sm text-gray-600 hover:text-dark text-left">Pricing</button></li>
+              <li><button onClick={() => handleNav('process')} className="text-sm text-gray-600 hover:text-dark text-left">Process</button></li>
+              <li><button onClick={() => handleNav('pricing')} className="text-sm text-gray-600 hover:text-dark text-left">Pricing</button></li>
               <li><button onClick={() => handleNav('capabilities')} className="text-sm text-gray-600 hover:text-dark text-left">Capabilities</button></li>
             </ul>
           </div>
@@ -77,13 +78,6 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <p>Based in Edmonton, working with companies across Calgary, Red Deer, Lethbridge, and beyond.</p>
           <p>We specialize in businesses where the sale happens offline but starts online. We are not affiliated with Facebook, Google, or any other ad platform. Results vary depending on industry and market conditions, but our guarantee stands: we work until it converts.</p>
         </div>
-      </div>
-      
-      {/* Fixed chat bubble */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <button onClick={() => handleNav('contact')} className="bg-forest text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center shadow-forest/30">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        </button>
       </div>
     </footer>
   );

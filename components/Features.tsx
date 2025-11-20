@@ -68,7 +68,7 @@ const Features: React.FC = () => {
               <div className="p-8 md:p-10 relative z-10 h-full flex flex-col justify-between group-hover:text-white transition-colors duration-300">
                  <div>
                     <div className="w-14 h-14 bg-gray-100 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-white/20 group-hover:text-white transition-colors">
-                       {React.cloneElement(feature.icon as React.ReactElement, { className: "text-[#1A1A1A] group-hover:text-white transition-colors" })}
+                       {React.cloneElement(feature.icon as React.ReactElement<any>, { className: "text-[#1A1A1A] group-hover:text-white transition-colors" })}
                     </div>
                     <h3 className="font-heading font-bold text-2xl md:text-3xl leading-tight mb-4">
                        {feature.title}

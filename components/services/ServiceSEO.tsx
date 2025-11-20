@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, BarChart, Globe, Search } from 'lucide-react';
 import { PageType } from '../../App';
 import ContentSection from '../ContentSection';
+import SEO from '../SEO';
 
 interface ServiceProps {
   onNavigate: (page: PageType) => void;
@@ -11,6 +13,11 @@ interface ServiceProps {
 const ServiceSEO: React.FC<ServiceProps> = ({ onNavigate }) => {
   return (
     <div className="pt-12">
+      <SEO 
+        title="SEO Services Edmonton | Local Search & Technical Audits"
+        description="Dominate local search results in Alberta. Innovista provides technical SEO audits, local SEO optimization, and content strategy to drive organic traffic."
+        canonicalUrl="/services/seo"
+      />
       <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -1,64 +1,92 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, User, Tag } from 'lucide-react';
+
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Calendar, User, ArrowLeft } from 'lucide-react';
 import { PageType } from '../App';
 import ContentSection from './ContentSection';
+import { insightsData } from '../data/content';
 
 interface InsightsProps {
   onNavigate?: (page: PageType) => void;
 }
 
 const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
-  const articles = [
-    {
-      category: "Strategy",
-      title: "Why your 'pretty' website isn't selling anything",
-      excerpt: "A deep dive into the difference between aesthetic design and conversion design. Stop paying for digital art and start building sales assets.",
-      author: "Alex Morgan",
-      date: "Oct 12, 2023",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2340&auto=format&fit=crop"
-    },
-    {
-      category: "SEO",
-      title: "The death of generic content: How to rank in 2024",
-      excerpt: "Google's latest updates are punishing AI-generated fluff. Here's how to write authoritative content that actually ranks in local search.",
-      author: "Sarah Chen",
-      date: "Sep 28, 2023",
-      image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=2340&auto=format&fit=crop"
-    },
-    {
-      category: "Automation",
-      title: "5 CRM workflows every service business needs",
-      excerpt: "Stop manually following up with leads. We break down the exact Zapier workflows we use to save 10+ hours a week.",
-      author: "Mike Ross",
-      date: "Sep 15, 2023",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2340&auto=format&fit=crop"
-    },
-    {
-      category: "Case Study",
-      title: "Doubling RFPs for an engineering firm in 90 days",
-      excerpt: "A behind-the-scenes look at the redesign and positioning strategy that helped Apex Engineering dominate their market.",
-      author: "Alex Morgan",
-      date: "Aug 30, 2023",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2340&auto=format&fit=crop"
-    },
-    {
-      category: "UX Design",
-      title: "Mobile-first isn't just a buzzword",
-      excerpt: "60% of your B2B traffic is on a phone. If your site is just a squished desktop version, you are losing money. Here is how to fix it.",
-      author: "Jessica Lee",
-      date: "Aug 12, 2023",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2340&auto=format&fit=crop"
-    },
-    {
-      category: "Business",
-      title: "When to fire your web agency",
-      excerpt: "Red flags that indicate your current agency is taking you for a ride. If they charge for 'maintenance' but do nothing, read this.",
-      author: "Alex Morgan",
-      date: "Jul 22, 2023",
-      image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2340&auto=format&fit=crop"
-    }
-  ];
+  const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
+
+  const activeArticle = selectedArticleId 
+    ? insightsData.find(a => a.id === selectedArticleId) 
+    : null;
+
+  // Scroll to top when opening an article
+  const handleArticleClick = (id: string) => {
+    setSelectedArticleId(id);
+    window.scrollTo(0, 0);
+  };
+
+  const handleBack = () => {
+    setSelectedArticleId(null);
+    window.scrollTo(0, 0);
+  };
+
+  if (activeArticle) {
+    return (
+      <div className="pt-12 min-h-screen bg-white">
+        <motion.div 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          className="max-w-4xl mx-auto px-6 pb-24"
+        >
+          <button 
+            onClick={handleBack}
+            className="group flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-forest mb-12 transition-colors pt-8"
+          >
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            Back to Insights
+          </button>
+
+          <div className="flex items-center gap-4 text-sm text-gray-500 mb-6 uppercase tracking-wide font-medium">
+            <span className="bg-gray-100 px-3 py-1 rounded-full text-dark">{activeArticle.category}</span>
+            <div className="flex items-center gap-1">
+               <Calendar size={14} /> {activeArticle.date}
+            </div>
+          </div>
+
+          <h1 className="font-heading font-bold text-3xl md:text-5xl text-[#1A1A1A] mb-8 leading-tight">
+            {activeArticle.title}
+          </h1>
+
+          <div className="flex items-center gap-3 mb-12 pb-12 border-b border-gray-100">
+            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+               <img src={`https://ui-avatars.com/api/?name=${activeArticle.author}&background=0D8ABC&color=fff`} alt={activeArticle.author} />
+            </div>
+            <div>
+               <p className="font-bold text-dark text-sm">{activeArticle.author}</p>
+               <p className="text-xs text-gray-500">Strategist @ Innovista</p>
+            </div>
+          </div>
+
+          <div className="aspect-video rounded-2xl overflow-hidden mb-12 bg-gray-100">
+            <img src={activeArticle.image} alt={activeArticle.title} className="w-full h-full object-cover" />
+          </div>
+
+          {/* Content Renderer */}
+          <div 
+            className="prose prose-lg prose-headings:font-heading prose-headings:text-dark prose-p:text-gray-600 prose-p:leading-relaxed max-w-none"
+            dangerouslySetInnerHTML={{ __html: activeArticle.content }}
+          />
+
+          {/* Article Footer CTA */}
+          <div className="mt-20 p-8 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+             <h3 className="font-bold text-2xl mb-4">Enjoyed this perspective?</h3>
+             <p className="text-gray-600 mb-6">We apply this same strategic thinking to our client projects.</p>
+             <button onClick={() => onNavigate && onNavigate('audit')} className="bg-forest text-white px-8 py-3 rounded-full font-bold hover:bg-forest/90 transition-colors">
+                Get a Free Audit
+             </button>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-12">
@@ -80,15 +108,14 @@ const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
         </motion.div>
       </section>
 
-      {/* Featured Article (Optional Layout Variation could go here) */}
-
       {/* Articles Grid */}
       <section className="py-12 md:py-24 bg-white border-t border-[#E6E6E6]">
         <div className="max-w-[90rem] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-            {articles.map((article, idx) => (
+            {insightsData.map((article, idx) => (
               <motion.article
-                key={idx}
+                key={article.id}
+                onClick={() => handleArticleClick(article.id)}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

@@ -1,6 +1,6 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Layers, ShoppingBag, Database, Smartphone, Cpu } from 'lucide-react';
 import ContentSection from './ContentSection';
 
 const Capabilities: React.FC = () => {
@@ -9,28 +9,106 @@ const Capabilities: React.FC = () => {
       category: "No-Code & CMS",
       desc: "Rapid deployment and easy content management for marketing teams.",
       tools: [
-        { name: "Webflow", desc: "For high-end, visual-first marketing websites.", icon: <Layers /> },
-        { name: "WordPress", desc: "For content-heavy sites requiring deep flexibility.", icon: <Database /> },
-        { name: "Framer", desc: "For speed and creative landing pages.", icon: <Smartphone /> }
+        { 
+          name: "Webflow", 
+          desc: "For high-end, visual-first marketing websites.", 
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webflow/webflow-original.svg" 
+        },
+        { 
+          name: "WordPress", 
+          desc: "For content-heavy sites requiring deep flexibility.", 
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" 
+        },
+        { 
+          name: "Framer", 
+          desc: "For speed and creative landing pages.", 
+          logo: "https://cdn.svgporn.com/logos/framer-icon.svg" 
+        },
+        { 
+          name: "Bubble", 
+          desc: "For complex web applications without code.", 
+          logo: "https://cdn.svgporn.com/logos/bubble.svg" 
+        },
+        { 
+          name: "Strapi", 
+          desc: "Headless CMS for omnichannel content.", 
+          logo: "https://cdn.svgporn.com/logos/strapi-icon.svg" 
+        }
       ]
     },
     {
       category: "Custom Development",
       desc: "Enterprise-grade performance for complex applications.",
       tools: [
-        { name: "React / Next.js", desc: "The industry standard for fast, scalable web apps.", icon: <Code /> },
-        { name: "Tailwind CSS", desc: "For bespoke, pixel-perfect styling systems.", icon: <Cpu /> },
-        { name: "Sanity.io", desc: "A headless CMS for structured content delivery.", icon: <Database /> }
+        { 
+          name: "React / Next.js", 
+          desc: "The industry standard for fast, scalable web apps.", 
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" 
+        },
+        { 
+          name: "Tailwind CSS", 
+          desc: "For bespoke, pixel-perfect styling systems.", 
+          logo: "https://cdn.svgporn.com/logos/tailwindcss-icon.svg" 
+        },
+        { 
+          name: "Node.js", 
+          desc: "Powerful backend infrastructure.", 
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" 
+        },
+        { 
+          name: "TypeScript", 
+          desc: "Type-safe code for mission-critical apps.", 
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" 
+        },
+        { 
+          name: "Supabase", 
+          desc: "Scalable database and authentication.", 
+          logo: "https://cdn.svgporn.com/logos/supabase-icon.svg" 
+        },
+        { 
+          name: "Sanity.io", 
+          desc: "A headless CMS for structured content delivery.", 
+          logo: "https://cdn.svgporn.com/logos/sanity.svg" 
+        }
       ]
     },
     {
       category: "E-Commerce",
       desc: "Robust stores that scale with your sales volume.",
       tools: [
-        { name: "Shopify", desc: "The world's best e-commerce platform.", icon: <ShoppingBag /> },
-        { name: "WooCommerce", desc: "Flexible open-source commerce for WordPress.", icon: <ShoppingBag /> }
+        { 
+          name: "Shopify", 
+          desc: "The world's best e-commerce platform.", 
+          logo: "https://cdn.svgporn.com/logos/shopify-icon.svg" 
+        },
+        { 
+          name: "BigCommerce", 
+          desc: "For high-volume enterprise retail.", 
+          logo: "https://cdn.svgporn.com/logos/bigcommerce-icon.svg" 
+        },
+        { 
+          name: "WooCommerce", 
+          desc: "Flexible open-source commerce for WordPress.", 
+          logo: "https://cdn.svgporn.com/logos/woocommerce-icon.svg" 
+        },
+        { 
+          name: "Magento", 
+          desc: "Self-hosted power for complex catalogs.", 
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/magento/magento-original.svg" 
+        }
       ]
     }
+  ];
+
+  const integrations = [
+    { name: "HubSpot", logo: "https://cdn.svgporn.com/logos/hubspot-icon.svg" },
+    { name: "Salesforce", logo: "https://cdn.svgporn.com/logos/salesforce.svg" },
+    { name: "Mailchimp", logo: "https://cdn.svgporn.com/logos/mailchimp-icon.svg" },
+    { name: "Zapier", logo: "https://cdn.svgporn.com/logos/zapier-icon.svg" },
+    { name: "Google Analytics 4", logo: "https://cdn.svgporn.com/logos/google-analytics.svg" },
+    { name: "Stripe", logo: "https://cdn.svgporn.com/logos/stripe-icon.svg" },
+    { name: "Intercom", logo: "https://cdn.svgporn.com/logos/intercom-icon.svg" },
+    { name: "Calendly", logo: "https://cdn.svgporn.com/logos/calendly-icon.svg" }
   ];
 
   return (
@@ -79,8 +157,12 @@ const Capabilities: React.FC = () => {
                       transition={{ delay: tIdx * 0.1 }}
                       className="group bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:border-dark hover:shadow-md transition-all"
                     >
-                      <div className="mb-6 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm text-dark group-hover:scale-110 transition-transform">
-                        {tool.icon}
+                      <div className="mb-6 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm p-2 group-hover:scale-110 transition-transform">
+                        <img 
+                          src={tool.logo} 
+                          alt={tool.name} 
+                          className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                        />
                       </div>
                       <h3 className="font-heading font-bold text-xl mb-3">{tool.name}</h3>
                       <p className="text-gray-600 leading-relaxed">{tool.desc}</p>
@@ -100,11 +182,12 @@ const Capabilities: React.FC = () => {
           Your website shouldn't exist in a silo. We integrate with the tools you already use to run your business.
         </p>
         
-        <div className="flex flex-wrap justify-center gap-4 md:gap-8">
-          {["HubSpot", "Salesforce", "Mailchimp", "Zapier", "Google Analytics 4", "Stripe", "Intercom", "Calendly"].map((tool) => (
-            <span key={tool} className="px-6 py-3 rounded-full bg-white border border-gray-200 text-gray-600 font-medium text-sm md:text-base">
-              {tool}
-            </span>
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+          {integrations.map((tool) => (
+            <div key={tool.name} className="flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-gray-200 text-gray-600 font-medium text-sm md:text-base shadow-sm hover:shadow-md hover:border-gray-300 transition-all">
+              <img src={tool.logo} alt={tool.name} className="w-5 h-5 object-contain opacity-70 grayscale group-hover:grayscale-0" />
+              {tool.name}
+            </div>
           ))}
         </div>
       </section>

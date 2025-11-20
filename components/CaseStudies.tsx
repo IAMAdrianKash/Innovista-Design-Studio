@@ -1,15 +1,16 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle2, BarChart3 } from 'lucide-react';
 import { PageType } from '../App';
 import ContentSection from './ContentSection';
+import { projectsData } from '../data/content';
 
 interface CaseStudiesProps {
   onNavigate: (page: PageType) => void;
 }
 
-const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index }) => {
+const ProjectCard: React.FC<{ project: any; index: number; onClick: () => void }> = ({ project, index, onClick }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -22,13 +23,14 @@ const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index
   return (
     <motion.div
       ref={ref}
+      onClick={onClick}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       className="group cursor-pointer"
     >
-      <div className="relative overflow-hidden rounded-[2rem] mb-8 aspect-[4/3]">
+      <div className="relative overflow-hidden rounded-[2rem] mb-8 aspect-[4/3] bg-gray-100">
         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10" />
         <motion.img 
           src={project.image} 
@@ -65,40 +67,115 @@ const ProjectCard: React.FC<{ project: any; index: number }> = ({ project, index
 };
 
 const CaseStudies: React.FC<CaseStudiesProps> = ({ onNavigate }) => {
-  const projects = [
-    {
-      client: "Apex Engineering",
-      title: "Restructuring a technical giant for digital clarity",
-      image: "https://picsum.photos/seed/architect/1200/800",
-      tags: ["Web Design", "Strategy"],
-      stat: "+45%",
-      statDesc: "Increase in qualified RFPs"
-    },
-    {
-      client: "Summit Legal Group",
-      title: "Modernizing a 40-year-old firm without losing heritage",
-      image: "https://picsum.photos/seed/lawyer/1200/800",
-      tags: ["Rebranding", "Web Design"],
-      stat: "2.5x",
-      statDesc: "Faster load time"
-    },
-    {
-      client: "NorthField Industrial",
-      title: "From paper brochures to a lead-generating machine",
-      image: "https://picsum.photos/seed/industrial/1200/800",
-      tags: ["Lead Gen", "Automation"],
-      stat: "320",
-      statDesc: "Leads generated in Q1"
-    },
-    {
-      client: "Vantage Capital",
-      title: "Building trust through transparent financial design",
-      image: "https://picsum.photos/seed/finance/1200/800",
-      tags: ["Web Design", "SEO"],
-      stat: "#1",
-      statDesc: "Rank for local keywords"
-    }
-  ];
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+
+  const activeProject = selectedProjectId 
+    ? projectsData.find(p => p.id === selectedProjectId) 
+    : null;
+
+  const handleProjectClick = (id: string) => {
+    setSelectedProjectId(id);
+    window.scrollTo(0, 0);
+  };
+
+  const handleBack = () => {
+    setSelectedProjectId(null);
+    window.scrollTo(0, 0);
+  };
+
+  if (activeProject) {
+    return (
+      <div className="pt-12 min-h-screen bg-white">
+        <div className="max-w-[90rem] mx-auto px-6 md:px-12 pb-24">
+          <button 
+            onClick={handleBack}
+            className="group flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-forest mb-12 transition-colors pt-8"
+          >
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            Back to Work
+          </button>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-24">
+             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <div className="flex gap-2 mb-6">
+                   {activeProject.tags.map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-full bg-gray-100 text-xs font-bold uppercase tracking-wide text-gray-600">{tag}</span>
+                   ))}
+                </div>
+                <h1 className="font-serif text-5xl md:text-6xl text-[#1A1A1A] leading-[1.05] mb-8">
+                  {activeProject.title}
+                </h1>
+                <p className="text-xl text-gray-600 leading-relaxed mb-12">
+                  {/* Using the challenge as intro text */}
+                  {activeProject.challenge}
+                </p>
+
+                <div className="grid grid-cols-2 gap-8 border-t border-gray-200 pt-8">
+                   <div>
+                      <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Client</p>
+                      <p className="font-heading font-bold text-xl">{activeProject.client}</p>
+                   </div>
+                   <div>
+                      <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Key Result</p>
+                      <p className="font-heading font-bold text-xl text-forest">{activeProject.stat}</p>
+                   </div>
+                </div>
+             </motion.div>
+
+             <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }} 
+                animate={{ opacity: 1, scale: 1 }}
+                className="relative rounded-[2.5rem] overflow-hidden aspect-square lg:aspect-[4/5]"
+             >
+                <img src={activeProject.image} alt={activeProject.client} className="object-cover w-full h-full" />
+             </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24">
+             <div>
+                <h3 className="font-heading font-bold text-3xl mb-4">The Challenge</h3>
+             </div>
+             <div className="lg:col-span-2">
+                <p className="text-lg text-gray-600 leading-relaxed">{activeProject.challenge}</p>
+             </div>
+
+             <div className="col-span-full h-px bg-gray-200"></div>
+
+             <div>
+                <h3 className="font-heading font-bold text-3xl mb-4">The Solution</h3>
+             </div>
+             <div className="lg:col-span-2">
+                <p className="text-lg text-gray-600 leading-relaxed">{activeProject.solution}</p>
+             </div>
+
+             <div className="col-span-full h-px bg-gray-200"></div>
+
+             <div>
+                <h3 className="font-heading font-bold text-3xl mb-4">The Results</h3>
+             </div>
+             <div className="lg:col-span-2">
+                <div className="bg-forest text-white p-8 rounded-2xl flex flex-col md:flex-row items-start md:items-center gap-6">
+                   <div className="bg-white/20 p-4 rounded-xl">
+                      <BarChart3 size={32} className="text-white" />
+                   </div>
+                   <div>
+                      <p className="text-xl font-medium mb-2">{activeProject.result}</p>
+                      <p className="text-white/60 text-sm">Verified outcomes 90 days post-launch.</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+          <div className="mt-24 text-center">
+             <h2 className="font-heading font-bold text-3xl mb-8">Ready for similar results?</h2>
+             <button onClick={() => onNavigate('audit')} className="bg-dark text-white px-8 py-4 rounded-full font-bold hover:bg-black transition-colors">
+                Get Your Free Audit
+             </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-12">
@@ -123,8 +200,13 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ onNavigate }) => {
       <section className="py-12 md:py-24 bg-white border-t border-[#E6E6E6]">
         <div className="max-w-[90rem] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-            {projects.map((project, idx) => (
-              <ProjectCard key={idx} project={project} index={idx} />
+            {projectsData.map((project, idx) => (
+              <ProjectCard 
+                key={project.id} 
+                project={project} 
+                index={idx} 
+                onClick={() => handleProjectClick(project.id)}
+              />
             ))}
           </div>
         </div>

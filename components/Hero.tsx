@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ChevronRight, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -9,12 +10,12 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   return (
-    <section className="relative pt-16 pb-24 px-6 md:px-12 max-w-[90rem] mx-auto">
+    <section className="relative pt-12 pb-24 px-6 md:px-12 max-w-[90rem] mx-auto overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         
         {/* Text Content */}
         <motion.div 
-          className="space-y-8 lg:max-w-2xl"
+          className="space-y-8 lg:max-w-2xl relative z-10"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -33,7 +34,26 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             We build conversion-focused websites for Alberta businesses that need results, not just pretty designs. Modern, fast, and engineered to sell.
           </p>
           
-          <div className="pt-6 flex flex-wrap gap-4">
+          {/* Social Proof - Moved Above Buttons */}
+          <div className="flex items-center gap-5 pt-2 pb-2">
+             <div className="flex -space-x-3">
+                {[1,2,3].map(i => (
+                   <div key={i} className="w-10 h-10 rounded-full border-2 border-cream bg-gray-200 overflow-hidden">
+                      <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="Client" />
+                   </div>
+                ))}
+             </div>
+             <div>
+                <div className="flex items-center gap-1 mb-0.5">
+                   {[1,2,3,4,5].map(i => (
+                      <svg key={i} className="w-3 h-3 text-forest fill-forest" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                   ))}
+                </div>
+                <p className="text-xs font-medium text-gray-500"><span className="font-bold text-dark">50+ firms</span> trust us</p>
+             </div>
+          </div>
+
+          <div className="flex flex-wrap gap-4">
             <button 
               onClick={() => onNavigate && onNavigate('audit')}
               className="group bg-forest text-white px-8 py-4 rounded-full text-[15px] font-medium hover:bg-forest/90 transition-all flex items-center gap-3 shadow-2xl shadow-forest/20 hover:shadow-forest/30 hover:-translate-y-1 duration-300"
@@ -54,44 +74,108 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
         </motion.div>
 
-        {/* Hero Image */}
+        {/* Transparent Animated Visual */}
         <motion.div 
-          className="relative"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="relative h-[400px] md:h-[600px] w-full flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
         >
-          <div className="relative overflow-hidden rounded-[2rem] md:rounded-[3rem] border border-white/50 shadow-2xl shadow-[#1A1A1A]/5 bg-gray-100">
-            {/* Using a more architectural/abstract image */}
-            <img 
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop" 
-              alt="Modern corporate architecture" 
-              className="object-cover w-full aspect-[4/3] lg:aspect-[16/12] transform hover:scale-105 transition-transform duration-[2.5s] ease-in-out grayscale-[20%]"
-            />
-            
-            {/* Floating Badge - Social Proof */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="absolute bottom-8 left-8 right-8 md:right-auto bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/50 max-w-sm hidden md:block"
-            >
-               <div className="flex items-center gap-4">
-                  <div className="flex -space-x-3">
-                     {[1,2,3].map(i => (
-                        <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-                           <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="Client" />
-                        </div>
-                     ))}
-                  </div>
-                  <div>
-                     <p className="font-heading font-bold text-dark text-sm">Trusted by 50+ firms</p>
-                     <p className="text-xs text-gray-500">Generating $10M+ in pipeline</p>
-                  </div>
-               </div>
-            </motion.div>
-          </div>
+           {/* Abstract Architectural Grid Visualization */}
+           <div className="relative w-full h-full max-w-[600px] max-h-[600px]">
+              
+              {/* Floating Grid Plane */}
+              <motion.svg 
+                viewBox="0 0 400 400" 
+                className="absolute inset-0 w-full h-full drop-shadow-2xl"
+                initial={{ rotateX: 60, rotateZ: 30, scale: 0.8 }}
+                animate={{ rotateZ: 35 }}
+                transition={{ repeat: Infinity, repeatType: "reverse", duration: 20, ease: "easeInOut" }}
+              >
+                  {/* Base Grid */}
+                  <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                     <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#064E3B" strokeWidth="0.5" opacity="0.1"/>
+                  </pattern>
+                  <rect width="100%" height="100%" fill="url(#grid)" />
+
+                  {/* Floating Data Blocks - Layer 1 */}
+                  <motion.rect 
+                    x="100" y="100" width="80" height="80" rx="4"
+                    fill="white" fillOpacity="0.8" stroke="#064E3B" strokeWidth="1"
+                    initial={{ y: 0 }}
+                    animate={{ y: -20 }}
+                    transition={{ repeat: Infinity, repeatType: "reverse", duration: 4, ease: "easeInOut" }}
+                  />
+                  
+                  {/* Floating Data Blocks - Layer 2 */}
+                  <motion.rect 
+                    x="220" y="140" width="120" height="60" rx="4"
+                    fill="white" fillOpacity="0.6" stroke="#064E3B" strokeWidth="1"
+                    initial={{ y: 0 }}
+                    animate={{ y: 30 }}
+                    transition={{ repeat: Infinity, repeatType: "reverse", duration: 5, delay: 1, ease: "easeInOut" }}
+                  />
+
+                   {/* Accent Connection Lines */}
+                   <motion.path 
+                      d="M 140 140 L 220 170"
+                      stroke="#064E3B" strokeWidth="1" strokeDasharray="4 4"
+                      initial={{ opacity: 0.2 }}
+                      animate={{ opacity: 0.6 }}
+                      transition={{ repeat: Infinity, repeatType: "reverse", duration: 3 }}
+                   />
+                   
+                   {/* Metric Card Representation */}
+                   <motion.g
+                      initial={{ y: 0 }}
+                      animate={{ y: -40 }}
+                      transition={{ repeat: Infinity, repeatType: "reverse", duration: 6, ease: "easeInOut" }}
+                   >
+                      <rect x="160" y="240" width="140" height="100" rx="8" fill="#064E3B" />
+                      <rect x="180" y="260" width="100" height="8" rx="4" fill="white" fillOpacity="0.2" />
+                      <rect x="180" y="280" width="60" height="8" rx="4" fill="white" fillOpacity="0.2" />
+                      <rect x="180" y="310" width="100" height="4" rx="2" fill="white" fillOpacity="0.1" />
+                      <rect x="180" y="320" width="100" height="4" rx="2" fill="white" fillOpacity="0.1" />
+                   </motion.g>
+
+              </motion.svg>
+
+              {/* Glassmorphism Overlay Cards */}
+              <motion.div 
+                 className="absolute top-1/4 left-0 bg-white/80 backdrop-blur-md border border-white/50 p-4 rounded-xl shadow-lg max-w-[160px]"
+                 initial={{ y: 20, opacity: 0 }}
+                 animate={{ y: 0, opacity: 1 }}
+                 transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                 <div className="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center mb-2">
+                    <ArrowRight size={16} className="text-forest -rotate-45" />
+                 </div>
+                 <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Conversion</p>
+                 <p className="text-xl font-heading font-bold text-dark">+142%</p>
+              </motion.div>
+
+               <motion.div 
+                 className="absolute bottom-1/4 right-0 bg-white/80 backdrop-blur-md border border-white/50 p-4 rounded-xl shadow-lg max-w-[180px]"
+                 initial={{ y: 20, opacity: 0 }}
+                 animate={{ y: 0, opacity: 1 }}
+                 transition={{ delay: 0.7, duration: 0.8 }}
+              >
+                 <div className="flex items-center gap-3 mb-2">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">System Active</p>
+                 </div>
+                 <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+                    <motion.div 
+                       className="h-full bg-forest"
+                       initial={{ width: "0%" }}
+                       animate={{ width: "85%" }}
+                       transition={{ duration: 1.5, delay: 1 }}
+                    />
+                 </div>
+              </motion.div>
+           </div>
         </motion.div>
+
       </div>
     </section>
   );

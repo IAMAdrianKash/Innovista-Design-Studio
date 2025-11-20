@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ChevronRight, MousePointerClick, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -110,34 +111,35 @@ const SolutionsGrid: React.FC = () => {
 
           {/* Large Card - Solution */}
           <motion.div 
-            className="lg:col-span-7 bg-[#1A1A1A] border border-gray-800 p-8 md:p-12 rounded-[2rem] flex flex-col justify-between group text-white order-1 lg:order-2"
+            className="lg:col-span-7 bg-forest border border-forest/20 p-8 md:p-12 rounded-[2rem] flex flex-col justify-between group text-white order-1 lg:order-2 shadow-2xl shadow-forest/10 relative overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+            <div className="relative z-10">
               <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mb-6 border border-white/10">
                  <TrendingUp className="text-white" size={20} />
               </div>
               <h3 className="font-heading font-bold text-2xl md:text-3xl leading-tight mb-4">
                 Every design decision answers one question.
               </h3>
-              <p className="text-base text-gray-400 leading-relaxed max-w-md">
+              <p className="text-base text-white/80 leading-relaxed max-w-md">
                 "Does this help convert visitors into leads?" We build mobile-first designs with built-in automation so leads flow into your CRM without manual data entry.
               </p>
             </div>
             
-            <div className="mt-12 space-y-3">
+            <div className="mt-12 space-y-3 relative z-10">
                 {['Strategic Positioning', 'CRM Integration', 'Speed Optimization'].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 text-sm font-medium text-gray-300">
+                    <div key={i} className="flex items-center gap-3 text-sm font-medium text-white/90">
                         <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
                         {item}
                     </div>
                 ))}
             </div>
 
-             <div className="mt-12 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-gray-500 group-hover:text-white transition-colors">
+             <div className="mt-12 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-white/60 group-hover:text-white transition-colors relative z-10">
               The Solution <div className="h-px w-8 bg-current"></div>
             </div>
           </motion.div>
