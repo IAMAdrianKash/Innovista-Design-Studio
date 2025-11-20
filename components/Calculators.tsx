@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, DollarSign, Key, Code, ArrowUpRight } from 'lucide-react';

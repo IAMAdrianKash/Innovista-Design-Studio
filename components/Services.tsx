@@ -1,5 +1,7 @@
+'use client'
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Monitor, TrendingUp, Zap, BarChart, ArrowRight } from 'lucide-react';
 import ContentSection from './ContentSection';
@@ -61,7 +63,7 @@ const Services: React.FC = () => {
         <div className="max-w-[90rem] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {services.map((service, idx) => (
-              <Link key={idx} to={service.path}>
+              <Link key={idx} href={service.path}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}

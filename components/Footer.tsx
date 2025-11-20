@@ -1,6 +1,8 @@
+'use client'
+
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Linkedin, Twitter, Globe } from 'lucide-react';
 
 const Footer: React.FC = () => {
@@ -16,37 +18,37 @@ const Footer: React.FC = () => {
           <div>
             <h5 className="font-heading font-bold text-xs uppercase tracking-wider mb-6 text-gray-500">Services</h5>
             <ul className="space-y-3">
-              <li><Link to="/services/web-design" className="text-sm text-gray-600 hover:text-dark text-left">Web Design</Link></li>
-              <li><Link to="/services/lead-generation" className="text-sm text-gray-600 hover:text-dark text-left">Lead Generation</Link></li>
-              <li><Link to="/services/automation" className="text-sm text-gray-600 hover:text-dark text-left">Automation</Link></li>
-              <li><Link to="/services/seo" className="text-sm text-gray-600 hover:text-dark text-left">SEO Optimization</Link></li>
+              <li><Link href="/services/web-design" className="text-sm text-gray-600 hover:text-dark text-left">Web Design</Link></li>
+              <li><Link href="/services/lead-generation" className="text-sm text-gray-600 hover:text-dark text-left">Lead Generation</Link></li>
+              <li><Link href="/services/automation" className="text-sm text-gray-600 hover:text-dark text-left">Automation</Link></li>
+              <li><Link href="/services/seo" className="text-sm text-gray-600 hover:text-dark text-left">SEO Optimization</Link></li>
             </ul>
           </div>
           <div>
             <h5 className="font-heading font-bold text-xs uppercase tracking-wider mb-6 text-gray-500">Work</h5>
             <ul className="space-y-3">
-              <li><Link to="/case-studies" className="text-sm text-gray-600 hover:text-dark text-left">Case Studies</Link></li>
-              <li><Link to="/process" className="text-sm text-gray-600 hover:text-dark text-left">Process</Link></li>
-              <li><Link to="/pricing" className="text-sm text-gray-600 hover:text-dark text-left">Pricing</Link></li>
-              <li><Link to="/capabilities" className="text-sm text-gray-600 hover:text-dark text-left">Capabilities</Link></li>
+              <li><Link href="/case-studies" className="text-sm text-gray-600 hover:text-dark text-left">Case Studies</Link></li>
+              <li><Link href="/process" className="text-sm text-gray-600 hover:text-dark text-left">Process</Link></li>
+              <li><Link href="/pricing" className="text-sm text-gray-600 hover:text-dark text-left">Pricing</Link></li>
+              <li><Link href="/capabilities" className="text-sm text-gray-600 hover:text-dark text-left">Capabilities</Link></li>
             </ul>
           </div>
           <div>
             <h5 className="font-heading font-bold text-xs uppercase tracking-wider mb-6 text-gray-500">Company</h5>
             <ul className="space-y-3">
-              <li><Link to="/about" className="text-sm text-gray-600 hover:text-dark">About Innovista</Link></li>
-              <li><Link to="/insights" className="text-sm text-gray-600 hover:text-dark">Insights (Blog)</Link></li>
-              <li><Link to="/contact" className="text-sm text-gray-600 hover:text-dark">Contact Us</Link></li>
-              <li><Link to="/careers" className="text-sm text-gray-600 hover:text-dark">Careers</Link></li>
-              <li><Link to="/faq" className="text-sm text-gray-600 hover:text-dark">FAQ</Link></li>
+              <li><Link href="/about" className="text-sm text-gray-600 hover:text-dark">About Innovista</Link></li>
+              <li><Link href="/insights" className="text-sm text-gray-600 hover:text-dark">Insights (Blog)</Link></li>
+              <li><Link href="/contact" className="text-sm text-gray-600 hover:text-dark">Contact Us</Link></li>
+              <li><Link href="/careers" className="text-sm text-gray-600 hover:text-dark">Careers</Link></li>
+              <li><Link href="/faq" className="text-sm text-gray-600 hover:text-dark">FAQ</Link></li>
             </ul>
           </div>
           <div>
             <h5 className="font-heading font-bold text-xs uppercase tracking-wider mb-6 text-gray-500">Legal</h5>
             <ul className="space-y-3">
-              <li><Link to="/privacy-policy" className="text-sm text-gray-600 hover:text-dark text-left">Privacy Policy</Link></li>
-              <li><Link to="/terms-of-service" className="text-sm text-gray-600 hover:text-dark text-left">Terms of Service</Link></li>
-              <li><Link to="/cookie-policy" className="text-sm text-gray-600 hover:text-dark text-left">Cookie Policy</Link></li>
+              <li><Link href="/privacy-policy" className="text-sm text-gray-600 hover:text-dark text-left">Privacy Policy</Link></li>
+              <li><Link href="/terms-of-service" className="text-sm text-gray-600 hover:text-dark text-left">Terms of Service</Link></li>
+              <li><Link href="/cookie-policy" className="text-sm text-gray-600 hover:text-dark text-left">Cookie Policy</Link></li>
             </ul>
           </div>
           

@@ -1,13 +1,15 @@
+'use client'
+
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Calendar, User } from 'lucide-react';
 import ContentSection from './ContentSection';
 import { getAllBlogPosts, urlForImage, type BlogPost } from '../lib/sanity';
 
 const Insights: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -84,7 +86,7 @@ const Insights: React.FC = () => {
                 return (
                   <motion.article
                     key={post._id}
-                    onClick={() => navigate(`/insights/${post.slug.current}`)}
+                    onClick={() => router.push(`/insights/${post.slug.current}`)}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}

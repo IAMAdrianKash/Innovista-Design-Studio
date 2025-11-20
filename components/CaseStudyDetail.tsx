@@ -1,9 +1,11 @@
+'use client'
+
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Tag, Quote } from 'lucide-react';
-import { getCaseStudyBySlug, CaseStudy as CaseStudyType, urlForImageImage } from '../lib/sanity';
+import { getCaseStudyBySlug, CaseStudy as CaseStudyType, urlForImage } from '../lib/sanity';
 
 const CaseStudyDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -52,7 +54,7 @@ const CaseStudyDetail: React.FC = () => {
           <h1 className="text-4xl font-heading font-bold text-dark mb-4">Case Study Not Found</h1>
           <p className="text-gray-600 mb-8">The case study you're looking for doesn't exist or has been removed.</p>
           <Link
-            to="/case-studies"
+            href="/case-studies"
             className="inline-flex items-center gap-2 px-6 py-3 bg-forest text-white rounded-xl font-medium hover:bg-forest/90 transition-colors"
           >
             <ArrowLeft size={20} />
@@ -96,28 +98,12 @@ const CaseStudyDetail: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{metaTitle}</title>
-        <meta name="description" content={metaDescription} />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:image" content={ogImageUrl} />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metaTitle} />
-        <meta name="twitter:description" content={metaDescription} />
-        <meta name="twitter:image" content={ogImageUrl} />
-      </Helmet>
 
       <article className="bg-cream min-h-screen">
         {/* Back Button */}
         <div className="max-w-7xl mx-auto px-8 pt-32 pb-8">
           <Link
-            to="/case-studies"
+            href="/case-studies"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-dark transition-colors"
           >
             <ArrowLeft size={20} />
@@ -343,13 +329,13 @@ const CaseStudyDetail: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/audit"
+                href="/audit"
                 className="px-8 py-4 bg-white text-forest font-bold rounded-xl hover:bg-gray-100 transition-colors"
               >
                 Get Free Audit
               </Link>
               <Link
-                to="/contact"
+                href="/contact"
                 className="px-8 py-4 border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-colors"
               >
                 Schedule a Call

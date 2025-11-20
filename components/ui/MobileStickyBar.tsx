@@ -1,5 +1,7 @@
+'use client'
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Mail, ArrowRight } from 'lucide-react';
 
 const MobileStickyBar: React.FC = () => {
@@ -13,7 +15,7 @@ const MobileStickyBar: React.FC = () => {
         Email Us
       </a>
       <Link
-        to="/audit"
+        href="/audit"
         className="flex-[1.5] flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-forest text-white font-bold text-sm shadow-lg shadow-forest/20 active:scale-[0.98] transition-all"
       >
         Get Free Audit

@@ -1,6 +1,8 @@
+'use client'
+
 import React, { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, Tag } from 'lucide-react';
@@ -8,7 +10,7 @@ import { getBlogPostBySlug, BlogPost as BlogPostType, urlForImage } from '../lib
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
+  const router = useRouter();
   const [post, setPost] = useState<BlogPostType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -54,7 +56,7 @@ const BlogPost: React.FC = () => {
           <h1 className="text-4xl font-heading font-bold text-dark mb-4">Article Not Found</h1>
           <p className="text-gray-600 mb-8">The article you're looking for doesn't exist or has been removed.</p>
           <Link
-            to="/insights"
+            href="/insights"
             className="inline-flex items-center gap-2 px-6 py-3 bg-forest text-white rounded-xl font-medium hover:bg-forest/90 transition-colors"
           >
             <ArrowLeft size={20} />
@@ -79,30 +81,12 @@ const BlogPost: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{metaTitle}</title>
-        <meta name="description" content={metaDescription} />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:image" content={ogImageUrl} />
-        <meta property="article:published_time" content={post.publishedAt} />
-        <meta property="article:author" content={post.author.name} />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metaTitle} />
-        <meta name="twitter:description" content={metaDescription} />
-        <meta name="twitter:image" content={ogImageUrl} />
-      </Helmet>
 
       <article className="bg-white min-h-screen">
         {/* Back Button */}
         <div className="max-w-4xl mx-auto px-6 pt-24 pb-8">
           <Link
-            to="/insights"
+            href="/insights"
             className="group inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-forest transition-colors"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
@@ -241,7 +225,7 @@ const BlogPost: React.FC = () => {
             <h3 className="font-bold text-2xl mb-4">Enjoyed this perspective?</h3>
             <p className="text-gray-600 mb-6">We apply this same strategic thinking to our client projects.</p>
             <Link
-              to="/audit"
+              href="/audit"
               className="inline-block bg-forest text-white px-8 py-3 rounded-full font-bold hover:bg-forest/90 transition-colors"
             >
               Get a Free Audit

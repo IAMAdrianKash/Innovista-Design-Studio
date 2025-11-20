@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Heart, Globe, Coffee } from 'lucide-react';
