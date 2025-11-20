@@ -1,13 +1,15 @@
+'use client'
+
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, HelpCircle } from 'lucide-react';
 import ContentSection from './ContentSection';
 import SEO from './SEO';
 
 const Pricing: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   return (
     <div className="pt-12">
       <SEO 
@@ -72,7 +74,7 @@ const Pricing: React.FC = () => {
                 ))}
               </ul>
               <button
-                onClick={() => navigate('/audit')}
+                onClick={() => router.push('/audit')}
                 className="w-full py-4 rounded-xl border border-gray-200 font-bold text-dark hover:bg-gray-50 transition-colors"
               >
                 Get Free Audit
@@ -114,7 +116,7 @@ const Pricing: React.FC = () => {
                 ))}
               </ul>
               <button
-                onClick={() => navigate('/contact')}
+                onClick={() => router.push('/contact')}
                 className="w-full py-4 rounded-xl bg-white text-forest font-bold hover:bg-gray-100 transition-colors relative z-10"
               >
                 Start Project
@@ -155,7 +157,7 @@ const Pricing: React.FC = () => {
                 ))}
               </ul>
               <button
-                onClick={() => navigate('/contact')}
+                onClick={() => router.push('/contact')}
                 className="w-full py-4 rounded-xl border border-gray-200 font-bold text-dark hover:bg-gray-50 transition-colors"
               >
                 Inquire About Retainers
@@ -172,7 +174,7 @@ const Pricing: React.FC = () => {
                 <h4 className="font-bold text-lg mb-1 text-dark">Need a custom scope?</h4>
                 <p className="text-gray-600 text-sm">We work with larger organizations on enterprise migrations and custom web apps. Let's chat about your specific requirements.</p>
              </div>
-             <button onClick={() => navigate('/contact')} className="md:ml-auto px-6 py-3 bg-dark text-white rounded-full text-sm font-bold hover:bg-black transition-colors whitespace-nowrap">
+             <button onClick={() => router.push('/contact')} className="md:ml-auto px-6 py-3 bg-dark text-white rounded-full text-sm font-bold hover:bg-black transition-colors whitespace-nowrap">
                 Contact Sales
              </button>
           </div>

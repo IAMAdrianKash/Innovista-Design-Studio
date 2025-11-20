@@ -1,6 +1,7 @@
+'use client'
 
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, ArrowLeft, CheckCircle2, BarChart3 } from 'lucide-react';
 import ContentSection from './ContentSection';
@@ -63,7 +64,7 @@ const ProjectCard: React.FC<{ project: any; index: number; onClick: () => void }
 };
 
 const CaseStudies: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
   const activeProject = selectedProjectId
@@ -165,7 +166,7 @@ const CaseStudies: React.FC = () => {
 
           <div className="mt-24 text-center">
              <h2 className="font-heading font-bold text-3xl mb-8">Ready for similar results?</h2>
-             <button onClick={() => navigate('/audit')} className="bg-dark text-white px-8 py-4 rounded-full font-bold hover:bg-black transition-colors">
+             <button onClick={() => router.push('/audit')} className="bg-dark text-white px-8 py-4 rounded-full font-bold hover:bg-black transition-colors">
                 Get Your Free Audit
              </button>
           </div>

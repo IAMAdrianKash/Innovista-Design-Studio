@@ -1,6 +1,9 @@
+'use client'
+
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation';
 import { Search, Menu, X, ChevronDown, Monitor, TrendingUp, Zap, BarChart, ArrowRight, ArrowUpRight, FileText, Briefcase, Info, MessageCircleQuestion, CreditCard, Users, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { insightsData, projectsData } from '../data/content';
@@ -47,8 +50,8 @@ const POPULAR_SEARCHES = [
 ];
 
 const Navbar: React.FC = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const location = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
@@ -125,7 +128,7 @@ const Navbar: React.FC = () => {
   ];
 
   const handleNav = (path: string) => {
-    navigate(path);
+    router.push(path);
     setIsOpen(false);
     setHoveredLink(null);
     setIsSearchOpen(false);
@@ -137,9 +140,9 @@ const Navbar: React.FC = () => {
     item.desc.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const isActive = (path: string) => location.pathname === path;
-  const isServiceActive = () => location.pathname.startsWith('/services');
-  const isAboutActive = () => ['/about', '/careers', '/faq', '/pricing'].includes(location.pathname);
+  const isActive = (path: string) => location === path;
+  const isServiceActive = () => location.startsWith('/services');
+  const isAboutActive = () => ['/about', '/careers', '/faq', '/pricing'].includes(location);
 
   return (
     <>
@@ -147,7 +150,7 @@ const Navbar: React.FC = () => {
         <div className="max-w-[90rem] mx-auto px-6 md:px-12 h-20 md:h-24 flex items-center justify-between relative">
 
           {/* Left Side: Logo */}
-          <Link to="/" className="flex-shrink-0 flex items-center pb-1 z-20">
+          <Link href="/" className="flex-shrink-0 flex items-center pb-1 z-20">
             <span className="font-heading text-2xl md:text-3xl font-bold tracking-tight text-[#1A1A1A] leading-none">
               Innovista<span className="text-forest">.</span>
             </span>
@@ -157,7 +160,7 @@ const Navbar: React.FC = () => {
           <div className="hidden xl:flex absolute left-1/2 top-0 -translate-x-1/2 h-full items-center gap-8 pt-1 z-10">
               <div className="h-full flex items-center">
                 <Link
-                  to="/"
+                  href="/"
                   className={`text-sm font-medium transition-colors ${isActive('/') ? 'text-[#1A1A1A]' : 'text-[#4A4A4A] hover:text-[#1A1A1A]'}`}
                 >
                   Home
@@ -170,7 +173,7 @@ const Navbar: React.FC = () => {
                 onMouseEnter={() => setHoveredLink('about')}
               >
                 <Link
-                  to="/about"
+                  href="/about"
                   className={`text-sm font-medium transition-colors flex items-center gap-1 ${isAboutActive() ? 'text-[#1A1A1A]' : 'text-[#4A4A4A] hover:text-[#1A1A1A]'}`}
                 >
                   About
@@ -195,7 +198,7 @@ const Navbar: React.FC = () => {
                              {aboutItems.map((item) => (
                                 <Link
                                   key={item.path}
-                                  to={item.path}
+                                  href={item.path}
                                   onClick={() => setHoveredLink(null)}
                                   className="flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer group"
                                 >
@@ -219,7 +222,7 @@ const Navbar: React.FC = () => {
                                 We are always looking for senior talent to join our remote team.
                              </p>
                              <Link
-                                to="/careers"
+                                href="/careers"
                                 onClick={() => setHoveredLink(null)}
                                 className="text-sm font-bold text-forest underline decoration-forest/30 hover:decoration-forest transition-all underline-offset-4"
                              >
@@ -249,7 +252,7 @@ const Navbar: React.FC = () => {
                 onMouseEnter={() => setHoveredLink('services')}
               >
                 <Link
-                  to="/services"
+                  href="/services"
                   className={`text-sm font-medium transition-colors flex items-center gap-1 ${isServiceActive() ? 'text-[#1A1A1A]' : 'text-[#4A4A4A] hover:text-[#1A1A1A]'}`}
                 >
                   Services
@@ -275,7 +278,7 @@ const Navbar: React.FC = () => {
                              {serviceItems.map((item) => (
                                 <Link
                                   key={item.path}
-                                  to={item.path}
+                                  href={item.path}
                                   onClick={() => setHoveredLink(null)}
                                   className="flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer group"
                                 >
@@ -290,8 +293,8 @@ const Navbar: React.FC = () => {
                               ))}
                           </div>
                           <div className="mt-8 pt-6 border-t border-gray-100 flex gap-6">
-                              <Link to="/capabilities" onClick={() => setHoveredLink(null)} className="text-xs font-bold text-gray-400 hover:text-dark uppercase tracking-wider">View Tech Stack</Link>
-                              <Link to="/process" onClick={() => setHoveredLink(null)} className="text-xs font-bold text-gray-400 hover:text-dark uppercase tracking-wider">View Process</Link>
+                              <Link href="/capabilities" onClick={() => setHoveredLink(null)} className="text-xs font-bold text-gray-400 hover:text-dark uppercase tracking-wider">View Tech Stack</Link>
+                              <Link href="/process" onClick={() => setHoveredLink(null)} className="text-xs font-bold text-gray-400 hover:text-dark uppercase tracking-wider">View Process</Link>
                           </div>
                        </div>
 
@@ -307,7 +310,7 @@ const Navbar: React.FC = () => {
                                 Book a discovery call to discuss your goals. No sales pressure.
                              </p>
                              <Link
-                                to="/contact"
+                                href="/contact"
                                 onClick={() => setHoveredLink(null)}
                                 className="w-full py-3 bg-white text-forest font-bold rounded-lg text-sm hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
                              >
@@ -323,7 +326,7 @@ const Navbar: React.FC = () => {
 
               <div className="h-full flex items-center">
                 <Link
-                  to="/case-studies"
+                  href="/case-studies"
                   className={`text-sm font-medium transition-colors ${isActive('/case-studies') ? 'text-[#1A1A1A]' : 'text-[#4A4A4A] hover:text-[#1A1A1A]'}`}
                 >
                   Work
@@ -332,7 +335,7 @@ const Navbar: React.FC = () => {
 
               <div className="h-full flex items-center">
                 <Link
-                  to="/insights"
+                  href="/insights"
                   className={`text-sm font-medium transition-colors ${isActive('/insights') ? 'text-[#1A1A1A]' : 'text-[#4A4A4A] hover:text-[#1A1A1A]'}`}
                 >
                   Insights
@@ -343,13 +346,13 @@ const Navbar: React.FC = () => {
           {/* Right Actions */}
           <div className="hidden md:flex items-center gap-4 z-20">
             <Link
-              to="/contact"
+              href="/contact"
               className="px-5 py-2.5 rounded-full bg-white border border-gray-200 text-[#1A1A1A] text-sm font-medium hover:bg-gray-100 transition-colors"
             >
               Contact Us
             </Link>
             <Link
-              to="/audit"
+              href="/audit"
               className="px-5 py-2.5 rounded-full bg-forest text-white text-sm font-medium hover:bg-forest/90 transition-colors shadow-lg shadow-forest/20"
             >
               Get Free Audit
@@ -390,7 +393,7 @@ const Navbar: React.FC = () => {
             >
               <div className="flex flex-col p-6 gap-1">
                 <Link
-                  to="/"
+                  href="/"
                   onClick={() => setIsOpen(false)}
                   className="text-base font-medium text-[#1A1A1A] text-left py-3 border-b border-gray-200"
                 >
@@ -417,7 +420,7 @@ const Navbar: React.FC = () => {
                          {aboutItems.map((item) => (
                           <Link
                             key={item.path}
-                            to={item.path}
+                            href={item.path}
                             onClick={() => { setIsOpen(false); setMobileAboutOpen(false); }}
                             className="block w-full text-left text-sm text-gray-600 py-2 hover:text-dark"
                           >
@@ -449,7 +452,7 @@ const Navbar: React.FC = () => {
                         {serviceItems.map((item) => (
                           <Link
                             key={item.path}
-                            to={item.path}
+                            href={item.path}
                             onClick={() => { setIsOpen(false); setMobileServicesOpen(false); }}
                             className="block w-full text-left text-sm text-gray-600 py-2 hover:text-dark"
                           >
@@ -457,7 +460,7 @@ const Navbar: React.FC = () => {
                           </Link>
                         ))}
                          <Link
-                            to="/services"
+                            href="/services"
                             onClick={() => { setIsOpen(false); setMobileServicesOpen(false); }}
                             className="block w-full text-left text-sm font-bold text-dark py-2"
                           >
@@ -469,7 +472,7 @@ const Navbar: React.FC = () => {
                 </div>
 
                 <Link
-                  to="/case-studies"
+                  href="/case-studies"
                   onClick={() => setIsOpen(false)}
                   className="text-base font-medium text-[#1A1A1A] text-left py-3 border-b border-gray-200"
                 >
@@ -477,7 +480,7 @@ const Navbar: React.FC = () => {
                 </Link>
 
                 <Link
-                  to="/insights"
+                  href="/insights"
                   onClick={() => setIsOpen(false)}
                   className="text-base font-medium text-[#1A1A1A] text-left py-3 border-b border-gray-200"
                 >
@@ -485,7 +488,7 @@ const Navbar: React.FC = () => {
                 </Link>
 
                  <Link
-                  to="/contact"
+                  href="/contact"
                   onClick={() => setIsOpen(false)}
                   className="text-base font-medium text-[#1A1A1A] text-left py-3 border-b border-gray-200"
                 >
@@ -494,14 +497,14 @@ const Navbar: React.FC = () => {
 
                 <div className="flex flex-col gap-3 mt-6">
                   <Link
-                      to="/contact"
+                      href="/contact"
                       onClick={() => setIsOpen(false)}
                       className="w-full px-6 py-3 rounded-full bg-white border border-gray-200 text-[#1A1A1A] text-sm font-medium text-center"
                   >
                       Contact Us
                   </Link>
                   <Link
-                    to="/audit"
+                    href="/audit"
                     onClick={() => setIsOpen(false)}
                     className="w-full px-6 py-3 rounded-full bg-forest text-white text-sm font-medium text-center"
                   >

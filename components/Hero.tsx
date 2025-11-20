@@ -1,6 +1,8 @@
+'use client'
+
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ChevronRight, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -51,7 +53,7 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-wrap gap-4">
             <Link
-              to="/audit"
+              href="/audit"
               className="group bg-forest text-white px-8 py-4 rounded-full text-[15px] font-medium hover:bg-forest/90 transition-all flex items-center gap-3 shadow-2xl shadow-forest/20 hover:shadow-forest/30 hover:-translate-y-1 duration-300"
             >
               Get Your Free Website Audit
@@ -61,7 +63,7 @@ const Hero: React.FC = () => {
             </Link>
 
             <Link
-              to="/case-studies"
+              href="/case-studies"
               className="group px-8 py-4 rounded-full text-[15px] font-medium text-[#1A1A1A] border border-gray-200 hover:border-gray-400 hover:bg-white transition-all flex items-center gap-2"
             >
               View Selected Work
