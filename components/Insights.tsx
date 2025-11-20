@@ -1,16 +1,13 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Calendar, User, ArrowLeft } from 'lucide-react';
-import { PageType } from '../App';
 import ContentSection from './ContentSection';
 import { insightsData } from '../data/content';
 
-interface InsightsProps {
-  onNavigate?: (page: PageType) => void;
-}
-
-const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
+const Insights: React.FC = () => {
+  const navigate = useNavigate();
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
 
   const activeArticle = selectedArticleId 
@@ -79,7 +76,7 @@ const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
           <div className="mt-20 p-8 bg-gray-50 rounded-2xl border border-gray-100 text-center">
              <h3 className="font-bold text-2xl mb-4">Enjoyed this perspective?</h3>
              <p className="text-gray-600 mb-6">We apply this same strategic thinking to our client projects.</p>
-             <button onClick={() => onNavigate && onNavigate('audit')} className="bg-forest text-white px-8 py-3 rounded-full font-bold hover:bg-forest/90 transition-colors">
+             <button onClick={() => navigate('/audit')} className="bg-forest text-white px-8 py-3 rounded-full font-bold hover:bg-forest/90 transition-colors">
                 Get a Free Audit
              </button>
           </div>

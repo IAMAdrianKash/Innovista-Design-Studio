@@ -1,20 +1,9 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Linkedin, Twitter, Globe } from 'lucide-react';
-import { PageType } from '../App';
 
-interface FooterProps {
-  onNavigate?: (page: PageType) => void;
-}
-
-const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
-  const handleNav = (page: PageType) => {
-    if (onNavigate) {
-      onNavigate(page);
-      window.scrollTo(0, 0);
-    }
-  };
-
+const Footer: React.FC = () => {
   return (
     <footer className="pt-24 pb-12 bg-white relative overflow-hidden">
       {/* Giant Background Text */}
@@ -27,37 +16,37 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h5 className="font-heading font-bold text-xs uppercase tracking-wider mb-6 text-gray-500">Services</h5>
             <ul className="space-y-3">
-              <li><button onClick={() => handleNav('service-web-design')} className="text-sm text-gray-600 hover:text-dark text-left">Web Design</button></li>
-              <li><button onClick={() => handleNav('service-lead-gen')} className="text-sm text-gray-600 hover:text-dark text-left">Lead Generation</button></li>
-              <li><button onClick={() => handleNav('service-automation')} className="text-sm text-gray-600 hover:text-dark text-left">Automation</button></li>
-              <li><button onClick={() => handleNav('service-seo')} className="text-sm text-gray-600 hover:text-dark text-left">SEO Optimization</button></li>
+              <li><Link to="/services/web-design" className="text-sm text-gray-600 hover:text-dark text-left">Web Design</Link></li>
+              <li><Link to="/services/lead-generation" className="text-sm text-gray-600 hover:text-dark text-left">Lead Generation</Link></li>
+              <li><Link to="/services/automation" className="text-sm text-gray-600 hover:text-dark text-left">Automation</Link></li>
+              <li><Link to="/services/seo" className="text-sm text-gray-600 hover:text-dark text-left">SEO Optimization</Link></li>
             </ul>
           </div>
           <div>
             <h5 className="font-heading font-bold text-xs uppercase tracking-wider mb-6 text-gray-500">Work</h5>
             <ul className="space-y-3">
-              <li><button onClick={() => handleNav('case-studies')} className="text-sm text-gray-600 hover:text-dark text-left">Case Studies</button></li>
-              <li><button onClick={() => handleNav('process')} className="text-sm text-gray-600 hover:text-dark text-left">Process</button></li>
-              <li><button onClick={() => handleNav('pricing')} className="text-sm text-gray-600 hover:text-dark text-left">Pricing</button></li>
-              <li><button onClick={() => handleNav('capabilities')} className="text-sm text-gray-600 hover:text-dark text-left">Capabilities</button></li>
+              <li><Link to="/case-studies" className="text-sm text-gray-600 hover:text-dark text-left">Case Studies</Link></li>
+              <li><Link to="/process" className="text-sm text-gray-600 hover:text-dark text-left">Process</Link></li>
+              <li><Link to="/pricing" className="text-sm text-gray-600 hover:text-dark text-left">Pricing</Link></li>
+              <li><Link to="/capabilities" className="text-sm text-gray-600 hover:text-dark text-left">Capabilities</Link></li>
             </ul>
           </div>
           <div>
             <h5 className="font-heading font-bold text-xs uppercase tracking-wider mb-6 text-gray-500">Company</h5>
             <ul className="space-y-3">
-              <li><button onClick={() => handleNav('about')} className="text-sm text-gray-600 hover:text-dark">About Innovista</button></li>
-              <li><button onClick={() => handleNav('insights')} className="text-sm text-gray-600 hover:text-dark">Insights (Blog)</button></li>
-              <li><button onClick={() => handleNav('contact')} className="text-sm text-gray-600 hover:text-dark">Contact Us</button></li>
-              <li><button onClick={() => handleNav('careers')} className="text-sm text-gray-600 hover:text-dark">Careers</button></li>
-              <li><button onClick={() => handleNav('faq')} className="text-sm text-gray-600 hover:text-dark">FAQ</button></li>
+              <li><Link to="/about" className="text-sm text-gray-600 hover:text-dark">About Innovista</Link></li>
+              <li><Link to="/insights" className="text-sm text-gray-600 hover:text-dark">Insights (Blog)</Link></li>
+              <li><Link to="/contact" className="text-sm text-gray-600 hover:text-dark">Contact Us</Link></li>
+              <li><Link to="/careers" className="text-sm text-gray-600 hover:text-dark">Careers</Link></li>
+              <li><Link to="/faq" className="text-sm text-gray-600 hover:text-dark">FAQ</Link></li>
             </ul>
           </div>
           <div>
             <h5 className="font-heading font-bold text-xs uppercase tracking-wider mb-6 text-gray-500">Legal</h5>
             <ul className="space-y-3">
-              <li><button onClick={() => handleNav('privacy-policy')} className="text-sm text-gray-600 hover:text-dark text-left">Privacy Policy</button></li>
-              <li><button onClick={() => handleNav('terms-of-service')} className="text-sm text-gray-600 hover:text-dark text-left">Terms of Service</button></li>
-              <li><button onClick={() => handleNav('cookie-policy')} className="text-sm text-gray-600 hover:text-dark text-left">Cookie Policy</button></li>
+              <li><Link to="/privacy-policy" className="text-sm text-gray-600 hover:text-dark text-left">Privacy Policy</Link></li>
+              <li><Link to="/terms-of-service" className="text-sm text-gray-600 hover:text-dark text-left">Terms of Service</Link></li>
+              <li><Link to="/cookie-policy" className="text-sm text-gray-600 hover:text-dark text-left">Cookie Policy</Link></li>
             </ul>
           </div>
           

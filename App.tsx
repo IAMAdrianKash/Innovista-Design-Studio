@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -25,50 +26,57 @@ import Footer from './components/Footer';
 import ScrollProgress from './components/ui/ScrollProgress';
 import MobileStickyBar from './components/ui/MobileStickyBar';
 
-export type PageType = 'home' | 'about' | 'services' | 'service-web-design' | 'service-lead-gen' | 'service-automation' | 'service-seo' | 'case-studies' | 'contact' | 'careers' | 'faq' | 'capabilities' | 'privacy-policy' | 'terms-of-service' | 'cookie-policy' | 'audit' | 'insights' | 'pricing' | 'process' | 'not-found';
+// ScrollToTop component - scrolls to top on route change
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<PageType>('home');
-
-  const handleNavigate = (page: PageType) => {
-    setCurrentPage(page);
-    window.scrollTo(0, 0);
-  };
-
   return (
     <HelmetProvider>
-      <div className="bg-cream min-h-screen font-sans text-dark selection:bg-dark selection:text-white overflow-x-hidden relative">
-        {/* Global UX Enhancements */}
-        <ScrollProgress />
+      <BrowserRouter>
+        <ScrollToTop />
+        <div className="bg-cream min-h-screen font-sans text-dark selection:bg-dark selection:text-white overflow-x-hidden relative">
+          {/* Global UX Enhancements */}
+          <ScrollProgress />
 
-        <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
-        
-        <main className="relative z-10">
-          {currentPage === 'home' && <Home onNavigate={handleNavigate} />}
-          {currentPage === 'about' && <About />}
-          {currentPage === 'services' && <Services onNavigate={handleNavigate} />}
-          {currentPage === 'service-web-design' && <ServiceWebDesign onNavigate={handleNavigate} />}
-          {currentPage === 'service-lead-gen' && <ServiceLeadGen onNavigate={handleNavigate} />}
-          {currentPage === 'service-automation' && <ServiceAutomation onNavigate={handleNavigate} />}
-          {currentPage === 'service-seo' && <ServiceSEO onNavigate={handleNavigate} />}
-          {currentPage === 'case-studies' && <CaseStudies onNavigate={handleNavigate} />}
-          {currentPage === 'contact' && <Contact />}
-          {currentPage === 'careers' && <Careers />}
-          {currentPage === 'faq' && <FAQ />}
-          {currentPage === 'capabilities' && <Capabilities />}
-          {currentPage === 'privacy-policy' && <PrivacyPolicy />}
-          {currentPage === 'terms-of-service' && <TermsOfService />}
-          {currentPage === 'cookie-policy' && <CookiePolicy />}
-          {currentPage === 'audit' && <Audit />}
-          {currentPage === 'insights' && <Insights onNavigate={handleNavigate} />}
-          {currentPage === 'pricing' && <Pricing onNavigate={handleNavigate} />}
-          {currentPage === 'process' && <Process onNavigate={handleNavigate} />}
-          {currentPage === 'not-found' && <NotFound onNavigate={handleNavigate} />}
-        </main>
+          <Navbar />
 
-        <Footer onNavigate={handleNavigate} />
-        <MobileStickyBar onNavigate={handleNavigate} />
-      </div>
+          <main className="relative z-10">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/web-design" element={<ServiceWebDesign />} />
+              <Route path="/services/lead-generation" element={<ServiceLeadGen />} />
+              <Route path="/services/automation" element={<ServiceAutomation />} />
+              <Route path="/services/seo" element={<ServiceSEO />} />
+              <Route path="/case-studies" element={<CaseStudies />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/capabilities" element={<Capabilities />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/cookie-policy" element={<CookiePolicy />} />
+              <Route path="/audit" element={<Audit />} />
+              <Route path="/insights" element={<Insights />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/process" element={<Process />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+
+          <Footer />
+          <MobileStickyBar />
+        </div>
+      </BrowserRouter>
     </HelmetProvider>
   );
 };

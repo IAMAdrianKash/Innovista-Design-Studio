@@ -8,14 +8,9 @@ import Features from './Features';
 import Testimonials from './Testimonials';
 import ContentSection from './ContentSection';
 import ServicingArea from './ServicingArea';
-import { PageType } from '../App';
 import SEO from './SEO';
 
-interface HomeProps {
-  onNavigate: (page: PageType) => void;
-}
-
-const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+const Home: React.FC = () => {
   // Structured Data for Local Business
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -58,7 +53,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         canonicalUrl="/"
         schema={localBusinessSchema}
       />
-      <Hero onNavigate={onNavigate} />
+      <Hero />
       <LogoStrip />
       <SolutionsGrid />
       <Calculators />
