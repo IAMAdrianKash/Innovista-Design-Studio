@@ -1,14 +1,15 @@
 import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
 import { visionTool } from '@sanity/vision';
+import { codeInput } from '@sanity/code-input';
 import { schemaTypes } from './sanity/schemas';
 
 export default defineConfig({
   name: 'default',
   title: 'Innovista Design Studio',
 
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'your-project-id',
-  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
+  projectId: 'thhy1crr',
+  dataset: 'production',
 
   plugins: [
     deskTool({
@@ -40,6 +41,7 @@ export default defineConfig({
           ]),
     }),
     visionTool(), // Query testing tool
+    codeInput(), // Code block support
   ],
 
   schema: {
