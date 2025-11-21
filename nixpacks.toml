@@ -1,17 +1,17 @@
 # Nixpacks configuration for Coolify deployment
-# This ensures the app builds correctly with React 19
+# Configured for Next.js 15
 
 [phases.setup]
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["npm install --legacy-peer-deps"]
+cmds = ["npm ci"]
 
 [phases.build]
 cmds = ["npm run build"]
 
 [start]
-cmd = "npx serve dist -s -p 3000"
+cmd = "npm start"
 
-# -s flag enables SPA mode (redirects all routes to index.html)
-# Required for React Router to work correctly
+# Next.js runs on port 3000 by default
+# Uses Next.js built-in production server
