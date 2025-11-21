@@ -1,0 +1,126 @@
+====================================
+PAGE: ABOUT US
+====================================
+URL: /about
+META TITLE: About Innovista | Edmonton Digital Agency (48 chars)
+META DESCRIPTION: Innovista Design Studio bridges the gap between looking good and selling. We are an Alberta-based web design agency focused on revenue and results. (153 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Story Section (Origin Story)
+3. Founder's Note
+4. Philosophy/Values Grid
+5. Team Approach Section
+6. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Main Headline (H1):
+"We're not artists.
+We're architects of revenue."
+[Note: "revenue" is styled in italic/light gray]
+
+Subheadline:
+"Innovista Design Studio bridges the gap between "looking good" and "selling." We help Alberta businesses stop leaking leads and start dominating their market."
+[~160 chars]
+
+--- STORY SECTION ---
+
+Section Label:
+"Our Origin Story"
+
+Section Headline (H2):
+"Tired of websites that are just expensive decorations."
+[Note: "expensive decorations" is styled in gray]
+
+Paragraph 1:
+"Innovista started when we realized a hard truth: most local businesses were getting ripped off. They were paying agencies $15,000+ for "custom" websites that were really just bloated WordPress templates that took 5 seconds to load."
+
+Paragraph 2:
+"These sites looked okay, but they didn't do the one thing they were supposed to do: make the phone ring."
+[Note: "make the phone ring" is bolded]
+
+Paragraph 3:
+"We decided to build something different. A studio that treats your website as a financial asset, not an art project. We strip away the fluff, focus on user psychology, and engineer sites that convert traffic into paying clients."
+
+Image:
+File: /images/about-bridge.jpg
+Alt Text: "Modern architecture representing our design philosophy"
+
+Floating Quote Card:
+""Design is intelligence made visible."
+— Not just a quote. Our process."
+
+--- FOUNDER'S NOTE ---
+
+Background: Light gray (F3F4F6)
+
+Founder Avatar:
+Placeholder image with initials "Alex Morgan"
+
+Quote:
+""My promise is simple: You will never have to wonder what you are paying for. No black boxes. No jargon. Just clear communication and work that moves the needle.""
+[Italic, serif font, ~200 chars]
+
+Signature:
+SVG signature illustration
+
+Name & Title:
+"Alex Morgan"
+"Founder & Lead Strategist"
+
+--- PHILOSOPHY SECTION ---
+
+Section Headline:
+"Our Philosophy"
+
+Section Subheadline:
+"How we deliver results when others deliver excuses."
+
+Value 1:
+TITLE: "Speed is a Feature"
+DESCRIPTION: "A 1-second delay in load time reduces conversions by 7%. We code for raw performance, ensuring your site loads instantly on any device."
+[~140 chars]
+
+Value 2:
+TITLE: "User-Centric, Not Ego-Centric"
+DESCRIPTION: "We don't care what color *we* like. We care what your customers respond to. Every pixel is placed with the intent to guide a user to 'Contact Us'."
+[~150 chars]
+
+Value 3:
+TITLE: "Data Over Opinions"
+DESCRIPTION: "We don't guess. We test. Our decisions are backed by analytics and user behavior data, not just 'creative intuition'."
+[~120 chars]
+
+--- TEAM APPROACH SECTION ---
+
+Background: Forest green (#064E3B)
+Text: White
+
+Section Headline:
+"No Juniors. No Outsourcing."
+
+Feature 1:
+TITLE: "Senior Talent Only"
+DESCRIPTION: "When you hire Innovista, you work directly with the experts building your site. No account managers playing "telephone" with your requirements."
+[~145 chars]
+
+Feature 2:
+TITLE: "Alberta Based"
+DESCRIPTION: "We understand the local market because we live here. From the oilfield to the boardroom, we know how Albertans do business."
+[~125 chars]
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Main headlines: 40-60 chars
+- Section headlines: 50-80 chars
+- Value descriptions: 120-160 chars for consistency
+- Keep quote under 250 chars for mobile readability
+- Founder quote should feel personal and direct

@@ -1,0 +1,82 @@
+====================================
+PAGE: SEO OPTIMIZATION SERVICE
+====================================
+URL: /services/seo
+META TITLE: SEO Services Edmonton | Local Search & Technical Audits (61 chars)
+META DESCRIPTION: Dominate local search results in Alberta. Innovista provides technical SEO audits, local SEO optimization, and content strategy to drive organic traffic. (156 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Key Features Grid (3 items)
+3. SEO Roadmap Timeline
+4. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Breadcrumb:
+"Service > SEO Optimization"
+
+Main Headline (H1):
+"Be found when it matters most."
+[Note: "matters most" is styled in italic/light gray]
+
+Subheadline:
+"We help Alberta businesses dominate local search results. Sustainable, white-hat SEO strategies that bring consistent, free traffic."
+[~130 chars]
+
+--- KEY FEATURES ---
+
+FEATURE 1:
+TITLE: "Technical Audits"
+DESCRIPTION: "We fix the broken links, slow load times, and structure issues that are preventing Google from trusting your site."
+[~115 chars]
+
+FEATURE 2:
+TITLE: "Local SEO"
+DESCRIPTION: "Ranking for 'Service + City' keywords. Google Business Profile optimization to capture local intent."
+[~100 chars]
+
+FEATURE 3:
+TITLE: "Content Strategy"
+DESCRIPTION: "Writing authoritative content that answers your customers' questions and establishes you as the industry expert."
+[~115 chars]
+
+--- THE SEO ROADMAP ---
+
+Section Headline:
+"The SEO Roadmap"
+
+MONTH 1:
+TITLE: "Month 1: Technical Foundation"
+DESCRIPTION: "Site speed, mobile usability, schema markup, and indexing fixes."
+[~65 chars]
+
+MONTH 2:
+TITLE: "Month 2: On-Page Optimization"
+DESCRIPTION: "Optimizing meta tags, headers, and existing content for target keywords."
+[~75 chars]
+
+MONTH 3:
+TITLE: "Month 3: Content Creation"
+DESCRIPTION: "Publishing high-quality articles to target long-tail search queries."
+[~70 chars]
+
+MONTH 4+:
+TITLE: "Month 4+: Authority Building"
+DESCRIPTION: "Backlink acquisition and digital PR to increase domain authority."
+[~65 chars]
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Roadmap titles: Include "Month X:" prefix for clarity
+- Roadmap descriptions: 60-80 chars for consistency
+- Feature descriptions: 100-120 chars
+- Timeline should show progressive strategy
+- Emphasize long-term, sustainable approach

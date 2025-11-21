@@ -1,0 +1,68 @@
+====================================
+PAGE: HOMEPAGE
+====================================
+URL: /
+META TITLE: Web Design Edmonton | Innovista Design Studio (60 chars)
+META DESCRIPTION: Innovista builds conversion-focused websites for Alberta businesses. We specialize in high-performance web design, SEO, and automation for professional services. (173 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Logo Strip
+3. Solutions Grid
+4. Calculators
+5. Features
+6. Servicing Area
+7. Testimonials
+8. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Status Badge:
+"Accepting Q4 Projects"
+
+Main Headline (H1):
+"Your website should be generating revenue."
+[Note: "revenue" is styled in italic/light gray]
+
+Subheadline:
+"We build conversion-focused websites for Alberta businesses that need results, not just pretty designs. Modern, fast, and engineered to sell."
+[Character limit: ~180 chars]
+
+Social Proof:
+"50+ firms trust us"
+[Shows avatar images and 5-star rating]
+
+Primary CTA Button:
+"Get Your Free Website Audit"
+[Links to: /audit]
+
+Secondary CTA Button:
+"View Selected Work"
+[Links to: /case-studies]
+
+Visual Cards (Floating metrics):
+- Card 1: "Conversion +142%"
+- Card 2: "System Active" with progress bar at 85%
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Main headline: Keep under 50 chars for mobile readability
+- Subheadline: 150-200 chars ideal
+- CTA buttons: 3-5 words maximum
+- Status badge: 2-4 words
+
+====================================
+SEO SCHEMA
+====================================
+Business Type: ProfessionalService
+Location: Edmonton, AB, Canada
+Email: hello@innovista.design
+Hours: Monday-Friday, 9:00-17:00
+Price Range: $$$

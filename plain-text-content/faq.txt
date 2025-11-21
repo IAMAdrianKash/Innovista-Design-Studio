@@ -1,0 +1,69 @@
+====================================
+PAGE: FAQ
+====================================
+URL: /faq
+META TITLE: Frequently Asked Questions | Innovista Design Studio (58 chars)
+META DESCRIPTION: Common questions about our web design process, pricing, timelines, and services. Honest, transparent answers. (110 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. FAQ Accordion (6 questions)
+3. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Main Headline (H1):
+"Common questions."
+[Note: "questions" is styled in italic/light gray]
+
+Subheadline:
+"Transparency is one of our core values. Here are honest answers to the things most clients ask us before starting."
+[~115 chars]
+
+--- FAQ ACCORDION ---
+
+QUESTION 1:
+Q: "How much does a website typically cost?"
+A: "Our custom website projects start at $8,000. This includes strategy, design, development, and basic SEO setup. More complex sites with extensive automation, migrations, or e-commerce functionality typically range between $12,000 - $25,000. We provide a fixed-price quote before starting, so there are never any surprises."
+[~330 chars]
+
+QUESTION 2:
+Q: "How long does the process take?"
+A: "A standard brochure website takes 4-6 weeks from kick-off to launch. Larger projects or those requiring complex integrations can take 8-10 weeks. We move fast, but we don't rush the strategy phase."
+[~200 chars]
+
+QUESTION 3:
+Q: "Do you work with existing websites?"
+A: "Sometimes. If your site is built on a modern stack (React, Webflow, clean WordPress), we can often step in for optimization and improvements. If it's built on an outdated theme or a drag-and-drop builder like Wix, we usually recommend a rebuild to ensure performance and scalability."
+[~285 chars]
+
+QUESTION 4:
+Q: "Will I be able to edit the site myself?"
+A: "Absolutely. We build every site with a user-friendly CMS (Content Management System). You'll be able to easily update text, swap images, and add new blog posts without touching a line of code. We also provide a training session before launch."
+[~245 chars]
+
+QUESTION 5:
+Q: "Do you handle hosting and maintenance?"
+A: "Yes. We offer optional monthly care plans that cover high-performance hosting, daily backups, security updates, and content edits. However, you are never locked in. If you prefer to manage it yourself, we'll hand over the keys."
+[~230 chars]
+
+QUESTION 6:
+Q: "What platforms do you build on?"
+A: "We are platform-agnostic but opinionated about quality. We primarily build with Next.js/React for custom needs, Webflow for high-end marketing sites, and Shopify for e-commerce. We choose the tool that best fits your business goals."
+[~235 chars]
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Questions: 5-10 words, conversational tone
+- Answers: 150-350 chars, direct and honest
+- First question (pricing) is typically most important
+- Answers should address objections proactively
+- Use specific numbers and timelines
+- Avoid jargon, write in plain English
