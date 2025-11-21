@@ -107,70 +107,63 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       />
 
       <article className="bg-white min-h-screen">
-        {/* Hero Section */}
-        <div className="relative">
+        {/* Header Section */}
+        <div className="max-w-4xl mx-auto px-6 md:px-12 pt-24 pb-8">
           {/* Back Button */}
-          <div className="absolute top-8 left-6 md:left-12 z-20">
-            <Link
-              href="/insights"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur rounded-full text-sm font-medium hover:bg-white transition-colors shadow-sm"
-            >
-              <ArrowLeft size={16} />
-              All Insights
-            </Link>
+          <Link
+            href="/insights"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-forest transition-colors mb-8"
+          >
+            <ArrowLeft size={16} />
+            Back to Insights
+          </Link>
+
+          {/* Meta Info */}
+          <div className="flex items-center gap-4 text-sm text-gray-500 mb-4 uppercase tracking-wide font-medium flex-wrap">
+            {post.categories && post.categories.length > 0 && (
+              <span className="bg-gray-100 px-3 py-1 rounded-full text-dark">
+                {post.categories[0].title}
+              </span>
+            )}
+            <div className="flex items-center gap-1">
+              <Calendar size={14} /> {formattedDate}
+            </div>
           </div>
 
-          {/* Featured Image */}
-          {imageUrl && (
-            <div className="relative w-full h-[50vh] md:h-[60vh] bg-gray-100">
-              <img
-                src={imageUrl}
-                alt={post.featuredImage?.alt || post.title}
-                className="object-cover w-full h-full"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+          {/* Title */}
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-dark leading-tight mb-6">
+            {post.title}
+          </h1>
+
+          {/* Author Info */}
+          {post.author && (
+            <div className="flex items-center gap-3 mb-8">
+              {post.author.image && (
+                <img
+                  src={urlForImage(post.author.image).width(48).height(48).url()}
+                  alt={post.author.name}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+              )}
+              <div>
+                <div className="font-medium text-dark">{post.author.name}</div>
+                <div className="text-sm text-gray-500">{post.author.bio ? post.author.bio.substring(0, 50) + '...' : 'Strategist at Innovista'}</div>
+              </div>
             </div>
           )}
-
-          {/* Article Header */}
-          <div className="max-w-4xl mx-auto px-6 md:px-12 -mt-24 relative z-10">
-            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-              {/* Meta Info */}
-              <div className="flex items-center gap-4 text-sm text-gray-500 mb-6 uppercase tracking-wide font-medium flex-wrap">
-                {post.categories && post.categories.length > 0 && (
-                  <span className="bg-gray-100 px-3 py-1 rounded-full text-dark">
-                    {post.categories[0].title}
-                  </span>
-                )}
-                <div className="flex items-center gap-1">
-                  <Calendar size={14} /> {formattedDate}
-                </div>
-                {post.author && (
-                  <div className="flex items-center gap-1">
-                    <User size={14} /> {post.author.name}
-                  </div>
-                )}
-                {post.estimatedReadTime && (
-                  <div className="flex items-center gap-1">
-                    <Clock size={14} /> {post.estimatedReadTime} min read
-                  </div>
-                )}
-              </div>
-
-              {/* Title */}
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-dark leading-tight mb-6">
-                {post.title}
-              </h1>
-
-              {/* Excerpt */}
-              {post.excerpt && (
-                <p className="text-xl text-gray-600 leading-relaxed mb-8 font-light">
-                  {post.excerpt}
-                </p>
-              )}
-            </div>
-          </div>
         </div>
+
+        {/* Featured Image */}
+        {imageUrl && (
+          <div className="max-w-4xl mx-auto px-6 md:px-12 mb-12">
+            <img
+              src={imageUrl}
+              alt={post.featuredImage?.alt || post.title}
+              className="w-full rounded-2xl object-cover"
+              style={{ maxHeight: '500px' }}
+            />
+          </div>
+        )}
 
         {/* Article Content */}
         <div className="max-w-4xl mx-auto px-6 md:px-12 py-16">
@@ -267,6 +260,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             </div>
           )}
+
+          {/* CTA Section */}
+          <div className="mt-16 p-12 bg-gray-50 rounded-3xl text-center">
+            <h3 className="font-heading text-3xl md:text-4xl font-bold text-dark mb-4">
+              Enjoyed this perspective?
+            </h3>
+            <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+              We apply this same strategic thinking to our client projects.
+            </p>
+            <Link
+              href="/audit"
+              className="inline-flex items-center justify-center px-8 py-4 bg-forest text-white font-bold rounded-full hover:bg-forest/90 transition-colors"
+            >
+              Get a Free Audit
+            </Link>
+          </div>
 
           {/* Back to Insights */}
           <div className="mt-16 text-center">
