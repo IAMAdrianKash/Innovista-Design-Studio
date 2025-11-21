@@ -6,7 +6,7 @@
 import { Resend } from 'resend';
 
 // Email configuration
-const FROM_EMAIL = 'onboarding@resend.dev'; // Resend's test email (change to your verified domain)
+const FROM_EMAIL = 'leads@innovista.design';
 const TO_EMAIL = 'hello@innovista.design';
 
 // Lazy initialization - only create Resend instance when needed
