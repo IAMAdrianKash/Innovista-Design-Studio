@@ -30,20 +30,35 @@ const playfairDisplay = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://innovista.design'),
   title: 'Innovista Design Studio - Conversion-Focused Web Design',
   description: 'Professional web design and development services focused on conversion optimization, lead generation, and business growth.',
   keywords: 'web design, lead generation, SEO, automation, conversion optimization',
   authors: [{ name: 'Innovista Design Studio' }],
+  icons: {
+    icon: '/images/brand/favicon.ico',
+    apple: '/images/brand/logo.png',
+  },
   openGraph: {
     title: 'Innovista Design Studio - Conversion-Focused Web Design',
     description: 'Professional web design and development services focused on conversion optimization, lead generation, and business growth.',
     type: 'website',
     locale: 'en_US',
+    siteName: 'Innovista Design Studio',
+    images: [
+      {
+        url: '/images/og/og-default.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Innovista Design Studio - Conversion-Focused Web Design',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Innovista Design Studio - Conversion-Focused Web Design',
     description: 'Professional web design and development services focused on conversion optimization, lead generation, and business growth.',
+    images: ['/images/og/og-default.jpg'],
   },
 }
 
