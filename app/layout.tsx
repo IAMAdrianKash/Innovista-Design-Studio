@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Innovista Design Studio' }],
   icons: {
     icon: '/images/brand/favicon.ico',
-    apple: '/images/brand/logo.png',
+    apple: '/images/brand/logo.svg',
   },
   openGraph: {
     title: 'Innovista Design Studio - Conversion-Focused Web Design',
