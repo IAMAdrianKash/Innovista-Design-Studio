@@ -28,13 +28,13 @@ const CONTENT_PAGES = [
   ...insightsData.map(post => ({
     title: post.title,
     type: 'Insight',
-    path: '/insights',
+    path: `/insights/${post.id}`,
     desc: post.excerpt
   })),
   ...projectsData.map(project => ({
     title: project.client,
     type: 'Work',
-    path: '/case-studies',
+    path: `/case-studies#${project.id}`,
     desc: project.title
   }))
 ];
