@@ -30,3 +30,6 @@ dist-ssr
 *.sw?
 /.next/
 /next-env.d.ts
+
+# TypeScript
+*.tsbuildinfo

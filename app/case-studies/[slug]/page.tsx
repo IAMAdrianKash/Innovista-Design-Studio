@@ -48,5 +48,5 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     notFound()
   }
 
-  return <CaseStudyDetail />
+  return <CaseStudyDetail caseStudy={caseStudy} />
 }

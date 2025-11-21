@@ -1,80 +1,20 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Tag, Quote } from 'lucide-react';
-import { getCaseStudyBySlug, CaseStudy as CaseStudyType, urlForImage } from '../lib/sanity';
+import { CaseStudy as CaseStudyType, urlForImage } from '../lib/sanity';
 
-const CaseStudyDetail: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const [caseStudy, setCaseStudy] = useState<CaseStudyType | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+interface CaseStudyDetailProps {
+  caseStudy: CaseStudyType;
+}
 
-  useEffect(() => {
-    const fetchCaseStudy = async () => {
-      if (!slug) return;
-
-      try {
-        setLoading(true);
-        const data = await getCaseStudyBySlug(slug);
-        if (data) {
-          setCaseStudy(data);
-        } else {
-          setError(true);
-        }
-      } catch (err) {
-        console.error('Error fetching case study:', err);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCaseStudy();
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-cream flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-forest border-r-transparent"></div>
-          <p className="mt-4 text-gray-600">Loading case study...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !caseStudy) {
-    return (
-      <div className="min-h-screen bg-cream flex items-center justify-center px-8">
-        <div className="text-center max-w-md">
-          <h1 className="text-4xl font-heading font-bold text-dark mb-4">Case Study Not Found</h1>
-          <p className="text-gray-600 mb-8">The case study you're looking for doesn't exist or has been removed.</p>
-          <Link
-            href="/case-studies"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-forest text-white rounded-xl font-medium hover:bg-forest/90 transition-colors"
-          >
-            <ArrowLeft size={20} />
-            Back to Case Studies
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
+const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ caseStudy }) => {
   const formattedDate = new Date(caseStudy.projectDate).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
   });
-
-  const metaTitle = caseStudy.seo?.metaTitle || `${caseStudy.client}: ${caseStudy.title} | Innovista Design Studio`;
-  const metaDescription = caseStudy.seo?.metaDescription || caseStudy.excerpt;
-  const ogImageUrl = caseStudy.seo?.ogImage
-    ? urlForImage(caseStudy.seo.ogImage).width(1200).height(630).url()
-    : urlForImage(caseStudy.featuredImage).width(1200).height(630).url();
 
   const industryLabels: Record<string, string> = {
     'law': 'Law Firms',
@@ -98,7 +38,6 @@ const CaseStudyDetail: React.FC = () => {
 
   return (
     <>
-
       <article className="bg-cream min-h-screen">
         {/* Back Button */}
         <div className="max-w-7xl mx-auto px-8 pt-32 pb-8">
