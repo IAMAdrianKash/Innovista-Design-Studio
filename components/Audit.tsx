@@ -1,11 +1,70 @@
 'use client'
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, AlertCircle, PlayCircle } from 'lucide-react';
 
 const Audit: React.FC = () => {
+  const [formData, setFormData] = useState({
+    website: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    frustration: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          formType: 'audit',
+          ...formData,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({
+          website: '',
+          firstName: '',
+          lastName: '',
+          email: '',
+          frustration: '',
+        });
+      } else {
+        setSubmitStatus('error');
+        setErrorMessage(result.error || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage('Failed to submit form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="pt-12 min-h-screen bg-white">
       <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-24">
@@ -76,69 +135,116 @@ const Audit: React.FC = () => {
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
             
-            <h3 className="font-heading font-bold text-2xl md:text-3xl mb-2 relative z-10">Request Your Audit</h3>
-            <p className="text-white/70 mb-8 relative z-10">Enter your details below. We usually turn these around in 48 hours.</p>
-
-            <form className="space-y-6 relative z-10">
-                <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">Website URL</label>
-                    <input 
-                        type="url" 
-                        className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white" 
-                        placeholder="https://yourcompany.com" 
-                        required 
-                    />
+            {submitStatus === 'success' ? (
+              <div className="relative z-10">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 size={32} className="text-forest" />
+                  </div>
+                  <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4">Audit Request Received!</h3>
+                  <p className="text-white/80 leading-relaxed mb-6">
+                    We'll analyze your website and send you a personalized video audit within 48 hours.
+                  </p>
+                  <button
+                    onClick={() => setSubmitStatus('idle')}
+                    className="text-white font-bold hover:underline"
+                  >
+                    Request another audit
+                  </button>
                 </div>
+              </div>
+            ) : (
+              <>
+                <h3 className="font-heading font-bold text-2xl md:text-3xl mb-2 relative z-10">Request Your Audit</h3>
+                <p className="text-white/70 mb-8 relative z-10">Enter your details below. We usually turn these around in 48 hours.</p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
                     <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">First Name</label>
-                        <input 
-                            type="text" 
-                            className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white" 
-                            placeholder="Jane" 
-                            required 
+                        <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">Website URL</label>
+                        <input
+                            type="url"
+                            name="website"
+                            value={formData.website}
+                            onChange={handleChange}
+                            required
+                            className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white"
+                            placeholder="https://yourcompany.com"
                         />
                     </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">First Name</label>
+                            <input
+                                type="text"
+                                name="firstName"
+                                value={formData.firstName}
+                                onChange={handleChange}
+                                required
+                                className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white"
+                                placeholder="Jane"
+                            />
+                        </div>
+                        <div>
+                            <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">Last Name</label>
+                            <input
+                                type="text"
+                                name="lastName"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                                required
+                                className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white"
+                                placeholder="Doe"
+                            />
+                        </div>
+                    </div>
+
                     <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">Last Name</label>
-                        <input 
-                            type="text" 
-                            className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white" 
-                            placeholder="Doe" 
-                            required 
+                        <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">Email Address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white"
+                            placeholder="jane@company.com"
                         />
                     </div>
-                </div>
 
-                <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">Email Address</label>
-                    <input 
-                        type="email" 
-                        className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white" 
-                        placeholder="jane@company.com" 
-                        required 
-                    />
-                </div>
+                    <div>
+                        <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">What's your biggest frustration? (Optional)</label>
+                        <textarea
+                            name="frustration"
+                            value={formData.frustration}
+                            onChange={handleChange}
+                            rows={3}
+                            className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white resize-none"
+                            placeholder="e.g. We get traffic but no leads..."
+                        />
+                    </div>
 
-                <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">What's your biggest frustration? (Optional)</label>
-                    <textarea 
-                        rows={3} 
-                        className="w-full bg-white/10 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all placeholder:text-white/40 text-white resize-none" 
-                        placeholder="e.g. We get traffic but no leads..."
-                    ></textarea>
-                </div>
+                    {submitStatus === 'error' && (
+                      <div className="p-4 bg-red-500/20 border border-red-300/30 rounded-xl">
+                        <p className="text-white text-sm">{errorMessage}</p>
+                      </div>
+                    )}
 
-                <button type="submit" className="w-full bg-white text-[#1A1A1A] font-bold py-5 rounded-xl hover:bg-gray-100 transition-all flex items-center justify-center gap-2 group mt-4 shadow-lg">
-                    Get My Free Video Audit
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-                
-                <p className="text-center text-xs text-white/40 mt-4">
-                    By submitting, you agree to our privacy policy. We hate spam too.
-                </p>
-            </form>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-white text-[#1A1A1A] font-bold py-5 rounded-xl hover:bg-gray-100 transition-all flex items-center justify-center gap-2 group mt-4 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {isSubmitting ? 'Submitting...' : 'Get My Free Video Audit'}
+                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+
+                    <p className="text-center text-xs text-white/40 mt-4">
+                        By submitting, you agree to our privacy policy. We hate spam too.
+                    </p>
+                </form>
+              </>
+            )}
           </motion.div>
 
         </div>
