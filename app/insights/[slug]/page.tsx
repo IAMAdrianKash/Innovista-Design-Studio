@@ -261,6 +261,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </div>
           )}
 
+          {/* CTA Section */}
+          <div className="mt-16 p-12 bg-gray-50 rounded-3xl text-center">
+            <h3 className="font-heading text-3xl md:text-4xl font-bold text-dark mb-4">
+              Enjoyed this perspective?
+            </h3>
+            <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+              We apply this same strategic thinking to our client projects.
+            </p>
+            <Link
+              href="/audit"
+              className="inline-flex items-center justify-center px-8 py-4 bg-forest text-white font-bold rounded-full hover:bg-forest/90 transition-colors"
+            >
+              Get a Free Audit
+            </Link>
+          </div>
+
           {/* Back to Insights */}
           <div className="mt-16 text-center">
             <Link
