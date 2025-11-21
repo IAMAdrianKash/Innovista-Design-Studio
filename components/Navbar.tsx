@@ -6,10 +6,10 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation';
 import { Search, Menu, X, ChevronDown, Monitor, TrendingUp, Zap, BarChart, ArrowRight, ArrowUpRight, FileText, Briefcase, Info, MessageCircleQuestion, CreditCard, Users, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { insightsData, projectsData } from '../data/content';
+import { getSearchableContent, type SearchResult } from '../lib/search';
 
 // Static Pages Index
-const STATIC_PAGES = [
+const STATIC_PAGES: SearchResult[] = [
   { title: 'Web Design Services', type: 'Service', path: '/services/web-design', desc: 'Custom React & Next.js websites.' },
   { title: 'Lead Generation', type: 'Service', path: '/services/lead-generation', desc: 'CRO and funnel strategies.' },
   { title: 'Business Automation', type: 'Service', path: '/services/automation', desc: 'CRM integrations and workflows.' },
@@ -22,25 +22,6 @@ const STATIC_PAGES = [
   { title: 'Contact Us', type: 'Company', path: '/contact', desc: 'Start a project inquiry.' },
   { title: 'Get Free Audit', type: 'Offer', path: '/audit', desc: 'Request a video analysis of your site.' },
 ];
-
-// Dynamic Content Index
-const CONTENT_PAGES = [
-  ...insightsData.map(post => ({
-    title: post.title,
-    type: 'Insight',
-    path: `/insights/${post.id}`,
-    desc: post.excerpt
-  })),
-  ...projectsData.map(project => ({
-    title: project.client,
-    type: 'Work',
-    path: `/case-studies#${project.id}`,
-    desc: project.title
-  }))
-];
-
-// Combined Search Index
-const SEARCH_INDEX = [...STATIC_PAGES, ...CONTENT_PAGES];
 
 const POPULAR_SEARCHES = [
   { label: 'How much does a site cost?', path: '/pricing' },
@@ -58,7 +39,15 @@ const Navbar: React.FC = () => {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchIndex, setSearchIndex] = useState<SearchResult[]>(STATIC_PAGES);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Fetch Sanity content for search when component mounts
+  useEffect(() => {
+    getSearchableContent().then((content) => {
+      setSearchIndex([...STATIC_PAGES, ...content]);
+    });
+  }, []);
 
   // Lock body scroll when search is open
   useEffect(() => {
@@ -135,7 +124,7 @@ const Navbar: React.FC = () => {
     setSearchQuery('');
   };
 
-  const filteredResults = SEARCH_INDEX.filter(item =>
+  const filteredResults = searchIndex.filter(item =>
     item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.desc.toLowerCase().includes(searchQuery.toLowerCase())
   );
