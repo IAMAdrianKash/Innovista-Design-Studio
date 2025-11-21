@@ -151,9 +151,11 @@ const Navbar: React.FC = () => {
 
           {/* Left Side: Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center pb-1 z-20">
-            <span className="font-heading text-2xl md:text-3xl font-bold tracking-tight text-[#1A1A1A] leading-none">
-              Innovista<span className="text-forest">.</span>
-            </span>
+            <img
+              src="/images/brand/logo.svg"
+              alt="Innovista Design Studio"
+              className="h-10 md:h-12 w-auto"
+            />
           </Link>
 
           {/* Center: Desktop Nav */}
