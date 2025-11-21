@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import CaseStudies from '@/components/CaseStudies'
+import { getAllCaseStudies } from '@/lib/sanity'
 
 export const metadata: Metadata = {
   title: 'Case Studies | Innovista Design Studio',
@@ -9,6 +10,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function CaseStudiesPage() {
-  return <CaseStudies />
+export const revalidate = 60 // Revalidate every 60 seconds
+
+export default async function CaseStudiesPage() {
+  const caseStudies = await getAllCaseStudies()
+
+  return <CaseStudies caseStudies={caseStudies} />
 }
