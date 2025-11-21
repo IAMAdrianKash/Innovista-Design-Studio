@@ -5,12 +5,23 @@
 
 import { Resend } from 'resend';
 
-// Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Email configuration
 const FROM_EMAIL = 'onboarding@resend.dev'; // Resend's test email (change to your verified domain)
 const TO_EMAIL = 'hello@innovista.design';
+
+// Lazy initialization - only create Resend instance when needed
+let resendInstance: Resend | null = null;
+
+function getResend(): Resend {
+  if (!resendInstance) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY is not set in environment variables');
+    }
+    resendInstance = new Resend(apiKey);
+  }
+  return resendInstance;
+}
 
 export interface ContactFormData {
   firstName: string;
@@ -84,6 +95,7 @@ export async function sendContactEmail(data: ContactFormData) {
       </div>
     `;
 
+    const resend = getResend();
     const { data: emailData, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
@@ -165,6 +177,7 @@ export async function sendAuditEmail(data: AuditFormData) {
       </div>
     `;
 
+    const resend = getResend();
     const { data: emailData, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
