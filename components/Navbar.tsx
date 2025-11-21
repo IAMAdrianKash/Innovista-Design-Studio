@@ -154,7 +154,7 @@ const Navbar: React.FC = () => {
             <img
               src="/images/brand/logo.svg"
               alt="Innovista Design Studio"
-              className="h-10 md:h-12 w-auto"
+              className="h-7 md:h-8 w-auto"
             />
           </Link>
 
