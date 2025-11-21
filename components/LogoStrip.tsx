@@ -4,15 +4,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const LogoStrip: React.FC = () => {
+  // Client logos - add your logo files to /public/images/clients/
   const logos = [
-    { name: 'Stripe', url: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg' },
-    { name: 'Canva', url: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_icon_2021.svg' },
-    { name: 'Coinbase', url: 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Coinbase.svg' },
-    { name: 'Databricks', url: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Databricks_Logo.png' },
-    { name: 'Figma', url: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg' },
-    { name: 'Google', url: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
-    { name: 'Grafana', url: 'https://upload.wikimedia.org/wikipedia/commons/a/a1/Grafana_logo.svg' },
-    { name: 'Gusto', url: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Gusto_logo.svg' },
+    { name: 'Client 1', url: '/images/clients/client-1.svg' },
+    { name: 'Client 2', url: '/images/clients/client-2.svg' },
+    { name: 'Client 3', url: '/images/clients/client-3.svg' },
+    { name: 'Client 4', url: '/images/clients/client-4.svg' },
+    { name: 'Client 5', url: '/images/clients/client-5.svg' },
+    { name: 'Client 6', url: '/images/clients/client-6.svg' },
+    { name: 'Client 7', url: '/images/clients/client-7.svg' },
+    { name: 'Client 8', url: '/images/clients/client-8.svg' },
   ];
 
   // Triple the logos to ensure smooth infinite scrolling on wider screens
