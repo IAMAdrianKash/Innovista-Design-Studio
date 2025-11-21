@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { submitContactForm, submitAuditForm } from '@/lib/tally';
+import { sendContactEmail, sendAuditEmail } from '@/lib/resend';
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Submit to appropriate Tally form
+    // Send email for the appropriate form type
     let result;
     if (formType === 'contact') {
       // Validate required contact form fields
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
       }
-      result = await submitContactForm(formData);
+      result = await sendContactEmail(formData);
     } else if (formType === 'audit') {
       // Validate required audit form fields
       if (!formData.website || !formData.firstName || !formData.lastName || !formData.email) {
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
       }
-      result = await submitAuditForm(formData);
+      result = await sendAuditEmail(formData);
     }
 
     if (result?.success) {
