@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Calendar, User } from 'lucide-react';
+import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import ContentSection from './ContentSection';
 import { getAllBlogPosts, urlForImage, type BlogPost } from '../lib/sanity';
 
@@ -113,9 +113,9 @@ const Insights: React.FC = () => {
                         <div className="flex items-center gap-1">
                           <Calendar size={12} /> {formattedDate}
                         </div>
-                        {post.author && (
+                        {post.estimatedReadTime && (
                           <div className="flex items-center gap-1">
-                            <User size={12} /> {post.author.name}
+                            <Clock size={12} /> {post.estimatedReadTime} min
                           </div>
                         )}
                       </div>
