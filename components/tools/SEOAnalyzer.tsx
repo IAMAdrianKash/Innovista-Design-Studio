@@ -204,7 +204,7 @@ const SEOAnalyzer: React.FC = () => {
             </div>
             <span className="text-sm font-medium text-forest">FREE TOOL</span>
           </div>
-          <h1 className="font-serif text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] text-[#1A1A1A] tracking-tight mb-8">
+          <h1 className="font-heading font-bold text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] text-[#1A1A1A] tracking-tight mb-8">
             SEO Analyzer
           </h1>
           <p className="text-lg md:text-xl text-[#4A4A4A] leading-relaxed max-w-2xl">
@@ -223,7 +223,7 @@ const SEOAnalyzer: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               <div className="bg-gray-50 rounded-[2rem] p-8 md:p-12">
-                <h2 className="font-serif text-3xl text-[#1A1A1A] mb-6">
+                <h2 className="font-heading font-bold text-3xl text-[#1A1A1A] mb-6">
                   Analyze Your Website
                 </h2>
                 <p className="text-[#595959] mb-8">
@@ -313,7 +313,7 @@ const SEOAnalyzer: React.FC = () => {
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                   <div>
                     <p className="text-sm font-medium text-[#595959] mb-2">SEO SCORE</p>
-                    <h2 className={`font-serif text-6xl md:text-7xl ${getScoreColor(results.score)} mb-2`}>
+                    <h2 className={`font-heading font-bold text-6xl md:text-7xl ${getScoreColor(results.score)} mb-2`}>
                       {results.score}
                       <span className="text-3xl">/100</span>
                     </h2>
@@ -333,7 +333,7 @@ const SEOAnalyzer: React.FC = () => {
 
               {/* Issues List */}
               <div className="bg-white rounded-[2rem] p-8 md:p-12 border border-gray-200">
-                <h3 className="font-serif text-3xl text-[#1A1A1A] mb-8">Detailed Analysis</h3>
+                <h3 className="font-heading font-bold text-3xl text-[#1A1A1A] mb-8">Detailed Analysis</h3>
 
                 <div className="space-y-4">
                   {results.issues.map((issue, index) => (
@@ -391,7 +391,7 @@ const SEOAnalyzer: React.FC = () => {
 
               {/* CTA */}
               <div className="bg-forest text-white rounded-[2rem] p-8 md:p-12">
-                <h3 className="font-serif text-3xl mb-4">Need help fixing these issues?</h3>
+                <h3 className="font-heading font-bold text-3xl mb-4">Need help fixing these issues?</h3>
                 <p className="text-white/90 mb-6 max-w-2xl">
                   Our team can audit your website in detail and implement all the necessary improvements to boost your search rankings and drive more organic traffic.
                 </p>

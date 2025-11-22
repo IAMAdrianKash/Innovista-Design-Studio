@@ -11,6 +11,7 @@ interface ResourceTool {
   description: string;
   icon: React.ReactNode;
   href: string;
+  features: string[];
   badge?: string;
 }
 
@@ -18,51 +19,57 @@ const Resources: React.FC = () => {
   const tools: ResourceTool[] = [
     {
       title: 'SEO Analyzer',
-      description: 'Comprehensive SEO analysis tool to audit your website\'s search engine optimization, identify issues, and get actionable recommendations.',
-      icon: <Search className="w-7 h-7" />,
+      description: 'Comprehensive analysis tool to audit your website\'s search engine optimization and get actionable recommendations.',
+      icon: <Search className="w-8 h-8 text-[#1A1A1A]" />,
       href: '/resources/seo-analyzer',
-      badge: 'Free Tool'
+      features: ['Meta Tags', 'Performance', 'Mobile-Friendly'],
+      badge: 'Free'
     },
     {
       title: 'Font Picker',
-      description: 'Explore and pair beautiful fonts for your website. Preview font combinations in real-time and find the perfect typography match.',
-      icon: <Type className="w-7 h-7" />,
+      description: 'Explore and pair beautiful fonts for your website. Preview combinations in real-time.',
+      icon: <Type className="w-8 h-8 text-[#1A1A1A]" />,
       href: '/resources/font-picker',
-      badge: 'Free Tool'
+      features: ['Live Preview', 'Pairings', 'Copy CSS'],
+      badge: 'Free'
     },
     {
       title: 'Color Palette Generator',
-      description: 'Generate harmonious color palettes for your brand. Get accessibility scores and export codes in multiple formats.',
-      icon: <Palette className="w-7 h-7" />,
+      description: 'Generate harmonious color palettes for your brand with accessibility scores.',
+      icon: <Palette className="w-8 h-8 text-[#1A1A1A]" />,
       href: '/resources/color-palette',
+      features: ['Harmony', 'A11y Scores', 'Export'],
       badge: 'Coming Soon'
     },
     {
       title: 'Page Speed Checker',
-      description: 'Test your website\'s loading speed and performance. Get detailed metrics and optimization suggestions to improve user experience.',
-      icon: <Gauge className="w-7 h-7" />,
+      description: 'Test your website\'s loading speed and get detailed optimization suggestions.',
+      icon: <Gauge className="w-8 h-8 text-[#1A1A1A]" />,
       href: '/resources/speed-checker',
+      features: ['Core Vitals', 'Metrics', 'Optimization'],
       badge: 'Coming Soon'
     },
     {
       title: 'Meta Tag Generator',
-      description: 'Create optimized meta tags for better SEO and social media sharing. Preview how your pages will look on different platforms.',
-      icon: <FileText className="w-7 h-7" />,
+      description: 'Create optimized meta tags for better SEO and social media sharing.',
+      icon: <FileText className="w-8 h-8 text-[#1A1A1A]" />,
       href: '/resources/meta-generator',
+      features: ['SEO Tags', 'OG Preview', 'Twitter Cards'],
       badge: 'Coming Soon'
     },
     {
       title: 'Conversion Calculator',
-      description: 'Calculate the potential ROI of improving your website\'s conversion rate. See how small improvements can make big impacts.',
-      icon: <Zap className="w-7 h-7" />,
+      description: 'Calculate the potential ROI of improving your website\'s conversion rate.',
+      icon: <Zap className="w-8 h-8 text-[#1A1A1A]" />,
       href: '/resources/conversion-calculator',
+      features: ['ROI Calc', 'Projections', 'Reports'],
       badge: 'Coming Soon'
     }
   ];
 
   return (
     <div className="pt-12">
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-24">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -75,78 +82,61 @@ const Resources: React.FC = () => {
             <span className="italic font-light text-[#8C8C8C]">your business grow.</span>
           </h1>
           <p className="text-lg md:text-xl text-[#4A4A4A] leading-relaxed max-w-2xl">
-            Access our collection of professional-grade tools designed to help you optimize your website, improve user experience, and drive better results.
+            Professional-grade tools designed to help you optimize your website, improve user experience, and drive better results.
           </p>
         </motion.div>
       </section>
 
-      {/* Tools Grid Section */}
+      {/* Tools Grid */}
       <section className="py-24 bg-white border-y border-gray-200">
         <div className="max-w-[90rem] mx-auto px-6 md:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-16"
-          >
-            <h2 className="font-serif text-4xl md:text-5xl text-[#1A1A1A] mb-4">
-              Available Tools
-            </h2>
-            <p className="text-lg text-[#4A4A4A] max-w-2xl">
-              Professional tools to analyze, optimize, and improve your online presence.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {tools.map((tool, index) => (
-              <motion.div
-                key={tool.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-              >
-                <Link
-                  href={tool.badge === 'Coming Soon' ? '#' : tool.href}
-                  className={`block group h-full ${tool.badge === 'Coming Soon' ? 'cursor-not-allowed' : ''}`}
-                  onClick={(e) => tool.badge === 'Coming Soon' && e.preventDefault()}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            {tools.map((tool, idx) => (
+              <Link key={idx} href={tool.badge === 'Coming Soon' ? '#' : tool.href} onClick={(e) => tool.badge === 'Coming Soon' && e.preventDefault()}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={`group bg-gray-50 p-8 md:p-12 rounded-[2rem] border border-gray-100 hover:border-gray-300 hover:shadow-lg transition-all relative overflow-hidden ${tool.badge === 'Coming Soon' ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'}`}
                 >
-                  <div className="bg-gray-50 border border-gray-200 rounded-[2rem] p-8 md:p-10 h-full transition-all duration-300 hover:border-gray-400 hover:shadow-lg relative overflow-hidden">
-                    {/* Badge */}
-                    {tool.badge && (
-                      <div className={`absolute top-6 right-6 px-3 py-1 rounded-full text-xs font-medium ${
-                        tool.badge === 'Coming Soon'
-                          ? 'bg-gray-200 text-gray-600'
-                          : 'bg-forest/10 text-forest'
-                      }`}>
-                        {tool.badge}
-                      </div>
-                    )}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gray-200/20 rounded-bl-[4rem] -mr-8 -mt-8 transition-transform group-hover:scale-110" />
 
-                    {/* Icon */}
-                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 text-forest transition-transform duration-300 group-hover:scale-110">
-                      {tool.icon}
+                  {/* Badge */}
+                  {tool.badge && (
+                    <div className={`absolute top-8 left-8 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ${
+                      tool.badge === 'Coming Soon'
+                        ? 'bg-gray-200 text-gray-600'
+                        : 'bg-forest/10 text-forest'
+                    }`}>
+                      {tool.badge}
                     </div>
+                  )}
 
-                    {/* Content */}
-                    <h3 className="font-serif text-2xl text-[#1A1A1A] mb-3 pr-20">
-                      {tool.title}
-                    </h3>
-                    <p className="text-[#595959] leading-relaxed mb-6">
-                      {tool.description}
-                    </p>
-
-                    {/* Arrow Link */}
-                    {tool.badge !== 'Coming Soon' && (
-                      <div className="flex items-center gap-2 text-forest font-medium group-hover:gap-3 transition-all">
-                        <span>Try it free</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </div>
-                    )}
+                  <div className="mb-8 bg-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                    {tool.icon}
                   </div>
-                </Link>
-              </motion.div>
+
+                  <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4 text-[#1A1A1A]">{tool.title}</h3>
+                  <p className="text-gray-600 text-base leading-relaxed mb-8 max-w-md">
+                    {tool.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-3 mb-8">
+                    {tool.features.map((feat, i) => (
+                      <span key={i} className="bg-white px-3 py-1 rounded-full text-xs font-semibold text-gray-500 uppercase tracking-wide border border-gray-100">
+                        {feat}
+                      </span>
+                    ))}
+                  </div>
+
+                  {tool.badge !== 'Coming Soon' && (
+                    <div className="flex items-center gap-2 text-sm font-bold text-[#1A1A1A] group-hover:gap-4 transition-all">
+                      Try it free <ArrowRight size={16} />
+                    </div>
+                  )}
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
