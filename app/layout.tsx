@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ScrollProgress from '@/components/ui/ScrollProgress'
 import MobileStickyBar from '@/components/ui/MobileStickyBar'
+import CookieBanner from '@/components/CookieBanner'
 
 // Optimized Google Fonts with Next.js
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -82,6 +83,7 @@ export default function RootLayout({
 
           <Footer />
           <MobileStickyBar />
+          <CookieBanner />
         </div>
       </body>
     </html>
