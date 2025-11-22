@@ -11,30 +11,30 @@ const Capabilities: React.FC = () => {
       category: "No-Code & CMS",
       desc: "Rapid deployment and easy content management for marketing teams.",
       tools: [
-        { 
-          name: "Webflow", 
-          desc: "For high-end, visual-first marketing websites.", 
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webflow/webflow-original.svg" 
+        {
+          name: "Webflow",
+          desc: "For high-end, visual-first marketing websites.",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webflow/webflow-original.svg"
         },
-        { 
-          name: "WordPress", 
-          desc: "For content-heavy sites requiring deep flexibility.", 
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" 
+        {
+          name: "WordPress",
+          desc: "For content-heavy sites requiring deep flexibility.",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg"
         },
-        { 
-          name: "Framer", 
-          desc: "For speed and creative landing pages.", 
-          logo: "https://cdn.svgporn.com/logos/framer-icon.svg" 
+        {
+          name: "Framer",
+          desc: "For speed and creative landing pages.",
+          logo: "https://cdn.svgporn.com/logos/framer-icon.svg"
         },
-        { 
-          name: "Bubble", 
-          desc: "For complex web applications without code.", 
-          logo: "https://cdn.svgporn.com/logos/bubble.svg" 
+        {
+          name: "Bubble",
+          desc: "For complex web applications without code.",
+          logo: "https://cdn.svgporn.com/logos/bubble.svg"
         },
-        { 
-          name: "Strapi", 
-          desc: "Headless CMS for omnichannel content.", 
-          logo: "https://cdn.svgporn.com/logos/strapi-icon.svg" 
+        {
+          name: "Strapi",
+          desc: "Headless CMS for omnichannel content.",
+          logo: "https://cdn.svgporn.com/logos/strapi-icon.svg"
         }
       ]
     },
@@ -42,35 +42,35 @@ const Capabilities: React.FC = () => {
       category: "Custom Development",
       desc: "Enterprise-grade performance for complex applications.",
       tools: [
-        { 
-          name: "React / Next.js", 
-          desc: "The industry standard for fast, scalable web apps.", 
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" 
+        {
+          name: "React / Next.js",
+          desc: "The industry standard for fast, scalable web apps.",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
         },
-        { 
-          name: "Tailwind CSS", 
-          desc: "For bespoke, pixel-perfect styling systems.", 
-          logo: "https://cdn.svgporn.com/logos/tailwindcss-icon.svg" 
+        {
+          name: "Tailwind CSS",
+          desc: "For bespoke, pixel-perfect styling systems.",
+          logo: "https://cdn.svgporn.com/logos/tailwindcss-icon.svg"
         },
-        { 
-          name: "Node.js", 
-          desc: "Powerful backend infrastructure.", 
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" 
+        {
+          name: "Node.js",
+          desc: "Powerful backend infrastructure.",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
         },
-        { 
-          name: "TypeScript", 
-          desc: "Type-safe code for mission-critical apps.", 
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" 
+        {
+          name: "TypeScript",
+          desc: "Type-safe code for mission-critical apps.",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
         },
-        { 
-          name: "Supabase", 
-          desc: "Scalable database and authentication.", 
-          logo: "https://cdn.svgporn.com/logos/supabase-icon.svg" 
+        {
+          name: "Supabase",
+          desc: "Scalable database and authentication.",
+          logo: "https://cdn.svgporn.com/logos/supabase-icon.svg"
         },
-        { 
-          name: "Sanity.io", 
-          desc: "A headless CMS for structured content delivery.", 
-          logo: "https://cdn.svgporn.com/logos/sanity.svg" 
+        {
+          name: "Sanity.io",
+          desc: "A headless CMS for structured content delivery.",
+          logo: "https://cdn.svgporn.com/logos/sanity.svg"
         }
       ]
     },
@@ -78,25 +78,25 @@ const Capabilities: React.FC = () => {
       category: "E-Commerce",
       desc: "Robust stores that scale with your sales volume.",
       tools: [
-        { 
-          name: "Shopify", 
-          desc: "The world's best e-commerce platform.", 
-          logo: "https://cdn.svgporn.com/logos/shopify-icon.svg" 
+        {
+          name: "Shopify",
+          desc: "The world's best e-commerce platform.",
+          logo: "https://cdn.svgporn.com/logos/shopify-icon.svg"
         },
-        { 
-          name: "BigCommerce", 
-          desc: "For high-volume enterprise retail.", 
-          logo: "https://cdn.svgporn.com/logos/bigcommerce-icon.svg" 
+        {
+          name: "BigCommerce",
+          desc: "For high-volume enterprise retail.",
+          logo: "https://cdn.svgporn.com/logos/bigcommerce-icon.svg"
         },
-        { 
-          name: "WooCommerce", 
-          desc: "Flexible open-source commerce for WordPress.", 
-          logo: "https://cdn.svgporn.com/logos/woocommerce-icon.svg" 
+        {
+          name: "WooCommerce",
+          desc: "Flexible open-source commerce for WordPress.",
+          logo: "https://cdn.svgporn.com/logos/woocommerce-icon.svg"
         },
-        { 
-          name: "Magento", 
-          desc: "Self-hosted power for complex catalogs.", 
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/magento/magento-original.svg" 
+        {
+          name: "Magento",
+          desc: "Self-hosted power for complex catalogs.",
+          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/magento/magento-original.svg"
         }
       ]
     }
@@ -128,7 +128,7 @@ const Capabilities: React.FC = () => {
             for the <span className="italic font-light text-[#8C8C8C]">job.</span>
           </h1>
           <p className="text-lg md:text-xl text-[#4A4A4A] leading-relaxed max-w-2xl">
-            We aren't dogmatic about technology. We use whatever stack delivers the best performance, scalability, and ease of use for your specific needs.
+            We aren't dogmatic about technology. We use whatever stack delivers the best performance, scalability, and ease of use for your specific needs and budget.
           </p>
         </motion.div>
       </section>
@@ -139,7 +139,7 @@ const Capabilities: React.FC = () => {
           <div className="space-y-24">
             {techStack.map((section, idx) => (
               <div key={idx}>
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -148,7 +148,7 @@ const Capabilities: React.FC = () => {
                   <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4">{section.category}</h2>
                   <p className="text-gray-500 text-lg">{section.desc}</p>
                 </motion.div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {section.tools.map((tool, tIdx) => (
                     <motion.div
@@ -160,9 +160,9 @@ const Capabilities: React.FC = () => {
                       className="group bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:border-dark hover:shadow-md transition-all"
                     >
                       <div className="mb-6 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm p-2 group-hover:scale-110 transition-transform">
-                        <img 
-                          src={tool.logo} 
-                          alt={tool.name} 
+                        <img
+                          src={tool.logo}
+                          alt={tool.name}
                           className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                         />
                       </div>
@@ -183,7 +183,7 @@ const Capabilities: React.FC = () => {
         <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-12">
           Your website shouldn't exist in a silo. We integrate with the tools you already use to run your business.
         </p>
-        
+
         <div className="flex flex-wrap justify-center gap-4 md:gap-6">
           {integrations.map((tool) => (
             <div key={tool.name} className="flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-gray-200 text-gray-600 font-medium text-sm md:text-base shadow-sm hover:shadow-md hover:border-gray-300 transition-all">
