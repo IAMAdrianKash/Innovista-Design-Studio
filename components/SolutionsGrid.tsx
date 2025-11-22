@@ -49,7 +49,7 @@ const SolutionsGrid: React.FC = () => {
                 Most websites are just expensive decorations.
               </h3>
               <p className="text-base text-gray-600 leading-relaxed max-w-md">
-                You paid good money for your current site. But traffic's not converting. Visitors leave. Forms don't get filled out. If your website isn't generating business, the design is the problem.
+                You paid good money for your current site. But traffic's not converting. Visitors leave. Forms don't get filled out. Whether you're running a restaurant, law firm, or industrial operation—if your website isn't generating business, the design is the problem.
               </p>
             </div>
 
@@ -128,12 +128,12 @@ const SolutionsGrid: React.FC = () => {
                 Every design decision answers one question.
               </h3>
               <p className="text-base text-white/80 leading-relaxed max-w-md">
-                "Does this help convert visitors into leads?" We build mobile-first designs with built-in automation so leads flow into your CRM without manual data entry.
+                "Does this help convert visitors into leads?"" We build mobile-first websites on whatever platform fits your business—WordPress, Shopify, React, or custom code. Speed, automation, and lead capture built in from day one.
               </p>
             </div>
 
             <div className="mt-12 space-y-3 relative z-10">
-              {['Strategic Positioning', 'CRM Integration', 'Speed Optimization'].map((item, i) => (
+              {['Platform Agnostic (WordPress, Shopify, React, Astro)', 'CRM Integration', 'Sub-1-Second Load Times'].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 text-sm font-medium text-white/90">
                   <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
                   {item}
