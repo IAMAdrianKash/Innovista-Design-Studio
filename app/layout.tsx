@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   keywords: 'web design, lead generation, SEO, automation, conversion optimization',
   authors: [{ name: 'Innovista Design Studio' }],
   icons: {
-    icon: '/images/brand/favicon.ico',
+    icon: '/images/brand/favicon.png',
     apple: '/images/brand/logo.svg',
   },
   openGraph: {
