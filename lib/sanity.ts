@@ -225,3 +225,33 @@ export async function getFeaturedCaseStudies(limit: number = 3): Promise<CaseStu
     { limit }
   );
 }
+
+export async function getRelatedBlogPosts(currentPostId: string, categories: string[], limit: number = 3): Promise<BlogPost[]> {
+  return sanityClient.fetch(
+    `*[_type == "post" && _id != $currentPostId && count((categories[]->_id)[@ in $categories]) > 0] | order(publishedAt desc) [0...$limit] {
+      _id,
+      _createdAt,
+      _updatedAt,
+      title,
+      slug,
+      excerpt,
+      author->{
+        _id,
+        name,
+        slug,
+        image,
+        bio
+      },
+      publishedAt,
+      categories[]->{
+        _id,
+        title,
+        slug,
+        description
+      },
+      featuredImage,
+      estimatedReadTime
+    }`,
+    { currentPostId, categories, limit }
+  );
+}

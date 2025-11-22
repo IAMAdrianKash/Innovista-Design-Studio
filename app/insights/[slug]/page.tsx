@@ -4,7 +4,9 @@ import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, ArrowLeft, Tag, User } from 'lucide-react'
-import { getBlogPostBySlug, getAllBlogPosts, urlForImage, type BlogPost } from '@/lib/sanity'
+import { getBlogPostBySlug, getAllBlogPosts, getRelatedBlogPosts, urlForImage, type BlogPost } from '@/lib/sanity'
+import ShareButtons from '@/components/blog/ShareButtons'
+import RelatedArticles from '@/components/blog/RelatedArticles'
 
 // Generate static paths for all blog posts at build time
 export async function generateStaticParams() {
@@ -65,6 +67,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound()
   }
 
+  // Fetch related articles
+  const categoryIds = post.categories ? post.categories.map(cat => cat._id) : [];
+  const relatedArticles = await getRelatedBlogPosts(post._id, categoryIds, 3);
+
   const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -74,6 +80,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const imageUrl = post.featuredImage
     ? urlForImage(post.featuredImage).width(1200).height(675).url()
     : ''
+
+  const fullUrl = `https://innovista.design/insights/${slug}`
 
   // Article structured data for SEO
   const articleSchema = {
@@ -128,6 +136,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="flex items-center gap-1">
               <Calendar size={14} /> {formattedDate}
             </div>
+            {post.estimatedReadTime && (
+              <div className="flex items-center gap-1">
+                <Clock size={14} /> {post.estimatedReadTime} min read
+              </div>
+            )}
           </div>
 
           {/* Title */}
@@ -135,22 +148,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {post.title}
           </h1>
 
-          {/* Author Info */}
-          {post.author && (
-            <div className="flex items-center gap-3 mb-8">
-              {post.author.image && (
-                <img
-                  src={urlForImage(post.author.image).width(48).height(48).url()}
-                  alt={post.author.name}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-              )}
-              <div>
-                <div className="font-medium text-dark">{post.author.name}</div>
-                <div className="text-sm text-gray-500">{post.author.bio ? post.author.bio.substring(0, 50) + '...' : 'Strategist at Innovista'}</div>
+          {/* Author Info & Share */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
+            {post.author && (
+              <div className="flex items-center gap-3">
+                {post.author.image && (
+                  <img
+                    src={urlForImage(post.author.image).width(48).height(48).url()}
+                    alt={post.author.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                )}
+                <div>
+                  <div className="font-medium text-dark">{post.author.name}</div>
+                  <div className="text-sm text-gray-500">{post.author.bio ? post.author.bio.substring(0, 50) + '...' : 'Strategist at Innovista'}</div>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+            <ShareButtons url={fullUrl} title={post.title} description={post.excerpt} />
+          </div>
         </div>
 
         {/* Featured Image */}
@@ -242,9 +258,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             />
           </div>
 
+          {/* Share Buttons - Bottom */}
+          <div className="mt-16 pt-8 border-t border-gray-200 flex items-center justify-between">
+            <p className="text-gray-600 font-medium">Found this helpful?</p>
+            <ShareButtons url={fullUrl} title={post.title} description={post.excerpt} />
+          </div>
+
           {/* Author Bio */}
           {post.author && post.author.bio && (
-            <div className="mt-16 pt-8 border-t border-gray-200">
+            <div className="mt-8 pt-8 border-t border-gray-200">
               <div className="flex items-start gap-4">
                 {post.author.image && (
                   <img
@@ -259,6 +281,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </div>
               </div>
             </div>
+          )}
+
+          {/* Related Articles */}
+          {relatedArticles.length > 0 && (
+            <RelatedArticles articles={relatedArticles} />
           )}
 
           {/* CTA Section */}
