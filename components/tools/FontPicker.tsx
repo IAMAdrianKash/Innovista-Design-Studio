@@ -221,7 +221,7 @@ font-weight: ${currentPair.body.weight};`;
             </div>
             <span className="text-sm font-medium text-forest">FREE TOOL</span>
           </div>
-          <h1 className="font-serif text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] text-[#1A1A1A] tracking-tight mb-8">
+          <h1 className="font-heading font-bold text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.05] text-[#1A1A1A] tracking-tight mb-8">
             Font Picker
           </h1>
           <p className="text-lg md:text-xl text-[#4A4A4A] leading-relaxed max-w-2xl">
@@ -242,7 +242,7 @@ font-weight: ${currentPair.body.weight};`;
           >
             <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between mb-6">
               <div>
-                <h2 className="font-serif text-2xl text-[#1A1A1A] mb-2">
+                <h2 className="font-heading font-bold text-2xl text-[#1A1A1A] mb-2">
                   {currentPair.heading.name} + {currentPair.body.name}
                 </h2>
                 <p className="text-[#595959]">{currentPair.description}</p>
@@ -352,7 +352,7 @@ font-weight: ${currentPair.body.weight};`;
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h3 className="font-serif text-3xl text-[#1A1A1A] mb-8">All Font Pairs</h3>
+            <h3 className="font-heading font-bold text-3xl text-[#1A1A1A] mb-8">All Font Pairs</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {fontPairs.map((pair, index) => (
                 <div
@@ -420,7 +420,7 @@ font-weight: ${currentPair.body.weight};`;
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="font-serif text-4xl md:text-5xl text-[#1A1A1A] mb-8">
+              <h2 className="font-heading font-bold text-4xl md:text-5xl text-[#1A1A1A] mb-8">
                 Typography <span className="italic font-light text-[#8C8C8C]">best practices</span>
               </h2>
 

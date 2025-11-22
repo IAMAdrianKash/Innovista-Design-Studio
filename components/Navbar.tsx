@@ -38,6 +38,7 @@ const Navbar: React.FC = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchIndex, setSearchIndex] = useState<SearchResult[]>(STATIC_PAGES);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -116,6 +117,21 @@ const Navbar: React.FC = () => {
     }
   ];
 
+  const resourceItems = [
+    {
+      name: 'SEO Analyzer',
+      path: '/resources/seo-analyzer',
+      icon: <Search size={20} />,
+      desc: 'Free SEO audit tool.'
+    },
+    {
+      name: 'Font Picker',
+      path: '/resources/font-picker',
+      icon: <FileText size={20} />,
+      desc: 'Typography pairings.'
+    }
+  ];
+
   const handleNav = (path: string) => {
     router.push(path);
     setIsOpen(false);
@@ -132,6 +148,7 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => location === path;
   const isServiceActive = () => location.startsWith('/services');
   const isAboutActive = () => ['/about', '/careers', '/faq', '/pricing'].includes(location);
+  const isResourceActive = () => location.startsWith('/resources');
 
   return (
     <>
@@ -332,6 +349,75 @@ const Navbar: React.FC = () => {
                   Insights
                 </Link>
               </div>
+
+              {/* Resources Dropdown */}
+              <div
+                className="relative h-full flex items-center"
+                onMouseEnter={() => setHoveredLink('resources')}
+              >
+                <Link
+                  href="/resources"
+                  className={`text-sm font-medium transition-colors flex items-center gap-1 ${isResourceActive() ? 'text-[#1A1A1A]' : 'text-[#4A4A4A] hover:text-[#1A1A1A]'}`}
+                >
+                  Resources
+                  <ChevronDown size={14} className={`transition-transform duration-200 ${hoveredLink === 'resources' ? 'rotate-180' : ''}`} />
+                </Link>
+
+                <AnimatePresence>
+                  {hoveredLink === 'resources' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white shadow-2xl border-t-4 border-forest border-x border-b border-gray-200 overflow-hidden cursor-default grid grid-cols-2"
+                      style={{ marginTop: '0px' }}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                       {/* Links Column */}
+                       <div className="p-8 bg-white">
+                          <h5 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-6">Free Tools</h5>
+                          <div className="space-y-4">
+                             {resourceItems.map((item) => (
+                                <Link
+                                  key={item.path}
+                                  href={item.path}
+                                  onClick={() => setHoveredLink(null)}
+                                  className="flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer group"
+                                >
+                                  <div className="mt-1 text-gray-400 group-hover:text-forest transition-colors">
+                                    {item.icon}
+                                  </div>
+                                  <div>
+                                    <h4 className="font-heading font-bold text-base text-dark group-hover:text-forest transition-colors">{item.name}</h4>
+                                    <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{item.desc}</p>
+                                  </div>
+                                </Link>
+                              ))}
+                          </div>
+                          <div className="mt-6 pt-6 border-t border-gray-100">
+                              <Link href="/resources" onClick={() => setHoveredLink(null)} className="text-xs font-bold text-gray-400 hover:text-dark uppercase tracking-wider">View All Tools</Link>
+                          </div>
+                       </div>
+
+                       {/* Featured Sidebar */}
+                       <div className="bg-gray-50 p-8 border-l border-gray-100 flex flex-col justify-between">
+                          <div>
+                             <h5 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Coming Soon</h5>
+                             <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                                More free tools launching soon including Color Palette Generator and Page Speed Checker.
+                             </p>
+                          </div>
+                          <div className="mt-8 pt-8 border-t border-gray-200">
+                              <p className="text-xs text-gray-500">
+                                All tools are 100% free with no registration required.
+                              </p>
+                          </div>
+                       </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
           </div>
 
           {/* Right Actions */}
@@ -477,6 +563,45 @@ const Navbar: React.FC = () => {
                 >
                   Insights
                 </Link>
+
+                {/* Mobile Accordion for Resources */}
+                <div className="border-b border-gray-200">
+                  <button
+                    onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
+                    className="w-full flex items-center justify-between text-base font-medium text-[#1A1A1A] py-3"
+                  >
+                    Resources
+                    <ChevronDown size={16} className={`transition-transform ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence>
+                    {mobileResourcesOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden pl-4 pb-2 space-y-2"
+                      >
+                         {resourceItems.map((item) => (
+                          <Link
+                            key={item.path}
+                            href={item.path}
+                            onClick={() => { setIsOpen(false); setMobileResourcesOpen(false); }}
+                            className="block w-full text-left text-sm text-gray-600 py-2 hover:text-dark"
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                         <Link
+                            href="/resources"
+                            onClick={() => { setIsOpen(false); setMobileResourcesOpen(false); }}
+                            className="block w-full text-left text-sm font-bold text-dark py-2"
+                          >
+                            View All
+                          </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                  <Link
                   href="/contact"
