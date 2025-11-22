@@ -12,12 +12,12 @@ const Pricing: React.FC = () => {
   const router = useRouter();
   return (
     <div className="pt-12">
-      <SEO 
+      <SEO
         title="Pricing & Engagement Models | Innovista Design Studio"
         description="Transparent pricing for high-performance web design and growth marketing. Project-based builds and monthly growth retainers."
         canonicalUrl="/pricing"
       />
-      
+
       <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -37,11 +37,11 @@ const Pricing: React.FC = () => {
 
       <section className="py-20 bg-white border-t border-gray-200">
         <div className="max-w-[90rem] mx-auto px-6 md:px-12">
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
+
             {/* Tier 1: The Audit */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -49,7 +49,7 @@ const Pricing: React.FC = () => {
             >
               <div className="mb-8">
                 <h3 className="font-heading font-bold text-2xl mb-2">The Audit</h3>
-                <p className="text-gray-500 text-sm">For companies unsure where to start.</p>
+                <p className="text-gray-500 text-sm">For businesses unsure where to start.</p>
               </div>
               <div className="mb-8">
                 <span className="text-4xl font-bold text-dark">$495</span>
@@ -82,7 +82,7 @@ const Pricing: React.FC = () => {
             </motion.div>
 
             {/* Tier 2: The Build (Primary) */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -97,17 +97,17 @@ const Pricing: React.FC = () => {
                 <p className="text-white/70 text-sm">Complete custom website & strategy.</p>
               </div>
               <div className="mb-8 relative z-10">
-                <span className="text-4xl font-bold text-white">From $8k</span>
+                <span className="text-4xl font-bold text-white">From $5k</span>
                 <span className="text-white/60 text-sm"> / project</span>
               </div>
               <ul className="space-y-4 mb-8 flex-1 relative z-10">
                 {[
-                  "Custom React / Next.js Development",
+                  "Platform-Agnostic Development (WordPress, Shopify, React, or Custom)",
                   "Conversion Strategy & Copywriting",
                   "Mobile-First Responsive Design",
-                  "Basic CMS (Sanity/Webflow)",
+                  "Content Management System Setup",
                   "On-Page SEO Setup",
-                  "Analytics & CRM Integration"
+                  "Analytics & Lead Capture Integration"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-white/90">
                     <div className="mt-0.5 w-4 h-4 rounded-full bg-white text-forest flex items-center justify-center text-[10px]">✓</div>
@@ -126,7 +126,7 @@ const Pricing: React.FC = () => {
             </motion.div>
 
             {/* Tier 3: Growth Retainer */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -135,7 +135,7 @@ const Pricing: React.FC = () => {
             >
               <div className="mb-8">
                 <h3 className="font-heading font-bold text-2xl mb-2">Growth Engine</h3>
-                <p className="text-gray-500 text-sm">Post-launch optimization & SEO.</p>
+                <p className="text-gray-500 text-sm">Post-launch optimization & growth</p>
               </div>
               <div className="mb-8">
                 <span className="text-4xl font-bold text-dark">From $1.5k</span>
@@ -144,11 +144,11 @@ const Pricing: React.FC = () => {
               <ul className="space-y-4 mb-8 flex-1">
                 {[
                   "Monthly SEO Content Strategy",
-                  "Landing Page A/B Testing",
-                  "Technical Maintenance & Uptime",
+                  "Conversion Rate Optimization (CRO)",
+                  "Technical Maintenance & Updates",
                   "Priority Support",
                   "Quarterly Strategy Reviews",
-                  "Dedicated Slack Channel"
+                  "Direct Access"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
                     <Check size={16} className="text-forest shrink-0 mt-0.5" />
@@ -167,21 +167,21 @@ const Pricing: React.FC = () => {
           </div>
 
           <div className="mt-16 p-8 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm">
-                <HelpCircle className="text-dark" />
-             </div>
-             <div>
-                <h4 className="font-bold text-lg mb-1 text-dark">Need a custom scope?</h4>
-                <p className="text-gray-600 text-sm">We work with larger organizations on enterprise migrations and custom web apps. Let's chat about your specific requirements.</p>
-             </div>
-             <button onClick={() => router.push('/contact')} className="md:ml-auto px-6 py-3 bg-dark text-white rounded-full text-sm font-bold hover:bg-black transition-colors whitespace-nowrap">
-                Contact Sales
-             </button>
+            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm">
+              <HelpCircle className="text-dark" />
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-1 text-dark">Need a custom scope?</h4>
+              <p className="text-gray-600 text-sm">We work with larger organizations on enterprise migrations and custom web apps. Let's chat about your specific requirements.</p>
+            </div>
+            <button onClick={() => router.push('/contact')} className="md:ml-auto px-6 py-3 bg-dark text-white rounded-full text-sm font-bold hover:bg-black transition-colors whitespace-nowrap">
+              Contact Sales
+            </button>
           </div>
 
         </div>
       </section>
-      
+
       <ContentSection />
     </div>
   );
