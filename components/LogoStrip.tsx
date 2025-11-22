@@ -6,14 +6,14 @@ import { motion } from 'framer-motion';
 const LogoStrip: React.FC = () => {
   // Client logos - add your logo files to /public/images/clients/
   const logos = [
-    { name: 'Client 1', url: '/images/clients/client-1.svg' },
-    { name: 'Client 2', url: '/images/clients/client-2.svg' },
-    { name: 'Client 3', url: '/images/clients/client-3.svg' },
-    { name: 'Client 4', url: '/images/clients/client-4.svg' },
-    { name: 'Client 5', url: '/images/clients/client-5.svg' },
-    { name: 'Client 6', url: '/images/clients/client-6.svg' },
-    { name: 'Client 7', url: '/images/clients/client-7.svg' },
-    { name: 'Client 8', url: '/images/clients/client-8.svg' },
+    { name: 'Client 1', url: '/images/clients/guru.png' },
+    { name: 'Client 2', url: '/images/clients/chinook.svg' },
+    { name: 'Client 3', url: '/images/clients/automatealberta.svg' },
+    { name: 'Client 4', url: '/images/clients/albertaugc.svg' },
+    { name: 'Client 5', url: '/images/clients/liam.png' },
+    { name: 'Client 6', url: '/images/clients/ripe.png' },
+    { name: 'Client 7', url: '/images/clients/kms.png' },
+    { name: 'Client 8', url: '/images/clients/evario.png' },
   ];
 
   // Triple the logos to ensure smooth infinite scrolling on wider screens
@@ -50,7 +50,7 @@ const LogoStrip: React.FC = () => {
             {logoRow.map((logo, index) => (
               <div
                 key={`${logo.name}-${index}`}
-                className="h-6 md:h-8 flex items-center justify-center opacity-[0.25] hover:opacity-100 transition-opacity duration-300 grayscale"
+                className="h-6 md:h-8 flex items-center justify-center opacity-[0.35] hover:opacity-100 transition-opacity duration-300 grayscale"
               >
                 <img
                   src={logo.url}
