@@ -8,7 +8,7 @@ const TermsOfService: React.FC = () => {
     <div className="pt-12 pb-24 bg-white min-h-screen">
       <div className="max-w-3xl mx-auto px-6">
         <h1 className="font-serif text-4xl md:text-5xl text-[#1A1A1A] mb-4">Terms of Service</h1>
-        <p className="text-gray-500 text-sm mb-12">Last updated: October 24, 2023</p>
+        <p className="text-gray-500 text-sm mb-12">Last updated: October 24, 2025</p>
 
         <div className="space-y-12 text-gray-700 leading-relaxed">
           <section>

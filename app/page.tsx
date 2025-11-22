@@ -53,7 +53,6 @@ export default function HomePage() {
       "closes": "17:00"
     },
     "sameAs": [
-      "https://twitter.com/innovista",
       "https://linkedin.com/company/innovista"
     ]
   }

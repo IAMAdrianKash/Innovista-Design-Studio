@@ -10,7 +10,7 @@ import SEO from './SEO';
 const About: React.FC = () => {
   return (
     <div className="pt-12">
-      <SEO 
+      <SEO
         title="About Innovista | Edmonton Digital Agency"
         description="Innovista Design Studio bridges the gap between looking good and selling. We are an Alberta-based web design agency focused on revenue and results."
         canonicalUrl="/about"
@@ -59,7 +59,7 @@ const About: React.FC = () => {
                 </p>
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -68,7 +68,7 @@ const About: React.FC = () => {
             >
               <div className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl">
                 <img
-                  src="/images/about-bridge.jpg"
+                  src="/images/about-bridges.png"
                   alt="Modern architecture representing our design philosophy"
                   className="object-cover w-full h-full"
                 />
@@ -83,26 +83,26 @@ const About: React.FC = () => {
         </div>
       </section>
 
-       {/* Founder's Note - Accountability */}
+      {/* Founder's Note - Accountability */}
       <section className="py-24 bg-[#F3F4F6]">
-          <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
-              <div className="w-20 h-20 bg-white rounded-full mx-auto mb-8 overflow-hidden border border-gray-200 p-1">
-                   <img src="https://ui-avatars.com/api/?name=Alex+Morgan&background=064E3B&color=fff" alt="Founder" className="rounded-full" />
-              </div>
-              <h2 className="font-serif text-3xl md:text-4xl text-[#1A1A1A] mb-8 leading-tight italic">
-                  "My promise is simple: You will never have to wonder what you are paying for. No black boxes. No jargon. Just clear communication and work that moves the needle."
-              </h2>
-              <div className="flex flex-col items-center justify-center gap-2">
-                  {/* Simple SVG Signature Representation */}
-                  <div className="h-12 w-32 mb-2 opacity-60">
-                     <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20,60 Q50,10 80,60 T140,60 T180,40" fill="none" stroke="#1A1A1A" strokeWidth="3" />
-                     </svg>
-                  </div>
-                  <p className="font-bold text-dark text-lg">Alex Morgan</p>
-                  <p className="text-sm text-gray-500 uppercase tracking-wider font-medium">Founder & Lead Strategist</p>
-              </div>
+        <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
+          <div className="w-20 h-20 bg-white rounded-full mx-auto mb-8 overflow-hidden border border-gray-200 p-1">
+            <img src="https://ui-avatars.com/api/?name=Alex+Morgan&background=064E3B&color=fff" alt="Founder" className="rounded-full" />
           </div>
+          <h2 className="font-serif text-3xl md:text-4xl text-[#1A1A1A] mb-8 leading-tight italic">
+            "My promise is simple: You will never have to wonder what you are paying for. No black boxes. No jargon. Just clear communication and work that moves the needle."
+          </h2>
+          <div className="flex flex-col items-center justify-center gap-2">
+            {/* Simple SVG Signature Representation */}
+            <div className="h-12 w-32 mb-2 opacity-60">
+              <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,60 Q50,10 80,60 T140,60 T180,40" fill="none" stroke="#1A1A1A" strokeWidth="3" />
+              </svg>
+            </div>
+            <p className="font-bold text-dark text-lg">Alex Morgan</p>
+            <p className="text-sm text-gray-500 uppercase tracking-wider font-medium">Founder & Lead Strategist</p>
+          </div>
+        </div>
       </section>
 
       {/* Values Grid */}
