@@ -1,0 +1,98 @@
+====================================
+PAGE: PRICING
+====================================
+URL: /pricing
+META TITLE: Pricing & Engagement Models | Innovista Design Studio (56 chars)
+META DESCRIPTION: Transparent pricing for high-performance web design and growth marketing. Project-based builds and monthly growth retainers. (128 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Pricing Tiers (3 cards)
+3. Custom Scope CTA
+4. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Main Headline (H1):
+"Investment models."
+[Note: "models" is styled in italic/light gray]
+
+Subheadline:
+"We don't do hourly billing. We quote flat, transparent project fees based on value and complexity. No surprises. No scope creep invoices."
+[~140 chars]
+
+--- PRICING TIERS ---
+
+TIER 1: THE AUDIT
+Title: "The Audit"
+Subtitle: "For companies unsure where to start."
+Price: "$495 / one-time"
+Special: "Currently Waived (Free)"
+
+Inclusions:
+✓ 15-Minute Video Breakdown
+✓ UX/UI Analysis
+✓ Site Speed Performance Check
+✓ Conversion Bottleneck Report
+✓ Actionable Roadmap
+
+CTA Button: "Get Free Audit"
+Links to: /audit
+
+TIER 2: THE FOUNDATION (MOST POPULAR)
+Badge: "Most Popular"
+Title: "The Foundation"
+Subtitle: "Complete custom website & strategy."
+Price: "From $8k / project"
+Background: Forest green (#064E3B)
+Text: White
+
+Inclusions:
+✓ Custom React / Next.js Development
+✓ Conversion Strategy & Copywriting
+✓ Mobile-First Responsive Design
+✓ Basic CMS (Sanity/Webflow)
+✓ On-Page SEO Setup
+✓ Analytics & CRM Integration
+
+CTA Button: "Start Project"
+Links to: /contact
+
+TIER 3: GROWTH ENGINE
+Title: "Growth Engine"
+Subtitle: "Post-launch optimization & SEO."
+Price: "From $1.5k / month"
+
+Inclusions:
+✓ Monthly SEO Content Strategy
+✓ Landing Page A/B Testing
+✓ Technical Maintenance & Uptime
+✓ Priority Support
+✓ Quarterly Strategy Reviews
+✓ Dedicated Slack Channel
+
+CTA Button: "Inquire About Retainers"
+Links to: /contact
+
+--- CUSTOM SCOPE CTA ---
+
+Title: "Need a custom scope?"
+Description: "We work with larger organizations on enterprise migrations and custom web apps. Let's chat about your specific requirements."
+CTA Button: "Contact Sales"
+Links to: /contact
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Tier titles: 2-3 words
+- Tier subtitles: 4-7 words
+- Price format: "From $Xk" or "$X / period"
+- Inclusion items: 3-6 words each, actionable
+- Keep tier heights balanced for visual consistency
+- "Most Popular" badge drives conversion

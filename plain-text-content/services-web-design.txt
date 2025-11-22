@@ -1,0 +1,104 @@
+====================================
+PAGE: WEB DESIGN SERVICE
+====================================
+URL: /services/web-design
+META TITLE: Custom Web Design Services Edmonton | React & Next.js Experts (65 chars)
+META DESCRIPTION: High-performance web design services in Edmonton. We build fast, mobile-first websites using React and Next.js designed to convert visitors into leads. (155 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Key Features Grid (3 items)
+3. Industries Section
+4. What's Included Checklist
+5. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Breadcrumb:
+"Service > Web Design"
+
+Main Headline (H1):
+"Websites that sell.
+Not just sit there."
+[Note: "sell" is styled in italic/light gray]
+
+Subheadline:
+"We build custom, high-performance websites tailored for Alberta businesses. No bloated templates. No slow loading times. Just pure conversion power."
+[~150 chars]
+
+--- KEY FEATURES ---
+
+FEATURE 1:
+TITLE: "Blazing Fast Performance"
+DESCRIPTION: "We code with React & Next.js to ensure your site loads in under a second. Speed isn't just a luxury; it's a ranking factor."
+[~125 chars]
+
+FEATURE 2:
+TITLE: "Mobile-First Architecture"
+DESCRIPTION: "Over 60% of your traffic is on mobile. We design for the smallest screen first, ensuring a flawless experience everywhere."
+[~125 chars]
+
+FEATURE 3:
+TITLE: "Conversion Centric"
+DESCRIPTION: "Every button, layout, and headline is engineered to guide the user towards a specific action. No dead ends."
+[~110 chars]
+
+--- INDUSTRIES WE EXCEL IN ---
+
+Section Headline:
+"Industries We Excel In"
+
+Section Subheadline:
+"We don't build for everyone. We build for industries where trust, clarity, and technical capability are non-negotiable."
+[~120 chars]
+
+INDUSTRY 1: LAW & PROFESSIONAL SERVICES
+Title: "Law & Professional Services"
+Sub-items:
+  - Practice Area Silos
+  - Attorney Bio Strategy
+  - Trust Signal Integration
+
+INDUSTRY 2: INDUSTRIAL & ENERGY
+Title: "Industrial & Energy"
+Sub-items:
+  - Equipment Cataloging
+  - Safety Certification Showcases
+  - RFP Optimization
+
+INDUSTRY 3: MEDICAL & HEALTH
+Title: "Medical & Health"
+Sub-items:
+  - Patient Booking Flows
+  - Service Education
+  - Clinic Virtual Tours
+
+--- WHAT'S INCLUDED ---
+
+Section Headline:
+"What's included in the build"
+
+Checklist Items:
+✓ Custom UI/UX Design (Figma)
+✓ React / Next.js Development
+✓ CMS Integration (Sanity/Contentful)
+✓ On-Page SEO Optimization
+✓ Google Analytics 4 Setup
+✓ Contact Form & CRM Integration
+✓ Hosting Setup & Domain Connection
+✓ 30 Days Post-Launch Support
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Feature titles: 2-4 words
+- Feature descriptions: 100-130 chars for balance
+- Industry titles: 2-4 words
+- Industry sub-items: 2-5 words each
+- Checklist items: 3-7 words, actionable language

@@ -1,0 +1,128 @@
+====================================
+REUSABLE SECTIONS & COMPONENTS
+====================================
+
+These sections appear across multiple pages and should maintain consistent messaging.
+
+====================================
+CONTENT SECTION (CTA)
+====================================
+Used on: Most pages as final CTA before footer
+
+Section Headline:
+"Ready to stop guessing?"
+[Note: "guessing" is styled in italic/light gray serif]
+
+Section Subheadline:
+"Stop wasting money on a website that doesn't work. We engineer outcomes, not just pages."
+[~90 chars]
+
+--- THE METHODOLOGY (ACCORDION) ---
+
+Step Label:
+"The Methodology"
+
+STEP 1:
+Title: "1. Fix the foundation first"
+Description: "We audit your current site structure, speed, and technical SEO to identify the cracks that are leaking revenue. A solid base is non-negotiable."
+[~145 chars]
+
+STEP 2:
+Title: "2. Optimize for conversions"
+Description: "We implement clear calls-to-action, remove distractions, and design user flows that guide visitors naturally toward the 'Contact' button."
+[~140 chars]
+
+STEP 3:
+Title: "3. Scale what's working"
+Description: "Once the site converts reliably, we ramp up traffic strategies. Whether through SEO or paid ads, we pour fuel on the fire only when the engine is efficient."
+[~160 chars]
+
+STEP 4:
+Title: "4. Automate follow-ups"
+Description: "Stop copy-pasting leads. We integrate your forms directly with your CRM so sales teams get notified instantly and leads get nurtured automatically."
+[~150 chars]
+
+STEP 5:
+Title: "5. Measure real ROI"
+Description: "We track actual business outcomes—form fills, phone calls, and sales—so you know exactly how much revenue your website is generating."
+[~135 chars]
+
+--- EMBEDDED AUDIT FORM ---
+
+Badge:
+"Start Here"
+
+Form Headline:
+"Get Your Free Website Audit"
+
+Form Description:
+"2-minute form. 15-minute video audit. Zero sales pressure. See exactly what's broken."
+[~85 chars]
+
+Submit Button:
+"Get My Free Video Audit"
+
+Privacy Note:
+"We respect your inbox. No spam, ever."
+[~40 chars]
+
+====================================
+LOGO STRIP
+====================================
+Used on: Homepage
+
+Purpose: Social proof showing client logos
+Note: Visual component with no text content
+
+====================================
+SOLUTIONS GRID
+====================================
+Used on: Homepage
+
+Purpose: Quick overview of service categories
+Note: Links to /services for full details
+
+====================================
+TESTIMONIALS
+====================================
+Used on: Homepage
+
+Purpose: Client testimonials and case study snippets
+Note: Content pulled from Sanity CMS
+
+====================================
+SERVICING AREA
+====================================
+Used on: Homepage
+
+Purpose: Geographic targeting for Edmonton/Alberta
+Note: May include map visualization
+
+====================================
+FEATURES SECTION
+====================================
+Used on: Homepage
+
+Purpose: Quick hits on key differentiators
+Examples:
+- "Lightning-fast load times"
+- "Mobile-first design"
+- "SEO optimized"
+- "Conversion focused"
+
+====================================
+CALCULATORS
+====================================
+Used on: Homepage
+
+Purpose: Interactive ROI/cost calculators for engagement
+Note: May be dynamic/interactive component
+
+====================================
+NOTES
+====================================
+- Reusable sections should have identical copy across pages
+- Only update these centrally to maintain consistency
+- Character limits should match across all instances
+- CTA forms should always link to /audit or /contact
+- Methodology steps are numbered 1-5 in specific order

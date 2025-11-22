@@ -1,0 +1,128 @@
+====================================
+PAGE: FREE WEBSITE AUDIT
+====================================
+URL: /audit
+META TITLE: Free Website Audit | Video Analysis in 48 Hours (52 chars)
+META DESCRIPTION: Get a 15-minute video breakdown of your website. We'll show you exactly what's costing you conversions and how to fix it. (123 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section (Left: Copy, Right: Form)
+2. What We Look For
+3. What You Get
+4. The Catch
+5. Testimonial Quote
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Status Badge:
+"Limited Availability"
+[With animated green dot]
+
+Main Headline (H1):
+"We'll prove it before you pay for it."
+[Note: "pay for it" is styled in italic/light gray]
+
+Subheadline:
+"Get a 15-minute video breakdown of your website. We'll show you exactly what's costing you conversions and how to fix it."
+[~125 chars]
+
+--- WHAT WE LOOK FOR ---
+
+Title: "What we look for"
+Description: "Speed issues, broken user flows, unclear messaging, and missed SEO opportunities."
+[~85 chars]
+
+--- WHAT YOU GET ---
+
+Title: "What you get"
+Description: "A personalized Loom video walking through your site, plus a bulleted action plan."
+[~85 chars]
+
+--- THE CATCH ---
+
+Title: "The Catch?"
+Description: "None. If you find value, maybe we'll work together. If not, you keep the roadmap."
+[~85 chars]
+
+--- TESTIMONIAL ---
+
+Quote: ""The audit showed us three things we fixed in an hour that doubled our form fills.""
+[~90 chars, italic, serif font]
+
+Attribution: "— Mark T., Director of Operations"
+
+--- AUDIT REQUEST FORM ---
+
+Form Title: "Request Your Audit"
+Form Subtitle: "Enter your details below. We usually turn these around in 48 hours."
+[~70 chars]
+
+Form Fields:
+1. Website URL (required)
+   Label: "WEBSITE URL"
+   Placeholder: "https://yourcompany.com"
+   Type: url
+
+2. First Name (required)
+   Label: "FIRST NAME"
+   Placeholder: "Jane"
+   Type: text
+
+3. Last Name (required)
+   Label: "LAST NAME"
+   Placeholder: "Doe"
+   Type: text
+
+4. Email Address (required)
+   Label: "EMAIL ADDRESS"
+   Placeholder: "jane@company.com"
+   Type: email
+
+5. Biggest Frustration (optional)
+   Label: "WHAT'S YOUR BIGGEST FRUSTRATION? (OPTIONAL)"
+   Placeholder: "e.g. We get traffic but no leads..."
+   Type: textarea
+   Rows: 3
+
+Submit Button:
+"Get My Free Video Audit"
+
+Privacy Note:
+"By submitting, you agree to our privacy policy. We hate spam too."
+[~65 chars]
+
+--- SUCCESS STATE ---
+
+Success Headline:
+"Audit Request Received!"
+
+Success Message:
+"We'll analyze your website and send you a personalized video audit within 48 hours."
+[~85 chars]
+
+Secondary CTA:
+"Request another audit"
+
+--- ERROR STATE ---
+
+Error Message (dynamic):
+Default: "Something went wrong. Please try again."
+Network: "Failed to submit form. Please try again."
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Form labels: ALL CAPS, 2-6 words
+- Placeholders: Lowercase, realistic examples
+- Success message: Keep under 100 chars
+- Testimonial quote: 80-100 chars for readability
+- CTA button: 3-6 words, action-oriented
+- Privacy note: Under 70 chars
+- Form should be on forest green (#064E3B) background
+- Form text color: White with varying opacity

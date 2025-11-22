@@ -1,0 +1,140 @@
+====================================
+PAGE: CAPABILITIES / TECH STACK
+====================================
+URL: /capabilities
+META TITLE: Our Capabilities & Tech Stack | Innovista Design Studio (58 chars)
+META DESCRIPTION: Platform-agnostic web development. From no-code tools like Webflow to custom React applications and e-commerce platforms. (125 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Tech Stack Grid (3 categories)
+   - No-Code & CMS
+   - Custom Development
+   - E-Commerce
+3. Integrations Section
+4. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Main Headline (H1):
+"The right tool for the job."
+[Note: "job" is styled in italic/light gray]
+
+Subheadline:
+"We aren't dogmatic about technology. We use whatever stack delivers the best performance, scalability, and ease of use for your specific needs."
+[~145 chars]
+
+--- CATEGORY 1: NO-CODE & CMS ---
+
+Category Title: "No-Code & CMS"
+Category Description: "Rapid deployment and easy content management for marketing teams."
+[~65 chars]
+
+TOOLS:
+1. Webflow
+   Description: "For high-end, visual-first marketing websites."
+   [~48 chars]
+
+2. WordPress
+   Description: "For content-heavy sites requiring deep flexibility."
+   [~54 chars]
+
+3. Framer
+   Description: "For speed and creative landing pages."
+   [~38 chars]
+
+4. Bubble
+   Description: "For complex web applications without code."
+   [~43 chars]
+
+5. Strapi
+   Description: "Headless CMS for omnichannel content."
+   [~37 chars]
+
+--- CATEGORY 2: CUSTOM DEVELOPMENT ---
+
+Category Title: "Custom Development"
+Category Description: "Enterprise-grade performance for complex applications."
+[~55 chars]
+
+TOOLS:
+1. React / Next.js
+   Description: "The industry standard for fast, scalable web apps."
+   [~52 chars]
+
+2. Tailwind CSS
+   Description: "For bespoke, pixel-perfect styling systems."
+   [~44 chars]
+
+3. Node.js
+   Description: "Powerful backend infrastructure."
+   [~33 chars]
+
+4. TypeScript
+   Description: "Type-safe code for mission-critical apps."
+   [~42 chars]
+
+5. Supabase
+   Description: "Scalable database and authentication."
+   [~38 chars]
+
+6. Sanity.io
+   Description: "A headless CMS for structured content delivery."
+   [~48 chars]
+
+--- CATEGORY 3: E-COMMERCE ---
+
+Category Title: "E-Commerce"
+Category Description: "Robust stores that scale with your sales volume."
+[~50 chars]
+
+TOOLS:
+1. Shopify
+   Description: "The world's best e-commerce platform."
+   [~38 chars]
+
+2. BigCommerce
+   Description: "For high-volume enterprise retail."
+   [~35 chars]
+
+3. WooCommerce
+   Description: "Flexible open-source commerce for WordPress."
+   [~45 chars]
+
+4. Magento
+   Description: "Self-hosted power for complex catalogs."
+   [~40 chars]
+
+--- INTEGRATIONS SECTION ---
+
+Section Headline:
+"And we connect to everything else"
+
+Section Description:
+"Your website shouldn't exist in a silo. We integrate with the tools you already use to run your business."
+[~105 chars]
+
+Integration Tools (Pills):
+- HubSpot
+- Salesforce
+- Mailchimp
+- Zapier
+- Google Analytics 4
+- Stripe
+- Intercom
+- Calendly
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Tool descriptions: 30-55 chars for consistency
+- Category descriptions: 50-70 chars
+- Tool names: Use official capitalization
+- Keep descriptions benefit-focused, not feature-focused
+- Integration pills: Logo + name, max 3 words

@@ -1,0 +1,80 @@
+====================================
+PAGE: BUSINESS AUTOMATION SERVICE
+====================================
+URL: /services/automation
+META TITLE: Business Automation Services | CRM & Email Integration (62 chars)
+META DESCRIPTION: Stop doing the busy work. We connect your website to your CRM, automate follow-ups, and streamline operations. (111 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Key Features Grid (3 items)
+3. Common Automations Grid
+4. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Breadcrumb:
+"Service > Automation"
+
+Main Headline (H1):
+"Stop doing the busy work."
+[Note: "busy work" is styled in italic/light gray]
+
+Subheadline:
+"We connect your website directly to your operations. Leads flow into your CRM, emails get sent automatically, and appointments schedule themselves."
+[~150 chars]
+
+--- KEY FEATURES ---
+
+FEATURE 1:
+TITLE: "CRM Integration"
+DESCRIPTION: "Whether you use HubSpot, Salesforce, or Pipedrive, we ensure every form fill creates a deal record instantly."
+[~110 chars]
+
+FEATURE 2:
+TITLE: "Email Nurturing"
+DESCRIPTION: "Immediate auto-responses and long-term drip campaigns that warm up leads before you ever talk to them."
+[~105 chars]
+
+FEATURE 3:
+TITLE: "Workflow Logic"
+DESCRIPTION: "If a lead has budget > $10k, notify sales immediately. If < $10k, send them a PDF. We build the logic."
+[~105 chars]
+
+--- COMMON AUTOMATIONS WE BUILD ---
+
+Section Headline:
+"Common Automations We Build"
+
+AUTOMATION 1:
+"Form Submit → Slack Notification to Team"
+
+AUTOMATION 2:
+"New Lead → Add to Mailchimp/ActiveCampaign"
+
+AUTOMATION 3:
+"Calendar Booking → Zoom Link Generation"
+
+AUTOMATION 4:
+"Purchase → QuickBooks Invoice Creation"
+
+AUTOMATION 5:
+"Onboarding Form → Trello Card Creation"
+
+AUTOMATION 6:
+"Contract Signed → Dropbox Folder Setup"
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Automation items: Use "Action → Result" format
+- Keep automation descriptions under 50 chars total
+- Feature descriptions: 100-110 chars
+- Use concrete examples with specific tools (HubSpot, Salesforce, etc.)
+- Emphasize time-saving and efficiency

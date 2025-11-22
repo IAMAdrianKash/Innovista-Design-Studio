@@ -1,0 +1,84 @@
+====================================
+PAGE: CAREERS
+====================================
+URL: /careers
+META TITLE: Careers at Innovista | Join Our Team (42 chars)
+META DESCRIPTION: Do the best work of your life. We're building a team of world-class craftspeople with no politics and no busy work. (118 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Values Grid (3 items)
+3. Open Positions List
+4. "Don't see your role?" CTA
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Main Headline (H1):
+"Do the best work of your life."
+[Note: "life" is styled in italic/light gray]
+
+Subheadline:
+"We're building a team of obsession-level craftspeople. No politics. No busy work. Just world-class digital products for clients who trust us."
+[~145 chars]
+
+--- VALUES SECTION ---
+
+VALUE 1:
+TITLE: "People First"
+DESCRIPTION: "We don't burn people out. 4-day work weeks in summer, unlimited PTO, and respect for your life outside of work."
+[~110 chars]
+
+VALUE 2:
+TITLE: "Work From Anywhere"
+DESCRIPTION: "We are remote-first. As long as you have a good internet connection and overlap with Mountain Time, we don't care where you are."
+[~130 chars]
+
+VALUE 3:
+TITLE: "Mastery Over Management"
+DESCRIPTION: "We value makers. You won't be stuck in meetings all day. We protect your flow state so you can build."
+[~105 chars]
+
+--- OPEN POSITIONS ---
+
+Section Headline:
+"Open Positions"
+
+ROLE 1:
+Title: "Senior Frontend Developer"
+Type: "Full-time"
+Location: "Remote (Canada)"
+Department: "Engineering"
+
+ROLE 2:
+Title: "UI/UX Designer"
+Type: "Contract"
+Location: "Edmonton / Hybrid"
+Department: "Design"
+
+ROLE 3:
+Title: "Digital Strategist"
+Type: "Full-time"
+Location: "Remote"
+Department: "Strategy"
+
+--- DON'T SEE YOUR ROLE? ---
+
+Title: "Don't see your role?"
+Description: "We're always looking for talent. Send your portfolio to hello@innovista.design"
+Email Link: hello@innovista.design
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Role titles: 2-4 words, specific
+- Values descriptions: 100-130 chars
+- Keep benefits concrete and specific
+- Emphasize culture and work-life balance
+- Remote-first positioning is key differentiator
+- Update roles list as positions change

@@ -1,0 +1,86 @@
+====================================
+PAGE: LEAD GENERATION SERVICE
+====================================
+URL: /services/lead-generation
+META TITLE: Lead Generation Services | Conversion Rate Optimization (62 chars)
+META DESCRIPTION: Traffic is vanity. Leads are sanity. We build high-converting funnels and landing pages for Alberta businesses. (112 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Key Features Grid (3 items)
+3. CRO Methodology (4 steps)
+4. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Breadcrumb:
+"Service > Lead Generation"
+
+Main Headline (H1):
+"Turn traffic into revenue."
+[Note: "revenue" is styled in italic/light gray]
+
+Subheadline:
+"Traffic is vanity. Leads are sanity. We build high-converting funnels and landing pages that systematically turn visitors into qualified prospects."
+[~150 chars]
+
+--- KEY FEATURES ---
+
+FEATURE 1:
+TITLE: "Precision Landing Pages"
+DESCRIPTION: "Single-purpose pages designed to capture data. No distractions, no menu links, just a compelling offer and a form."
+[~115 chars]
+
+FEATURE 2:
+TITLE: "A/B Testing"
+DESCRIPTION: "We don't guess. We test headlines, button colors, and layouts to squeeze every drop of ROI from your traffic."
+[~110 chars]
+
+FEATURE 3:
+TITLE: "Lead Magnets"
+DESCRIPTION: "Create valuable resources (PDFs, calculators, audits) that your customers will happily exchange their email address for."
+[~125 chars]
+
+--- OUR CRO METHODOLOGY ---
+
+Section Headline:
+"Our CRO Methodology"
+
+STEP 1:
+NUMBER: "01"
+TITLE: "1. Analysis"
+DESCRIPTION: "We install heatmaps and recording software to see where users are dropping off."
+[~80 chars]
+
+STEP 2:
+NUMBER: "02"
+TITLE: "2. Hypothesis"
+DESCRIPTION: "We identify bottlenecks and propose design changes to fix them."
+[~65 chars]
+
+STEP 3:
+NUMBER: "03"
+TITLE: "3. Implementation"
+DESCRIPTION: "We build the new variation of the page."
+[~40 chars]
+
+STEP 4:
+NUMBER: "04"
+TITLE: "4. Testing"
+DESCRIPTION: "We run traffic to both versions and declare a winner based on data."
+[~70 chars]
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Methodology steps: Keep descriptions under 100 chars
+- Feature descriptions: 100-130 chars for consistency
+- Use data-driven language throughout
+- Emphasize testing and optimization over guesswork
+- "Traffic is vanity. Leads are sanity." is the key message

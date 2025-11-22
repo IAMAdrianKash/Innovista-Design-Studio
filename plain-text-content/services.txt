@@ -1,0 +1,77 @@
+====================================
+PAGE: SERVICES OVERVIEW
+====================================
+URL: /services
+META TITLE: Our Services | Innovista Design Studio (43 chars)
+META DESCRIPTION: Web design, lead generation, SEO, and automation services for professional service businesses in Edmonton and across Alberta. (130 chars)
+
+====================================
+STRUCTURE
+====================================
+1. Hero Section
+2. Services Grid (4 cards)
+3. Content Section (CTA)
+
+====================================
+CONTENT BY SECTION
+====================================
+
+--- HERO SECTION ---
+
+Main Headline (H1):
+"Everything you need to grow online."
+[Note: "grow online" is styled in italic/light gray]
+
+Subheadline:
+"We don't just build websites. We build comprehensive digital ecosystems designed to generate leads, automate processes, and scale your business."
+[~145 chars]
+
+--- SERVICES GRID ---
+
+SERVICE 1: WEB DESIGN & DEVELOPMENT
+Link: /services/web-design
+Title: "Web Design & Development"
+Description: "Custom built, high-performance websites designed to convert visitors into customers."
+Features:
+  - React & Next.js
+  - Mobile-First
+  - Speed Optimized
+CTA: "Learn more →"
+
+SERVICE 2: LEAD GENERATION
+Link: /services/lead-generation
+Title: "Lead Generation"
+Description: "Strategic funnels and CRO that turn your passive traffic into active qualified leads."
+Features:
+  - Landing Pages
+  - A/B Testing
+  - Analytics
+CTA: "Learn more →"
+
+SERVICE 3: BUSINESS AUTOMATION
+Link: /services/automation
+Title: "Business Automation"
+Description: "Connect your website to your CRM. Automate follow-ups, scheduling, and data entry."
+Features:
+  - CRM Integration
+  - Email Workflows
+  - Zapier/Make
+CTA: "Learn more →"
+
+SERVICE 4: SEO OPTIMIZATION
+Link: /services/seo
+Title: "SEO Optimization"
+Description: "Dominate local search results with technical SEO audits and content strategies."
+Features:
+  - Technical Audits
+  - Local SEO
+  - Content Strategy
+CTA: "Learn more →"
+
+====================================
+NOTES & CHARACTER LIMITS
+====================================
+- Service titles: 2-4 words
+- Service descriptions: 80-100 chars for consistency
+- Feature tags: 2-3 words each
+- Keep grid symmetrical with equal content lengths
