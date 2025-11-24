@@ -1,51 +1,99 @@
 'use client'
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { Check, ArrowRight, Monitor, Smartphone, Zap, TrendingUp, Award, Clock, DollarSign, Users, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, ChevronRight, ArrowRight, Monitor, Smartphone, Zap, TrendingUp, Award, Clock, DollarSign, Users, Plus, Minus } from 'lucide-react';
+import { getFeaturedCaseStudies, type CaseStudy, urlForImage } from '@/lib/sanity';
 
 interface FAQItemProps {
   question: string;
   answer: string;
+  index: number;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
-const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const FAQItem: React.FC<FAQItemProps> = ({ question, answer, index, isOpen, onToggle }) => {
   return (
-    <div className="border-b border-gray-200 py-6">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05 }}
+      className={`border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300 ${isOpen ? 'bg-gray-50 border-dark/10' : 'bg-white hover:border-gray-300'}`}
+    >
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between text-left group"
+        onClick={onToggle}
+        className="w-full flex items-center justify-between p-8 text-left focus:outline-none"
       >
-        <h3 className="font-heading font-bold text-lg md:text-xl text-dark group-hover:text-forest transition-colors pr-4">
+        <span className={`font-heading font-bold text-xl md:text-2xl ${isOpen ? 'text-dark' : 'text-gray-700'}`}>
           {question}
-        </h3>
-        {isOpen ? (
-          <ChevronUp className="w-5 h-5 text-forest shrink-0" />
-        ) : (
-          <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-forest transition-colors shrink-0" />
-        )}
+        </span>
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-dark text-white' : 'bg-gray-100 text-gray-400'}`}>
+          {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+        </div>
       </button>
-      {isOpen && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="overflow-hidden"
-        >
-          <p className="text-gray-600 leading-relaxed mt-4 text-base md:text-lg">
-            {answer}
-          </p>
-        </motion.div>
-      )}
-    </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="px-8 pb-8">
+              <p className="text-gray-600 text-lg leading-relaxed">
+                {answer}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
 const WebDesignEdmonton: React.FC = () => {
+  const [openFAQ, setOpenFAQ] = useState<number | null>(0);
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+
+  useEffect(() => {
+    // Fetch featured case studies
+    getFeaturedCaseStudies(2).then(studies => {
+      setCaseStudies(studies);
+    }).catch(err => {
+      console.error('Failed to fetch case studies:', err);
+    });
+  }, []);
+
+  const faqs = [
+    {
+      question: "How much does web design cost in Edmonton?",
+      answer: "Our custom web design projects in Edmonton typically range from $8,000 to $30,000+, depending on complexity and features. Unlike other Edmonton web design agencies, we provide transparent pricing upfront with no hidden fees. Every project includes custom UI/UX design, React/Next.js development, SEO optimization, and 30 days of post-launch support. We also offer flexible payment plans for Alberta businesses."
+    },
+    {
+      question: "What's the timeline for a custom website in Edmonton?",
+      answer: "Most web design projects in Edmonton take 6-12 weeks from kickoff to launch. Our process includes: Discovery & Strategy (1 week), Design & Prototyping (2-3 weeks), Development (3-5 weeks), Testing & Refinement (1-2 weeks), and Launch + Training (1 week). We work with businesses across Edmonton, Sherwood Park, and St. Albert, providing regular updates throughout the entire process."
+    },
+    {
+      question: "Do you work with businesses outside Edmonton?",
+      answer: "Absolutely! While we're based in Edmonton and serve many local Alberta businesses, we work with clients across Canada and internationally. Our web design process is built for remote collaboration, with regular video calls, shared project boards, and clear communication. Whether you're in Downtown Edmonton, Calgary, Vancouver, or anywhere else, we've got you covered."
+    },
+    {
+      question: "What makes a good web design agency in Edmonton?",
+      answer: "A good Edmonton web design agency should focus on results, not just aesthetics. Look for: transparent pricing with no hidden fees, proven track record with local businesses, expertise in conversion optimization, modern technology (React, Next.js), SEO knowledge, and clear communication. Unlike traditional Edmonton web design companies that lock you into long contracts, we believe in earning your business through results. That's why we offer flexible terms and prioritize your ROI."
+    },
+    {
+      question: "Do you offer SEO services with web design?",
+      answer: "Yes! Every website we build includes on-page SEO optimization as standard. This includes keyword research, meta tags, structured data, site speed optimization, and mobile responsiveness. For businesses that want ongoing SEO and content marketing, we also offer monthly retainer packages that include link building, content creation, and technical SEO audits."
+    },
+    {
+      question: "Can you redesign my existing website?",
+      answer: "Absolutely. Many of our Edmonton clients come to us with outdated websites that aren't generating leads. We'll audit your current site, identify conversion bottlenecks, and build a new website that turns visitors into customers. We can also migrate your existing content and set up proper redirects to preserve your SEO rankings."
+    }
+  ];
+
   // Structured Data for Local Business Service
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -116,40 +164,26 @@ const WebDesignEdmonton: React.FC = () => {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How much does web design cost in Edmonton?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Our custom web design projects in Edmonton typically range from $8,000 to $30,000+, depending on complexity and features. Unlike other Edmonton web design agencies, we provide transparent pricing upfront with no hidden fees. Every project includes custom UI/UX design, React/Next.js development, SEO optimization, and 30 days of post-launch support. We also offer flexible payment plans for Alberta businesses."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What's the timeline for a custom website in Edmonton?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Most web design projects in Edmonton take 6-12 weeks from kickoff to launch. Our process includes: Discovery & Strategy (1 week), Design & Prototyping (2-3 weeks), Development (3-5 weeks), Testing & Refinement (1-2 weeks), and Launch + Training (1 week). We work with businesses across Edmonton, Sherwood Park, and St. Albert, providing regular updates throughout the entire process."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you work with businesses outside Edmonton?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Absolutely! While we're based in Edmonton and serve many local Alberta businesses, we work with clients across Canada and internationally. Our web design process is built for remote collaboration, with regular video calls, shared project boards, and clear communication. Whether you're in Downtown Edmonton, Calgary, Vancouver, or anywhere else, we've got you covered."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What makes a good web design agency in Edmonton?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A good Edmonton web design agency should focus on results, not just aesthetics. Look for: transparent pricing with no hidden fees, proven track record with local businesses, expertise in conversion optimization, modern technology (React, Next.js), SEO knowledge, and clear communication. Unlike traditional Edmonton web design companies that lock you into long contracts, we believe in earning your business through results. That's why we offer flexible terms and prioritize your ROI."
-        }
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
       }
-    ]
+    }))
+  };
+
+  // Map industry codes to display labels
+  const industryLabels: Record<string, string> = {
+    'law': 'Law Firms',
+    'engineering': 'Engineering',
+    'manufacturing': 'Manufacturing',
+    'healthcare': 'Healthcare',
+    'real-estate': 'Real Estate',
+    'consulting': 'Consulting',
+    'technology': 'Technology',
+    'other': 'Other',
   };
 
   return (
@@ -189,19 +223,23 @@ const WebDesignEdmonton: React.FC = () => {
               We're an Edmonton web design agency that builds conversion-focused websites for professional services and B2B companies across Alberta. No bloated templates. No long-term contracts. Just websites that work.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div className="flex flex-wrap gap-4 mb-12">
               <Link
                 href="/audit"
-                className="inline-flex items-center justify-center px-8 py-4 bg-forest text-white font-bold rounded-full hover:bg-forest/90 transition-colors gap-2 group"
+                className="group bg-forest text-white px-8 py-4 rounded-full text-[15px] font-medium hover:bg-forest/90 transition-all flex items-center gap-3 shadow-2xl shadow-forest/20 hover:shadow-forest/30 hover:-translate-y-1 duration-300"
               >
                 Get Your Free Website Audit
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <div className="bg-white/20 rounded-full p-1 group-hover:translate-x-1 transition-transform">
+                  <ChevronRight size={14} />
+                </div>
               </Link>
+
               <Link
                 href="/case-studies"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-200 text-dark font-bold rounded-full hover:border-forest hover:text-forest transition-colors"
+                className="group px-8 py-4 rounded-full text-[15px] font-medium text-[#1A1A1A] border border-gray-200 hover:border-gray-400 hover:bg-white transition-all flex items-center gap-2"
               >
-                View Our Work
+                View Selected Work
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform opacity-0 group-hover:opacity-100" />
               </Link>
             </div>
 
@@ -441,64 +479,101 @@ const WebDesignEdmonton: React.FC = () => {
               </p>
             </div>
 
-            {/* Case Study Highlights */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-              <div className="bg-gray-50 p-8 rounded-2xl">
-                <div className="mb-6">
-                  <span className="px-3 py-1 rounded-full border border-gray-200 text-xs font-medium text-gray-500 uppercase tracking-wide">
-                    Law Firm
-                  </span>
-                </div>
-                <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4">
-                  Edmonton Legal Practice
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  Redesigned their website to focus on practice area authority and lead generation. Implemented strategic CTAs and improved mobile experience for on-the-go clients.
-                </p>
-                <div className="grid grid-cols-2 gap-6 mb-6 pt-6 border-t border-gray-200">
-                  <div>
-                    <div className="font-heading font-bold text-4xl text-forest mb-1">240%</div>
-                    <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Lead Increase</div>
-                  </div>
-                  <div>
-                    <div className="font-heading font-bold text-4xl text-forest mb-1">1.2s</div>
-                    <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Page Load Time</div>
-                  </div>
-                </div>
+            {/* Case Study Highlights - Using Real Data */}
+            {caseStudies.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                {caseStudies.map((study, idx) => {
+                  const firstResult = study.results[0];
+                  return (
+                    <Link key={study._id} href={`/case-studies/${study.slug.current}`}>
+                      <div className="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition-shadow cursor-pointer group">
+                        <div className="mb-6">
+                          <span className="px-3 py-1 rounded-full border border-gray-200 text-xs font-medium text-gray-500 uppercase tracking-wide">
+                            {industryLabels[study.industry] || study.industry}
+                          </span>
+                        </div>
+                        <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4 group-hover:underline decoration-2 underline-offset-4 transition-all">
+                          {study.client}
+                        </h3>
+                        <p className="text-gray-600 leading-relaxed mb-6">
+                          {study.excerpt}
+                        </p>
+                        {study.results.length > 0 && (
+                          <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gray-200">
+                            {study.results.slice(0, 2).map((result, i) => (
+                              <div key={i}>
+                                <div className="font-heading font-bold text-4xl text-forest mb-1">{result.value}</div>
+                                <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">{result.label}</div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                <div className="bg-gray-50 p-8 rounded-2xl">
+                  <div className="mb-6">
+                    <span className="px-3 py-1 rounded-full border border-gray-200 text-xs font-medium text-gray-500 uppercase tracking-wide">
+                      Law Firm
+                    </span>
+                  </div>
+                  <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4">
+                    Edmonton Legal Practice
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Redesigned their website to focus on practice area authority and lead generation. Implemented strategic CTAs and improved mobile experience for on-the-go clients.
+                  </p>
+                  <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gray-200">
+                    <div>
+                      <div className="font-heading font-bold text-4xl text-forest mb-1">240%</div>
+                      <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Lead Increase</div>
+                    </div>
+                    <div>
+                      <div className="font-heading font-bold text-4xl text-forest mb-1">1.2s</div>
+                      <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Page Load Time</div>
+                    </div>
+                  </div>
+                </div>
 
-              <div className="bg-gray-50 p-8 rounded-2xl">
-                <div className="mb-6">
-                  <span className="px-3 py-1 rounded-full border border-gray-200 text-xs font-medium text-gray-500 uppercase tracking-wide">
-                    Engineering
-                  </span>
-                </div>
-                <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4">
-                  Alberta Engineering Firm
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  Built a conversion-focused website that showcases technical capabilities and streamlines the RFP process for industrial clients across Western Canada.
-                </p>
-                <div className="grid grid-cols-2 gap-6 mb-6 pt-6 border-t border-gray-200">
-                  <div>
-                    <div className="font-heading font-bold text-4xl text-forest mb-1">187%</div>
-                    <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Qualified Leads</div>
+                <div className="bg-gray-50 p-8 rounded-2xl">
+                  <div className="mb-6">
+                    <span className="px-3 py-1 rounded-full border border-gray-200 text-xs font-medium text-gray-500 uppercase tracking-wide">
+                      Engineering
+                    </span>
                   </div>
-                  <div>
-                    <div className="font-heading font-bold text-4xl text-forest mb-1">65%</div>
-                    <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Lower Bounce Rate</div>
+                  <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4">
+                    Alberta Engineering Firm
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Built a conversion-focused website that showcases technical capabilities and streamlines the RFP process for industrial clients across Western Canada.
+                  </p>
+                  <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gray-200">
+                    <div>
+                      <div className="font-heading font-bold text-4xl text-forest mb-1">187%</div>
+                      <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Qualified Leads</div>
+                    </div>
+                    <div>
+                      <div className="font-heading font-bold text-4xl text-forest mb-1">65%</div>
+                      <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Lower Bounce Rate</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <div className="text-center">
               <Link
                 href="/case-studies"
-                className="inline-flex items-center justify-center px-8 py-4 bg-forest text-white font-bold rounded-full hover:bg-forest/90 transition-colors gap-2 group"
+                className="group bg-forest text-white px-8 py-4 rounded-full text-[15px] font-medium hover:bg-forest/90 transition-all inline-flex items-center gap-3 shadow-2xl shadow-forest/20 hover:shadow-forest/30 hover:-translate-y-1 duration-300"
               >
                 View All Case Studies
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <div className="bg-white/20 rounded-full p-1 group-hover:translate-x-1 transition-transform">
+                  <ChevronRight size={14} />
+                </div>
               </Link>
             </div>
           </div>
@@ -594,31 +669,17 @@ const WebDesignEdmonton: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-8 md:p-12">
-              <FAQItem
-                question="How much does web design cost in Edmonton?"
-                answer="Our custom web design projects in Edmonton typically range from $8,000 to $30,000+, depending on complexity and features. Unlike other Edmonton web design agencies, we provide transparent pricing upfront with no hidden fees. Every project includes custom UI/UX design, React/Next.js development, SEO optimization, and 30 days of post-launch support. We also offer flexible payment plans for Alberta businesses."
-              />
-              <FAQItem
-                question="What's the timeline for a custom website in Edmonton?"
-                answer="Most web design projects in Edmonton take 6-12 weeks from kickoff to launch. Our process includes: Discovery & Strategy (1 week), Design & Prototyping (2-3 weeks), Development (3-5 weeks), Testing & Refinement (1-2 weeks), and Launch + Training (1 week). We work with businesses across Edmonton, Sherwood Park, and St. Albert, providing regular updates throughout the entire process."
-              />
-              <FAQItem
-                question="Do you work with businesses outside Edmonton?"
-                answer="Absolutely! While we're based in Edmonton and serve many local Alberta businesses, we work with clients across Canada and internationally. Our web design process is built for remote collaboration, with regular video calls, shared project boards, and clear communication. Whether you're in Downtown Edmonton, Calgary, Vancouver, or anywhere else, we've got you covered."
-              />
-              <FAQItem
-                question="What makes a good web design agency in Edmonton?"
-                answer="A good Edmonton web design agency should focus on results, not just aesthetics. Look for: transparent pricing with no hidden fees, proven track record with local businesses, expertise in conversion optimization, modern technology (React, Next.js), SEO knowledge, and clear communication. Unlike traditional Edmonton web design companies that lock you into long contracts, we believe in earning your business through results. That's why we offer flexible terms and prioritize your ROI."
-              />
-              <FAQItem
-                question="Do you offer SEO services with web design?"
-                answer="Yes! Every website we build includes on-page SEO optimization as standard. This includes keyword research, meta tags, structured data, site speed optimization, and mobile responsiveness. For businesses that want ongoing SEO and content marketing, we also offer monthly retainer packages that include link building, content creation, and technical SEO audits."
-              />
-              <FAQItem
-                question="Can you redesign my existing website?"
-                answer="Absolutely. Many of our Edmonton clients come to us with outdated websites that aren't generating leads. We'll audit your current site, identify conversion bottlenecks, and build a new website that turns visitors into customers. We can also migrate your existing content and set up proper redirects to preserve your SEO rankings."
-              />
+            <div className="space-y-4">
+              {faqs.map((faq, idx) => (
+                <FAQItem
+                  key={idx}
+                  question={faq.question}
+                  answer={faq.answer}
+                  index={idx}
+                  isOpen={openFAQ === idx}
+                  onToggle={() => setOpenFAQ(openFAQ === idx ? null : idx)}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -661,10 +722,12 @@ const WebDesignEdmonton: React.FC = () => {
 
             <Link
               href="/audit"
-              className="inline-flex items-center justify-center px-10 py-5 bg-white text-forest font-bold rounded-full hover:bg-gray-100 transition-colors gap-2 group text-lg"
+              className="group bg-white text-forest px-10 py-5 rounded-full text-[15px] font-medium hover:bg-gray-100 transition-all inline-flex items-center gap-3 shadow-2xl hover:shadow-3xl hover:-translate-y-1 duration-300"
             >
               Get Your Free Audit Now
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <div className="bg-forest/10 rounded-full p-1 group-hover:translate-x-1 transition-transform">
+                <ChevronRight size={14} className="text-forest" />
+              </div>
             </Link>
 
             <p className="text-white/60 mt-6 text-sm">
