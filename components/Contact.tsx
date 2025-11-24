@@ -2,10 +2,12 @@
 
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 const Contact: React.FC = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -51,25 +53,16 @@ const Contact: React.FC = () => {
       const result = await response.json();
 
       if (result.success) {
-        setSubmitStatus('success');
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          service: 'Web Design & Build',
-          budget: '',
-          website: '',
-          message: '',
-          agreedToPrivacy: false,
-        });
+        // Redirect to thank you page
+        router.push('/thank-you?type=contact');
       } else {
         setSubmitStatus('error');
         setErrorMessage(result.error || 'Something went wrong. Please try again.');
+        setIsSubmitting(false);
       }
     } catch (error) {
       setSubmitStatus('error');
       setErrorMessage('Failed to submit form. Please try again.');
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -140,26 +133,7 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="bg-gray-50 p-8 md:p-12 rounded-[3rem]"
           >
-            {submitStatus === 'success' ? (
-              <div className="bg-white p-8 md:p-12 rounded-[3rem] border-2 border-forest">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-forest rounded-full flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 size={32} className="text-white" />
-                  </div>
-                  <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4">Message Sent!</h3>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Thanks for reaching out. We'll review your inquiry and get back to you within 24 hours.
-                  </p>
-                  <button
-                    onClick={() => setSubmitStatus('idle')}
-                    className="text-forest font-bold hover:underline"
-                  >
-                    Send another message
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2">
                         <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2">First Name</label>
@@ -289,7 +263,6 @@ const Contact: React.FC = () => {
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
             </form>
-            )}
           </motion.div>
 
         </div>
