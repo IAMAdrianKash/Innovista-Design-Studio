@@ -87,7 +87,7 @@ const About: React.FC = () => {
       <section className="py-24 bg-[#F3F4F6]">
         <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
           <div className="w-20 h-20 bg-white rounded-full mx-auto mb-8 overflow-hidden border border-gray-200 p-1">
-            <img src="https://ui-avatars.com/api/?name=Alex+Morgan&background=064E3B&color=fff" alt="Founder" className="rounded-full" />
+            <img src="https://ui-avatars.com/api/?name=Akash+Sharma&background=064E3B&color=fff" alt="Founder" className="rounded-full" />
           </div>
           <h2 className="font-serif text-3xl md:text-4xl text-[#1A1A1A] mb-8 leading-tight italic">
             "My promise is simple: You will never have to wonder what you are paying for. No black boxes. No jargon. Just clear communication and work that moves the needle."
@@ -99,7 +99,7 @@ const About: React.FC = () => {
                 <path d="M20,60 Q50,10 80,60 T140,60 T180,40" fill="none" stroke="#1A1A1A" strokeWidth="3" />
               </svg>
             </div>
-            <p className="font-bold text-dark text-lg">Alex Morgan</p>
+            <p className="font-bold text-dark text-lg">Akash Sharma</p>
             <p className="text-sm text-gray-500 uppercase tracking-wider font-medium">Founder & Lead Strategist</p>
           </div>
         </div>

@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 import { Star, Play, Quote } from 'lucide-react';
 
 const featuredTestimonial = {
-  quote: "Innovista transformed our digital presence. We went from being 'just another firm' to the clear market leader in Alberta. The ROI has been undeniable.",
-  author: "Matthias Winckenburg",
-  role: "CTO & Founder",
+  quote: "Working with Innovista has been nothing but a breeze, they helped take our restoration website to the next level.",
+  author: "Bryan Jerimiah",
+  role: "Manager",
   company: "Attention",
   image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=2340&auto=format&fit=crop"
 };
@@ -17,33 +17,33 @@ const scrollTestimonials = [
   {
     id: 1,
     logo: "Guru Kitchen + Bar",
-    quote: "We are 100% benchmark and evaluation driven. Innovista was one of the few agencies that spoke our language. Their reactive support and data compliance make their offer really compelling.",
+    quote: "Thank you Innovista for helping us rebrand Guru Kitchen + Bar website again, everytime we work with them they always have new and creative ideas to help us grow.",
     author: "Jeet Nair",
-    role: "Group Engineering Manager",
+    role: "Manager",
     image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&h=100&fit=crop"
   },
   {
     id: 2,
     logo: "Ripe Tomato Pizza",
-    quote: "It's the first time we've been able to launch a campaign with such accuracy and speed. Whatever the complexity, the quality is always there.",
+    quote: "They're the best at what they do. We've been working with them for years and they've always been on top of their game. Absolute wizards in what they do",
     author: "Shahnaz Kiani",
-    role: "CEO",
+    role: "Manager",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
   },
   {
     id: 3,
     logo: "Chinook AI & Partners",
-    quote: "The audit they provided was eye-opening. We implemented 3 of their suggestions and saw an immediate lift in conversion. We signed the retainer the next day.",
-    author: "Sarah Jenkins",
+    quote: "We were looking for an agency that could not only make amazing websites, but strategically position us for success. Innovista exceeded our expectations. HIGHLY recommend.",
+    author: "Sarah",
     role: "Marketing Director",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
   },
   {
     id: 4,
     logo: "Automate Alberta",
-    quote: "Finally, an agency that understands B2B sales cycles. No fluff, just clear messaging and a design that positions us exactly where we need to be.",
-    author: "David Chen",
-    role: "VP of Sales",
+    quote: "Was refered Innovista by a friend and I'm so glad I did. They exceeded my expectations and I would highly recommend them to anyone looking for a top-notch web design agency.",
+    author: "Timothy Chen",
+    role: "Manager",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
   }
 ];
