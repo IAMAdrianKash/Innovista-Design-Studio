@@ -2,10 +2,12 @@
 
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, AlertCircle, PlayCircle } from 'lucide-react';
 
 const Audit: React.FC = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     website: '',
     firstName: '',
@@ -46,22 +48,16 @@ const Audit: React.FC = () => {
       const result = await response.json();
 
       if (result.success) {
-        setSubmitStatus('success');
-        setFormData({
-          website: '',
-          firstName: '',
-          lastName: '',
-          email: '',
-          frustration: '',
-        });
+        // Redirect to thank you page
+        router.push('/thank-you?type=audit');
       } else {
         setSubmitStatus('error');
         setErrorMessage(result.error || 'Something went wrong. Please try again.');
+        setIsSubmitting(false);
       }
     } catch (error) {
       setSubmitStatus('error');
       setErrorMessage('Failed to submit form. Please try again.');
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -134,31 +130,11 @@ const Audit: React.FC = () => {
             className="bg-forest text-white p-8 md:p-12 rounded-[3rem] relative overflow-hidden shadow-2xl"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
-            
-            {submitStatus === 'success' ? (
-              <div className="relative z-10">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 size={32} className="text-forest" />
-                  </div>
-                  <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4">Audit Request Received!</h3>
-                  <p className="text-white/80 leading-relaxed mb-6">
-                    We'll analyze your website and send you a personalized video audit within 48 hours.
-                  </p>
-                  <button
-                    onClick={() => setSubmitStatus('idle')}
-                    className="text-white font-bold hover:underline"
-                  >
-                    Request another audit
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <>
-                <h3 className="font-heading font-bold text-2xl md:text-3xl mb-2 relative z-10">Request Your Audit</h3>
-                <p className="text-white/70 mb-8 relative z-10">Enter your details below. We usually turn these around in 48 hours.</p>
 
-                <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+            <h3 className="font-heading font-bold text-2xl md:text-3xl mb-2 relative z-10">Request Your Audit</h3>
+            <p className="text-white/70 mb-8 relative z-10">Enter your details below. We usually turn these around in 48 hours.</p>
+
+            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
                     <div>
                         <label className="text-xs font-bold uppercase tracking-wider text-white/60 ml-2 mb-2 block">Website URL</label>
                         <input
@@ -243,8 +219,6 @@ const Audit: React.FC = () => {
                         By submitting, you agree to our privacy policy. We hate spam too.
                     </p>
                 </form>
-              </>
-            )}
           </motion.div>
 
         </div>

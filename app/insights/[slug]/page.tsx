@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const metaTitle = post.seo?.metaTitle || `${post.title} | Innovista Design Studio`
   const metaDescription = post.seo?.metaDescription || post.excerpt
+  const fullUrl = `https://innovista.design/insights/${slug}`
   const ogImageUrl = post.seo?.ogImage
     ? urlForImage(post.seo.ogImage).width(1200).height(630).url()
     : post.featuredImage
@@ -46,6 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime: post.publishedAt,
       authors: post.author ? [post.author.name] : undefined,
       images: ogImageUrl ? [{ url: ogImageUrl }] : undefined,
+      url: fullUrl,
     },
     twitter: {
       card: 'summary_large_image',
@@ -54,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       images: ogImageUrl ? [ogImageUrl] : undefined,
     },
     alternates: {
-      canonical: `/insights/${slug}`,
+      canonical: fullUrl,
     },
   }
 }
