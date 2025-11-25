@@ -13,7 +13,7 @@ const sanityWriteClient = createClient({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, website, location, category, tagline, description, specialties } = body;
+    const { name, email, website, location, category, tagline, description, specialties, avatar, portfolioLinks } = body;
 
     // Validate required fields
     if (!name || !email || !location || !category || !tagline || !description) {
@@ -34,8 +34,46 @@ export async function POST(request: NextRequest) {
       ? specialties.split(',').map((s: string) => s.trim()).filter(Boolean)
       : [];
 
+    // Handle avatar upload if present
+    let imageAsset = undefined;
+    if (avatar) {
+      try {
+        // Extract base64 data and mime type
+        const matches = avatar.match(/^data:(.+);base64,(.+)$/);
+        if (matches) {
+          const mimeType = matches[1];
+          const base64Data = matches[2];
+          const buffer = Buffer.from(base64Data, 'base64');
+
+          // Upload to Sanity
+          const uploadedAsset = await sanityWriteClient.assets.upload('image', buffer, {
+            filename: `${slug}-avatar.${mimeType.split('/')[1]}`,
+          });
+
+          imageAsset = {
+            _type: 'image',
+            asset: {
+              _type: 'reference',
+              _ref: uploadedAsset._id,
+            },
+          };
+        }
+      } catch (uploadError) {
+        console.error('Error uploading avatar:', uploadError);
+        // Continue without avatar if upload fails
+      }
+    }
+
+    // Format portfolio links for Sanity
+    const formattedPortfolioLinks = portfolioLinks && portfolioLinks.length > 0
+      ? portfolioLinks.map((link: { url: string; description: string }) => ({
+          url: link.url,
+          description: link.description || undefined,
+        }))
+      : undefined;
+
     // Create the draft partner document
-    const draftPartner = {
+    const draftPartner: any = {
       _type: 'partner',
       name,
       slug: {
@@ -49,14 +87,19 @@ export async function POST(request: NextRequest) {
       website: website || undefined,
       location,
       specialties: specialtiesArray.length > 0 ? specialtiesArray : undefined,
+      portfolioLinks: formattedPortfolioLinks,
       verified: false, // Draft partners start unverified
       featured: false, // Draft partners start unfeatured
       order: 999, // Default order, can be changed in Sanity
     };
 
+    // Add image only if uploaded successfully
+    if (imageAsset) {
+      draftPartner.image = imageAsset;
+    }
+
     // Create the document in Sanity as a draft
     const result = await sanityWriteClient.create(draftPartner, {
-      // Using autoGenerateArrayKeys to handle arrays properly
       autoGenerateArrayKeys: true,
     });
 

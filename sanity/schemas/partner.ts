@@ -98,6 +98,31 @@ export default defineType({
       description: 'Email for forwarding intro requests - NOT shown publicly',
     }),
     defineField({
+      name: 'portfolioLinks',
+      title: 'Portfolio Links (From Application)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'url',
+              title: 'Portfolio URL',
+              type: 'url',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'description',
+              title: 'Description (Optional)',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+      description: 'Links submitted during application (Dropbox, Google Drive, etc.) - Max 10',
+      validation: (Rule) => Rule.max(10),
+    }),
+    defineField({
       name: 'portfolio',
       title: 'Portfolio',
       type: 'array',
