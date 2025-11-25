@@ -75,8 +75,21 @@ const BecomePartnerForm: React.FC = () => {
     return true;
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    // Prevent form submission when pressing Enter in input fields
+    if (e.key === 'Enter' && e.target instanceof HTMLInputElement) {
+      e.preventDefault();
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Only allow submission if we're on the final step
+    if (currentStep !== totalSteps) {
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -185,36 +198,70 @@ const BecomePartnerForm: React.FC = () => {
             <>
               {/* Progress Indicator */}
               <div className="mb-8">
-                <div className="flex items-center justify-between mb-2">
-                  {[1, 2, 3].map((step) => (
-                    <div key={step} className="flex items-center flex-1">
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
-                          currentStep >= step
-                            ? 'bg-forest text-white'
-                            : 'bg-gray-200 text-gray-400'
-                        }`}
-                      >
-                        {step}
-                      </div>
-                      {step < 3 && (
-                        <div
-                          className={`flex-1 h-1 mx-2 transition-colors ${
-                            currentStep > step ? 'bg-forest' : 'bg-gray-200'
-                          }`}
-                        />
-                      )}
+                <div className="flex items-start justify-between">
+                  {/* Step 1 */}
+                  <div className="flex flex-col items-center" style={{ width: '33.333%' }}>
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors mb-2 ${
+                        currentStep >= 1
+                          ? 'bg-forest text-white'
+                          : 'bg-gray-200 text-gray-400'
+                      }`}
+                    >
+                      1
                     </div>
-                  ))}
-                </div>
-                <div className="flex justify-between text-xs text-gray-500 mt-2">
-                  <span>Basic Info</span>
-                  <span>Details</span>
-                  <span>Media</span>
+                    <span className="text-xs text-gray-500 text-center">Basic Info</span>
+                  </div>
+
+                  {/* Connector Line 1 */}
+                  <div className="flex-1 flex items-start pt-4" style={{ maxWidth: '16.666%' }}>
+                    <div
+                      className={`w-full h-1 transition-colors ${
+                        currentStep > 1 ? 'bg-forest' : 'bg-gray-200'
+                      }`}
+                    />
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="flex flex-col items-center" style={{ width: '33.333%' }}>
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors mb-2 ${
+                        currentStep >= 2
+                          ? 'bg-forest text-white'
+                          : 'bg-gray-200 text-gray-400'
+                      }`}
+                    >
+                      2
+                    </div>
+                    <span className="text-xs text-gray-500 text-center">Details</span>
+                  </div>
+
+                  {/* Connector Line 2 */}
+                  <div className="flex-1 flex items-start pt-4" style={{ maxWidth: '16.666%' }}>
+                    <div
+                      className={`w-full h-1 transition-colors ${
+                        currentStep > 2 ? 'bg-forest' : 'bg-gray-200'
+                      }`}
+                    />
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="flex flex-col items-center" style={{ width: '33.333%' }}>
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors mb-2 ${
+                        currentStep >= 3
+                          ? 'bg-forest text-white'
+                          : 'bg-gray-200 text-gray-400'
+                      }`}
+                    >
+                      3
+                    </div>
+                    <span className="text-xs text-gray-500 text-center">Media</span>
+                  </div>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
                 <AnimatePresence mode="wait">
                   {/* Step 1: Basic Info */}
                   {currentStep === 1 && (
