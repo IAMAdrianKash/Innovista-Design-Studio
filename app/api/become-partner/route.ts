@@ -72,8 +72,14 @@ export async function POST(request: NextRequest) {
         }))
       : undefined;
 
+    // Generate a unique draft ID
+    const timestamp = Date.now();
+    const randomStr = Math.random().toString(36).substring(2, 9);
+    const draftId = `drafts.${slug}-${timestamp}-${randomStr}`;
+
     // Create the draft partner document
     const draftPartner: any = {
+      _id: draftId,
       _type: 'partner',
       name,
       slug: {
