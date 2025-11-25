@@ -39,6 +39,7 @@ const Navbar: React.FC = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [mobilePartnersOpen, setMobilePartnersOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchIndex, setSearchIndex] = useState<SearchResult[]>(STATIC_PAGES);
@@ -133,6 +134,21 @@ const Navbar: React.FC = () => {
     }
   ];
 
+  const partnerItems = [
+    {
+      name: 'Partner Directory',
+      path: '/partners',
+      icon: <Users size={20} />,
+      desc: 'Trusted experts we recommend.'
+    },
+    {
+      name: 'Become a Partner',
+      path: '/become-a-partner',
+      icon: <ArrowRight size={20} />,
+      desc: 'Join our directory.'
+    }
+  ];
+
   const handleNav = (path: string) => {
     router.push(path);
     setIsOpen(false);
@@ -149,6 +165,7 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => location === path;
   const isServiceActive = () => location.startsWith('/services');
   const isAboutActive = () => ['/about', '/careers', '/faq', '/pricing'].includes(location);
+  const isPartnerActive = () => ['/partners', '/become-a-partner'].includes(location) || location.startsWith('/partners/');
   const isResourceActive = () => location.startsWith('/resources');
 
   return (
@@ -351,13 +368,70 @@ const Navbar: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="h-full flex items-center">
+              {/* Partners Dropdown */}
+              <div
+                className="relative h-full flex items-center"
+                onMouseEnter={() => setHoveredLink('partners')}
+              >
                 <Link
                   href="/partners"
-                  className={`text-sm font-medium transition-colors ${isActive('/partners') ? 'text-[#1A1A1A]' : 'text-[#4A4A4A] hover:text-[#1A1A1A]'}`}
+                  className={`text-sm font-medium transition-colors flex items-center gap-1 ${isPartnerActive() ? 'text-[#1A1A1A]' : 'text-[#4A4A4A] hover:text-[#1A1A1A]'}`}
                 >
                   Partners
+                  <ChevronDown size={14} className={`transition-transform duration-200 ${hoveredLink === 'partners' ? 'rotate-180' : ''}`} />
                 </Link>
+
+                <AnimatePresence>
+                  {hoveredLink === 'partners' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white shadow-2xl border-t-4 border-forest border-x border-b border-gray-200 overflow-hidden cursor-default grid grid-cols-2"
+                      style={{ marginTop: '0px' }}
+                      onMouseLeave={() => setHoveredLink(null)}
+                    >
+                       {/* Links Column */}
+                       <div className="p-8 bg-white">
+                          <h5 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-6">Our Network</h5>
+                          <div className="space-y-4">
+                             {partnerItems.map((item) => (
+                                <Link
+                                  key={item.path}
+                                  href={item.path}
+                                  onClick={() => setHoveredLink(null)}
+                                  className="flex items-start gap-4 p-3 -ml-3 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer group"
+                                >
+                                  <div className="mt-1 text-gray-400 group-hover:text-forest transition-colors">
+                                    {item.icon}
+                                  </div>
+                                  <div>
+                                    <h4 className="font-heading font-bold text-base text-dark group-hover:text-forest transition-colors">{item.name}</h4>
+                                    <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{item.desc}</p>
+                                  </div>
+                                </Link>
+                              ))}
+                          </div>
+                       </div>
+
+                       {/* Featured Sidebar */}
+                       <div className="bg-gray-50 p-8 border-l border-gray-100 flex flex-col justify-between">
+                          <div>
+                             <h5 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Trusted Experts</h5>
+                             <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                                We only recommend partners we've personally vetted and trust.
+                             </p>
+                          </div>
+                          <div className="mt-8 pt-8 border-t border-gray-200">
+                              <p className="text-xs text-gray-500">
+                                All partnerships are free with no referral fees or commissions.
+                              </p>
+                          </div>
+                       </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Resources Dropdown */}
@@ -574,13 +648,37 @@ const Navbar: React.FC = () => {
                   Insights
                 </Link>
 
-                <Link
-                  href="/partners"
-                  onClick={() => setIsOpen(false)}
-                  className="text-base font-medium text-[#1A1A1A] text-left py-3 border-b border-gray-200"
-                >
-                  Partners
-                </Link>
+                {/* Mobile Accordion for Partners */}
+                <div className="border-b border-gray-200">
+                  <button
+                    onClick={() => setMobilePartnersOpen(!mobilePartnersOpen)}
+                    className="w-full flex items-center justify-between text-base font-medium text-[#1A1A1A] py-3"
+                  >
+                    Partners
+                    <ChevronDown size={16} className={`transition-transform ${mobilePartnersOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence>
+                    {mobilePartnersOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden pl-4 pb-2 space-y-2"
+                      >
+                         {partnerItems.map((item) => (
+                          <Link
+                            key={item.path}
+                            href={item.path}
+                            onClick={() => { setIsOpen(false); setMobilePartnersOpen(false); }}
+                            className="block w-full text-left text-sm text-gray-600 py-2 hover:text-dark"
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 {/* Mobile Accordion for Resources */}
                 <div className="border-b border-gray-200">

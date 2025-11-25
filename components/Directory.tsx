@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, ExternalLink, MapPin, X, ChevronRight } from 'lucide-react';
+import { CheckCircle2, ExternalLink, MapPin, X, ChevronRight, Eye } from 'lucide-react';
 import { getAllPartners, type Partner, urlForImage } from '@/lib/sanity';
 
 interface RequestIntroModalProps {
@@ -254,24 +255,34 @@ const PartnerCard: React.FC<PartnerCardProps> = ({ partner, onRequestIntro }) =>
         )}
 
         {/* Actions */}
-        <div className="flex gap-3">
-          <button
-            onClick={() => onRequestIntro(partner)}
-            className="flex-1 group bg-forest text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-forest/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-forest/20"
+        <div className="flex flex-col gap-3">
+          <Link
+            href={`/partners/${partner.slug.current}`}
+            className="w-full px-6 py-3 rounded-full border-2 border-forest text-forest hover:bg-forest hover:text-white transition-all flex items-center justify-center gap-2 font-medium text-sm group"
           >
-            Request Intro
+            <Eye size={16} />
+            View Profile
             <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
-          </button>
-          {partner.website && (
-            <a
-              href={partner.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 rounded-full border border-gray-200 hover:border-gray-400 transition-colors flex items-center justify-center"
+          </Link>
+          <div className="flex gap-3">
+            <button
+              onClick={() => onRequestIntro(partner)}
+              className="flex-1 bg-forest text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-forest/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-forest/20"
             >
-              <ExternalLink size={16} />
-            </a>
-          )}
+              Request Intro
+            </button>
+            {partner.website && (
+              <a
+                href={partner.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-full border border-gray-200 hover:border-gray-400 transition-colors flex items-center justify-center"
+                title="Visit Website"
+              >
+                <ExternalLink size={16} />
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </motion.div>

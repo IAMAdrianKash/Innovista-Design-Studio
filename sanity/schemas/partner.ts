@@ -98,6 +98,78 @@ export default defineType({
       description: 'Email for forwarding intro requests - NOT shown publicly',
     }),
     defineField({
+      name: 'portfolio',
+      title: 'Portfolio',
+      type: 'array',
+      description: 'Add photos or embedded video URLs to showcase work',
+      of: [
+        {
+          type: 'object',
+          name: 'portfolioImage',
+          title: 'Image',
+          fields: [
+            {
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (Optional)',
+              type: 'string',
+            },
+          ],
+          preview: {
+            select: {
+              media: 'image',
+              caption: 'caption',
+            },
+            prepare({ media, caption }) {
+              return {
+                title: caption || 'Portfolio Image',
+                media,
+              };
+            },
+          },
+        },
+        {
+          type: 'object',
+          name: 'portfolioVideo',
+          title: 'Embedded Video',
+          fields: [
+            {
+              name: 'videoUrl',
+              title: 'Video URL',
+              type: 'url',
+              description: 'YouTube, Vimeo, or other embeddable video URL',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'caption',
+              title: 'Caption (Optional)',
+              type: 'string',
+            },
+          ],
+          preview: {
+            select: {
+              url: 'videoUrl',
+              caption: 'caption',
+            },
+            prepare({ url, caption }) {
+              return {
+                title: caption || 'Portfolio Video',
+                subtitle: url,
+              };
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: 'order',
       title: 'Sort Order',
       type: 'number',

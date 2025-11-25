@@ -98,6 +98,14 @@ export interface CaseStudy {
   };
 }
 
+export interface PortfolioItem {
+  _type: 'portfolioImage' | 'portfolioVideo';
+  _key: string;
+  image?: SanityImage;
+  videoUrl?: string;
+  caption?: string;
+}
+
 export interface Partner {
   _id: string;
   name: string;
@@ -112,6 +120,7 @@ export interface Partner {
   location?: string;
   specialties?: string[];
   contactEmail?: string;
+  portfolio?: PortfolioItem[];
   order: number;
 }
 
@@ -331,6 +340,13 @@ export async function getPartnerBySlug(slug: string): Promise<Partner | null> {
       location,
       specialties,
       contactEmail,
+      portfolio[] {
+        _type,
+        _key,
+        image,
+        videoUrl,
+        caption
+      },
       order
     }`,
     { slug }
