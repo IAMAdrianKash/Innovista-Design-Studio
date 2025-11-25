@@ -76,8 +76,8 @@ const BecomePartnerForm: React.FC = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
-    // Prevent form submission when pressing Enter in input fields
-    if (e.key === 'Enter' && e.target instanceof HTMLInputElement) {
+    // Prevent form submission when pressing Enter anywhere in the form
+    if (e.key === 'Enter') {
       e.preventDefault();
     }
   };
