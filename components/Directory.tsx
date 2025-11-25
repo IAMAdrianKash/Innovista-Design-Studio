@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, ExternalLink, MapPin, X, ChevronRight, Eye } from 'lucide-react';
+import { CheckCircle2, ExternalLink, MapPin, X, ChevronRight, Eye, Users } from 'lucide-react';
 import { getAllPartners, type Partner, urlForImage } from '@/lib/sanity';
 
 interface RequestIntroModalProps {
@@ -211,11 +211,17 @@ const PartnerCard: React.FC<PartnerCardProps> = ({ partner, onRequestIntro }) =>
     >
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
-        <img
-          src={urlForImage(partner.image).width(600).height(450).url()}
-          alt={partner.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+        {partner.image ? (
+          <img
+            src={urlForImage(partner.image).width(600).height(450).url()}
+            alt={partner.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gray-200">
+            <Users size={48} className="text-gray-400" />
+          </div>
+        )}
         {partner.verified && (
           <div className="absolute top-4 right-4 bg-forest text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
             <CheckCircle2 size={14} />
