@@ -14,27 +14,27 @@ const Capabilities: React.FC = () => {
         {
           name: "Webflow",
           desc: "For high-end, visual-first marketing websites.",
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webflow/webflow-original.svg"
+          logo: "/images/icons/webflow.svg"
         },
         {
           name: "WordPress",
           desc: "For content-heavy sites requiring deep flexibility.",
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg"
+          logo: "/images/icons/wordpress.svg"
         },
         {
           name: "Framer",
           desc: "For speed and creative landing pages.",
-          logo: "https://cdn.svgporn.com/logos/framer-icon.svg"
+          logo: "/images/icons/framer.svg"
         },
         {
           name: "Bubble",
           desc: "For complex web applications without code.",
-          logo: "https://cdn.svgporn.com/logos/bubble.svg"
+          logo: "/images/icons/bubble-io.svg"
         },
         {
           name: "Strapi",
           desc: "Headless CMS for omnichannel content.",
-          logo: "https://cdn.svgporn.com/logos/strapi-icon.svg"
+          logo: "/images/icons/strapi.svg"
         }
       ]
     },
@@ -45,32 +45,32 @@ const Capabilities: React.FC = () => {
         {
           name: "React / Next.js",
           desc: "The industry standard for fast, scalable web apps.",
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+          logo: "/images/icons/nextjs_icon_dark.svg"
         },
         {
           name: "Tailwind CSS",
           desc: "For bespoke, pixel-perfect styling systems.",
-          logo: "https://cdn.svgporn.com/logos/tailwindcss-icon.svg"
+          logo: "/images/icons/tailwindcss.svg"
         },
         {
           name: "Node.js",
           desc: "Powerful backend infrastructure.",
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+          logo: "/images/icons/nodejs.svg"
         },
         {
           name: "TypeScript",
           desc: "Type-safe code for mission-critical apps.",
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+          logo: "/images/icons/typescript.svg"
         },
         {
           name: "Supabase",
           desc: "Scalable database and authentication.",
-          logo: "https://cdn.svgporn.com/logos/supabase-icon.svg"
+          logo: "/images/icons/supabase.svg"
         },
         {
           name: "Sanity.io",
           desc: "A headless CMS for structured content delivery.",
-          logo: "https://cdn.svgporn.com/logos/sanity.svg"
+          logo: "/images/icons/sanity-light.svg"
         }
       ]
     },
@@ -81,36 +81,36 @@ const Capabilities: React.FC = () => {
         {
           name: "Shopify",
           desc: "The world's best e-commerce platform.",
-          logo: "https://cdn.svgporn.com/logos/shopify-icon.svg"
+          logo: "/images/icons/shopify.svg"
         },
         {
           name: "BigCommerce",
           desc: "For high-volume enterprise retail.",
-          logo: "https://cdn.svgporn.com/logos/bigcommerce-icon.svg"
+          logo: "/images/icons/bigcommerce.svg"
         },
         {
           name: "WooCommerce",
           desc: "Flexible open-source commerce for WordPress.",
-          logo: "https://cdn.svgporn.com/logos/woocommerce-icon.svg"
+          logo: "/images/icons/woocommerce.svg"
         },
         {
           name: "Magento",
           desc: "Self-hosted power for complex catalogs.",
-          logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/magento/magento-original.svg"
+          logo: "/images/icons/magento.svg"
         }
       ]
     }
   ];
 
   const integrations = [
-    { name: "HubSpot", logo: "https://cdn.svgporn.com/logos/hubspot-icon.svg" },
-    { name: "Salesforce", logo: "https://cdn.svgporn.com/logos/salesforce.svg" },
-    { name: "Mailchimp", logo: "https://cdn.svgporn.com/logos/mailchimp-icon.svg" },
-    { name: "Zapier", logo: "https://cdn.svgporn.com/logos/zapier-icon.svg" },
-    { name: "Google Analytics 4", logo: "https://cdn.svgporn.com/logos/google-analytics.svg" },
-    { name: "Stripe", logo: "https://cdn.svgporn.com/logos/stripe-icon.svg" },
-    { name: "Intercom", logo: "https://cdn.svgporn.com/logos/intercom-icon.svg" },
-    { name: "Calendly", logo: "https://cdn.svgporn.com/logos/calendly-icon.svg" }
+    { name: "HubSpot", logo: "/images/icons/hubspot.svg" },
+    { name: "Salesforce", logo: "/images/icons/salesforce.svg" },
+    { name: "Mailchimp", logo: "/images/icons/mailchimp.svg" },
+    { name: "Zapier", logo: "/images/icons/zapier.svg" },
+    { name: "Google Analytics 4", logo: "/images/icons/google-analytics.svg" },
+    { name: "Stripe", logo: "/images/icons/stripe.svg" },
+    { name: "Intercom", logo: "/images/icons/intercom.svg" },
+    { name: "Calendly", logo: "/images/icons/calendly.svg" }
   ];
 
   return (
