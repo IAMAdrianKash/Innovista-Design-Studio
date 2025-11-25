@@ -439,7 +439,7 @@ const WebDesignEdmonton: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {[
                 "Custom UI/UX Design in Figma",
                 "React & Next.js Development",
@@ -591,7 +591,7 @@ const WebDesignEdmonton: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               <div className="bg-white p-8 rounded-2xl border border-gray-100">
                 <div className="mb-4">
                   <Award className="w-10 h-10 text-forest" />
