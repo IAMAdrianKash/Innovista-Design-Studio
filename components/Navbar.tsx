@@ -19,6 +19,7 @@ const STATIC_PAGES: SearchResult[] = [
   { title: 'Our Process', type: 'Work', path: '/process', desc: 'The 5-step Innovista methodology.' },
   { title: 'About Innovista', type: 'Company', path: '/about', desc: 'Our story, philosophy and team.' },
   { title: 'Insights & Blog', type: 'Company', path: '/insights', desc: 'Strategy articles and guides.' },
+  { title: 'Partner Directory', type: 'Company', path: '/partners', desc: 'Verified experts we trust.' },
   { title: 'Contact Us', type: 'Company', path: '/contact', desc: 'Start a project inquiry.' },
   { title: 'Get Free Audit', type: 'Offer', path: '/audit', desc: 'Request a video analysis of your site.' },
 ];
@@ -350,6 +351,15 @@ const Navbar: React.FC = () => {
                 </Link>
               </div>
 
+              <div className="h-full flex items-center">
+                <Link
+                  href="/partners"
+                  className={`text-sm font-medium transition-colors ${isActive('/partners') ? 'text-[#1A1A1A]' : 'text-[#4A4A4A] hover:text-[#1A1A1A]'}`}
+                >
+                  Partners
+                </Link>
+              </div>
+
               {/* Resources Dropdown */}
               <div
                 className="relative h-full flex items-center"
@@ -562,6 +572,14 @@ const Navbar: React.FC = () => {
                   className="text-base font-medium text-[#1A1A1A] text-left py-3 border-b border-gray-200"
                 >
                   Insights
+                </Link>
+
+                <Link
+                  href="/partners"
+                  onClick={() => setIsOpen(false)}
+                  className="text-base font-medium text-[#1A1A1A] text-left py-3 border-b border-gray-200"
+                >
+                  Partners
                 </Link>
 
                 {/* Mobile Accordion for Resources */}
