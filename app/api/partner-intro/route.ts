@@ -31,6 +31,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Fetch partner details including contact email
+    const partner = await getPartnerBySlug(partnerId);
+    const partnerEmail = partner?.contactEmail || 'Not provided';
+
     // Build email HTML
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -41,6 +45,7 @@ export async function POST(request: NextRequest) {
         <div style="margin: 20px 0; padding: 20px; background: #FFF9E6; border-left: 4px solid #FFB800; border-radius: 5px;">
           <p style="margin: 0; font-weight: bold; color: #333;">Requested Partner:</p>
           <p style="margin: 5px 0 0 0; font-size: 18px; color: #2D5F4E;">${partnerName}</p>
+          <p style="margin: 5px 0 0 0; color: #666;"><strong>Partner Email:</strong> <a href="mailto:${partnerEmail}">${partnerEmail}</a></p>
         </div>
 
         <div style="margin: 20px 0;">
@@ -71,12 +76,17 @@ export async function POST(request: NextRequest) {
         </div>
 
         <div style="margin: 30px 0; padding: 20px; background: #E8F5E9; border-left: 4px solid #2D5F4E; border-radius: 5px;">
-          <p style="margin: 0; font-weight: bold; color: #333;">📋 Next Steps:</p>
-          <ol style="margin: 10px 0 0 0; padding-left: 20px; color: #666;">
-            <li>Review the client's request</li>
-            <li>Forward this to ${partnerName}</li>
-            <li>CC the client on the introduction email</li>
-          </ol>
+          <p style="margin: 0; font-weight: bold; color: #333;">📋 Quick Intro Email Template:</p>
+          <div style="margin: 15px 0; padding: 15px; background: white; border-radius: 5px; font-family: monospace; font-size: 12px; line-height: 1.6;">
+            <strong>To:</strong> ${partnerEmail}<br>
+            <strong>Cc:</strong> ${email}<br>
+            <strong>Subject:</strong> Intro: ${name} ${company ? `(${company})` : ''}<br><br>
+            Hi ${partnerName.split(' ')[0]},<br><br>
+            I'd like to introduce you to ${name}${company ? ` from ${company}` : ''}. They're looking for help with:<br><br>
+            "${message}"<br><br>
+            ${name}, ${partnerName.split(' ')[0]} is one of our trusted partners and I think you two would be a great fit.<br><br>
+            I'll let you both take it from here!
+          </div>
         </div>
 
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666;">
