@@ -4,7 +4,7 @@ import { getPartnerBySlug, getAllPartners } from '@/lib/sanity'
 import PartnerProfile from '@/components/PartnerProfile'
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -15,7 +15,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const partner = await getPartnerBySlug(params.slug)
+  const { slug } = await params
+  const partner = await getPartnerBySlug(slug)
 
   if (!partner) {
     return {
@@ -45,7 +46,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PartnerPage({ params }: Props) {
-  const partner = await getPartnerBySlug(params.slug)
+  const { slug } = await params
+  const partner = await getPartnerBySlug(slug)
 
   if (!partner) {
     notFound()
