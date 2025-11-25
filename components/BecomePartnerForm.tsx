@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, ChevronRight, ChevronLeft, Users, Upload, Plus, X, Link as LinkIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { CheckCircle2, ChevronRight, Upload, Plus, X, Link as LinkIcon, Users } from 'lucide-react';
 
 interface PortfolioLink {
   url: string;
@@ -10,7 +10,6 @@ interface PortfolioLink {
 }
 
 const BecomePartnerForm: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,8 +32,6 @@ const BecomePartnerForm: React.FC = () => {
     { value: 'growth-marketing', label: 'Growth/Marketing (SEO, Ads, Social Media)' },
     { value: 'print-physical', label: 'Print/Physical (Printing, Signage, Merch)' },
   ];
-
-  const totalSteps = 3;
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -65,31 +62,8 @@ const BecomePartnerForm: React.FC = () => {
     setPortfolioLinks(portfolioLinks.filter((_, i) => i !== index));
   };
 
-  const canProceed = () => {
-    if (currentStep === 1) {
-      return formData.name && formData.email && formData.location && formData.category;
-    }
-    if (currentStep === 2) {
-      return formData.tagline && formData.description;
-    }
-    return true;
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
-    // Prevent form submission when pressing Enter anywhere in the form
-    if (e.key === 'Enter') {
-      e.preventDefault();
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Only allow submission if we're on the final step
-    if (currentStep !== totalSteps) {
-      return;
-    }
-
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -136,7 +110,6 @@ const BecomePartnerForm: React.FC = () => {
         setAvatarFile(null);
         setAvatarPreview(null);
         setPortfolioLinks([]);
-        setCurrentStep(1);
       } else {
         setSubmitStatus('error');
       }
@@ -195,381 +168,267 @@ const BecomePartnerForm: React.FC = () => {
               </button>
             </div>
           ) : (
-            <>
-              {/* Progress Indicator */}
-              <div className="mb-8">
-                <div className="flex items-start justify-between">
-                  {/* Step 1 */}
-                  <div className="flex flex-col items-center" style={{ width: '33.333%' }}>
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors mb-2 ${
-                        currentStep >= 1
-                          ? 'bg-forest text-white'
-                          : 'bg-gray-200 text-gray-400'
-                      }`}
-                    >
-                      1
-                    </div>
-                    <span className="text-xs text-gray-500 text-center">Basic Info</span>
-                  </div>
+            <form onSubmit={handleSubmit}>
+              <div className="space-y-8">
+                {/* Basic Information Section */}
+                <div className="space-y-6">
+                  <h2 className="font-heading font-bold text-xl md:text-2xl">Basic Information</h2>
 
-                  {/* Connector Line 1 */}
-                  <div className="flex-1 flex items-start pt-4" style={{ maxWidth: '16.666%' }}>
-                    <div
-                      className={`w-full h-1 transition-colors ${
-                        currentStep > 1 ? 'bg-forest' : 'bg-gray-200'
-                      }`}
+                  {/* Business Name */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Business Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
+                      placeholder="Your Business Name"
                     />
                   </div>
 
-                  {/* Step 2 */}
-                  <div className="flex flex-col items-center" style={{ width: '33.333%' }}>
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors mb-2 ${
-                        currentStep >= 2
-                          ? 'bg-forest text-white'
-                          : 'bg-gray-200 text-gray-400'
-                      }`}
-                    >
-                      2
-                    </div>
-                    <span className="text-xs text-gray-500 text-center">Details</span>
+                  {/* Email */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Contact Email *
+                    </label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                      className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
+                      placeholder="contact@yourbusiness.com"
+                    />
+                    <p className="text-xs text-gray-500 mt-2 ml-2">
+                      This email will be used for intro requests and directory contact.
+                    </p>
                   </div>
 
-                  {/* Connector Line 2 */}
-                  <div className="flex-1 flex items-start pt-4" style={{ maxWidth: '16.666%' }}>
-                    <div
-                      className={`w-full h-1 transition-colors ${
-                        currentStep > 2 ? 'bg-forest' : 'bg-gray-200'
-                      }`}
+                  {/* Location */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Location *
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.location}
+                      onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                      required
+                      className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
+                      placeholder="Edmonton, AB"
                     />
                   </div>
 
-                  {/* Step 3 */}
-                  <div className="flex flex-col items-center" style={{ width: '33.333%' }}>
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors mb-2 ${
-                        currentStep >= 3
-                          ? 'bg-forest text-white'
-                          : 'bg-gray-200 text-gray-400'
-                      }`}
+                  {/* Category */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Category *
+                    </label>
+                    <select
+                      value={formData.category}
+                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                      required
+                      className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
                     >
-                      3
-                    </div>
-                    <span className="text-xs text-gray-500 text-center">Media</span>
+                      <option value="">Select a category...</option>
+                      {categories.map((cat) => (
+                        <option key={cat.value} value={cat.value}>
+                          {cat.label}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
-              </div>
 
-              <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
-                <AnimatePresence mode="wait">
-                  {/* Step 1: Basic Info */}
-                  {currentStep === 1 && (
-                    <motion.div
-                      key="step1"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      className="space-y-6"
-                    >
-                      <h2 className="font-heading font-bold text-xl md:text-2xl mb-4">Basic Information</h2>
+                {/* Business Details Section */}
+                <div className="space-y-6 border-t border-gray-200 pt-8">
+                  <h2 className="font-heading font-bold text-xl md:text-2xl">Business Details</h2>
 
-                      {/* Business Name */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Business Name *
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          required
-                          className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
-                          placeholder="Your Business Name"
+                  {/* Tagline */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Tagline *
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.tagline}
+                      onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
+                      required
+                      maxLength={60}
+                      className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
+                      placeholder="Professional Photography & Videography Services"
+                    />
+                    <p className="text-xs text-gray-500 mt-2 ml-2">
+                      A short description of what you do (max 60 characters).
+                    </p>
+                  </div>
+
+                  {/* Description */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Business Description *
+                    </label>
+                    <textarea
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      required
+                      rows={4}
+                      className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors resize-none"
+                      placeholder="Tell us about your business, what makes you unique, and the value you provide to clients..."
+                    />
+                  </div>
+
+                  {/* Website */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Website (Optional)
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.website}
+                      onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                      className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
+                      placeholder="https://yourbusiness.com"
+                    />
+                  </div>
+
+                  {/* Specialties */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Specialties (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.specialties}
+                      onChange={(e) => setFormData({ ...formData, specialties: e.target.value })}
+                      className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
+                      placeholder="Corporate Photography, Product Shoots, Event Coverage"
+                    />
+                    <p className="text-xs text-gray-500 mt-2 ml-2">
+                      Separate multiple specialties with commas.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Media & Portfolio Section */}
+                <div className="space-y-6 border-t border-gray-200 pt-8">
+                  <h2 className="font-heading font-bold text-xl md:text-2xl">Media & Portfolio</h2>
+
+                  {/* Avatar Upload */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Profile Avatar (Optional)
+                    </label>
+                    <div className="flex items-center gap-4">
+                      {avatarPreview && (
+                        <img
+                          src={avatarPreview}
+                          alt="Avatar preview"
+                          className="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
                         />
-                      </div>
-
-                      {/* Email */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Contact Email *
-                        </label>
-                        <input
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          required
-                          className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
-                          placeholder="contact@yourbusiness.com"
-                        />
-                        <p className="text-xs text-gray-500 mt-2 ml-2">
-                          This email will be used for intro requests and directory contact.
-                        </p>
-                      </div>
-
-                      {/* Location */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Location *
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.location}
-                          onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                          required
-                          className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
-                          placeholder="Edmonton, AB"
-                        />
-                      </div>
-
-                      {/* Category */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Category *
-                        </label>
-                        <select
-                          value={formData.category}
-                          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                          required
-                          className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
-                        >
-                          <option value="">Select a category...</option>
-                          {categories.map((cat) => (
-                            <option key={cat.value} value={cat.value}>
-                              {cat.label}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Step 2: Details */}
-                  {currentStep === 2 && (
-                    <motion.div
-                      key="step2"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      className="space-y-6"
-                    >
-                      <h2 className="font-heading font-bold text-xl md:text-2xl mb-4">Business Details</h2>
-
-                      {/* Tagline */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Tagline *
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.tagline}
-                          onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
-                          required
-                          maxLength={60}
-                          className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
-                          placeholder="Professional Photography & Videography Services"
-                        />
-                        <p className="text-xs text-gray-500 mt-2 ml-2">
-                          A short description of what you do (max 60 characters).
-                        </p>
-                      </div>
-
-                      {/* Description */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Business Description *
-                        </label>
-                        <textarea
-                          value={formData.description}
-                          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                          required
-                          rows={4}
-                          className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors resize-none"
-                          placeholder="Tell us about your business, what makes you unique, and the value you provide to clients..."
-                        />
-                      </div>
-
-                      {/* Website */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Website (Optional)
-                        </label>
-                        <input
-                          type="url"
-                          value={formData.website}
-                          onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                          className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
-                          placeholder="https://yourbusiness.com"
-                        />
-                      </div>
-
-                      {/* Specialties */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Specialties (Optional)
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.specialties}
-                          onChange={(e) => setFormData({ ...formData, specialties: e.target.value })}
-                          className="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:outline-none focus:border-dark transition-colors"
-                          placeholder="Corporate Photography, Product Shoots, Event Coverage"
-                        />
-                        <p className="text-xs text-gray-500 mt-2 ml-2">
-                          Separate multiple specialties with commas.
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Step 3: Media */}
-                  {currentStep === 3 && (
-                    <motion.div
-                      key="step3"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      className="space-y-6"
-                    >
-                      <h2 className="font-heading font-bold text-xl md:text-2xl mb-4">Media & Portfolio</h2>
-
-                      {/* Avatar Upload */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Profile Avatar (Optional)
-                        </label>
-                        <div className="flex items-center gap-4">
-                          {avatarPreview && (
-                            <img
-                              src={avatarPreview}
-                              alt="Avatar preview"
-                              className="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
-                            />
-                          )}
-                          <label className="flex-1 cursor-pointer">
-                            <div className="border-2 border-dashed border-gray-300 rounded-xl px-6 py-4 hover:border-forest transition-colors flex items-center justify-center gap-2">
-                              <Upload size={20} className="text-gray-400" />
-                              <span className="text-sm text-gray-600">
-                                {avatarFile ? avatarFile.name : 'Upload Avatar Image'}
-                              </span>
-                            </div>
-                            <input
-                              type="file"
-                              accept="image/*"
-                              onChange={handleAvatarChange}
-                              className="hidden"
-                            />
-                          </label>
+                      )}
+                      <label className="flex-1 cursor-pointer">
+                        <div className="border-2 border-dashed border-gray-300 rounded-xl px-6 py-4 hover:border-forest transition-colors flex items-center justify-center gap-2">
+                          <Upload size={20} className="text-gray-400" />
+                          <span className="text-sm text-gray-600">
+                            {avatarFile ? avatarFile.name : 'Upload Avatar Image'}
+                          </span>
                         </div>
-                        <p className="text-xs text-gray-500 mt-2 ml-2">
-                          Recommended: Square image, at least 400x400px
-                        </p>
-                      </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleAvatarChange}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2 ml-2">
+                      Recommended: Square image, at least 400x400px
+                    </p>
+                  </div>
 
-                      {/* Portfolio Links */}
-                      <div>
-                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
-                          Portfolio Links (Optional, Max 10)
-                        </label>
-                        <p className="text-xs text-gray-500 ml-2 mb-4">
-                          Share links to your portfolio (Dropbox, Google Drive, Behance, etc.)
-                        </p>
+                  {/* Portfolio Links */}
+                  <div>
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-2 mb-2 block">
+                      Portfolio Links (Optional, Max 10)
+                    </label>
+                    <p className="text-xs text-gray-500 ml-2 mb-4">
+                      Share links to your portfolio (Dropbox, Google Drive, Behance, etc.)
+                    </p>
 
-                        <div className="space-y-3">
-                          {portfolioLinks.map((link, index) => (
-                            <div key={index} className="border border-gray-200 rounded-xl p-4 space-y-3">
-                              <div className="flex items-start gap-2">
-                                <LinkIcon size={16} className="text-gray-400 mt-3" />
-                                <div className="flex-1 space-y-2">
-                                  <input
-                                    type="url"
-                                    value={link.url}
-                                    onChange={(e) => updatePortfolioLink(index, 'url', e.target.value)}
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-dark transition-colors"
-                                    placeholder="https://drive.google.com/..."
-                                  />
-                                  <input
-                                    type="text"
-                                    value={link.description}
-                                    onChange={(e) => updatePortfolioLink(index, 'description', e.target.value)}
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-dark transition-colors"
-                                    placeholder="Description (optional)"
-                                  />
-                                </div>
-                                <button
-                                  type="button"
-                                  onClick={() => removePortfolioLink(index)}
-                                  className="p-2 text-gray-400 hover:text-red-500 transition-colors"
-                                >
-                                  <X size={16} />
-                                </button>
-                              </div>
+                    <div className="space-y-3">
+                      {portfolioLinks.map((link, index) => (
+                        <div key={index} className="border border-gray-200 rounded-xl p-4 space-y-3">
+                          <div className="flex items-start gap-2">
+                            <LinkIcon size={16} className="text-gray-400 mt-3" />
+                            <div className="flex-1 space-y-2">
+                              <input
+                                type="url"
+                                value={link.url}
+                                onChange={(e) => updatePortfolioLink(index, 'url', e.target.value)}
+                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-dark transition-colors"
+                                placeholder="https://drive.google.com/..."
+                              />
+                              <input
+                                type="text"
+                                value={link.description}
+                                onChange={(e) => updatePortfolioLink(index, 'description', e.target.value)}
+                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-dark transition-colors"
+                                placeholder="Description (optional)"
+                              />
                             </div>
-                          ))}
+                            <button
+                              type="button"
+                              onClick={() => removePortfolioLink(index)}
+                              className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                            >
+                              <X size={16} />
+                            </button>
+                          </div>
                         </div>
+                      ))}
+                    </div>
 
-                        {portfolioLinks.length < 10 && (
-                          <button
-                            type="button"
-                            onClick={addPortfolioLink}
-                            className="mt-3 w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-sm font-medium text-gray-600 hover:border-forest hover:text-forest transition-colors flex items-center justify-center gap-2"
-                          >
-                            <Plus size={16} />
-                            Add Portfolio Link
-                          </button>
-                        )}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    {portfolioLinks.length < 10 && (
+                      <button
+                        type="button"
+                        onClick={addPortfolioLink}
+                        className="mt-3 w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-sm font-medium text-gray-600 hover:border-forest hover:text-forest transition-colors flex items-center justify-center gap-2"
+                      >
+                        <Plus size={16} />
+                        Add Portfolio Link
+                      </button>
+                    )}
+                  </div>
+                </div>
 
                 {/* Error Message */}
                 {submitStatus === 'error' && (
-                  <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-xl">
                     <p className="text-red-600 text-sm">
                       Something went wrong. Please try again or contact us directly.
                     </p>
                   </div>
                 )}
 
-                {/* Navigation Buttons */}
-                <div className="flex gap-3 mt-8">
-                  {currentStep > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => setCurrentStep(currentStep - 1)}
-                      className="flex-1 px-6 py-4 rounded-full border-2 border-gray-200 text-gray-700 font-medium hover:border-gray-400 transition-all flex items-center justify-center gap-2"
-                    >
-                      <ChevronLeft size={16} />
-                      Back
-                    </button>
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full group bg-forest text-white px-8 py-4 rounded-full font-medium hover:bg-forest/90 transition-all flex items-center justify-center gap-3 shadow-2xl shadow-forest/20 hover:shadow-forest/30 hover:-translate-y-1 duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                  {!isSubmitting && (
+                    <div className="bg-white/20 rounded-full p-1 group-hover:translate-x-1 transition-transform">
+                      <ChevronRight size={16} />
+                    </div>
                   )}
-
-                  {currentStep < totalSteps ? (
-                    <button
-                      type="button"
-                      onClick={() => setCurrentStep(currentStep + 1)}
-                      disabled={!canProceed()}
-                      className="flex-1 group bg-forest text-white px-6 py-4 rounded-full font-medium hover:bg-forest/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-forest/20 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Next
-                      <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  ) : (
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="flex-1 group bg-forest text-white px-6 py-4 rounded-full font-medium hover:bg-forest/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-forest/20 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? 'Submitting...' : 'Submit Application'}
-                      {!isSubmitting && (
-                        <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                      )}
-                    </button>
-                  )}
-                </div>
-              </form>
-            </>
+                </button>
+              </div>
+            </form>
           )}
         </motion.div>
       </section>
