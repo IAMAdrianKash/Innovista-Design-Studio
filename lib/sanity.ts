@@ -98,6 +98,23 @@ export interface CaseStudy {
   };
 }
 
+export interface Partner {
+  _id: string;
+  name: string;
+  slug: { current: string };
+  tagline: string;
+  description: string;
+  category: string;
+  image: SanityImage;
+  verified: boolean;
+  featured: boolean;
+  website?: string;
+  location?: string;
+  specialties?: string[];
+  contactEmail?: string;
+  order: number;
+}
+
 // Helper functions for fetching content
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
   return sanityClient.fetch(
@@ -253,5 +270,69 @@ export async function getRelatedBlogPosts(currentPostId: string, categories: str
       estimatedReadTime
     }`,
     { currentPostId, categories, limit }
+  );
+}
+
+// Partner Directory Functions
+export async function getAllPartners(): Promise<Partner[]> {
+  return sanityClient.fetch(
+    `*[_type == "partner"] | order(featured desc, order asc) {
+      _id,
+      name,
+      slug,
+      tagline,
+      description,
+      category,
+      image,
+      verified,
+      featured,
+      website,
+      location,
+      specialties,
+      order
+    }`
+  );
+}
+
+export async function getPartnersByCategory(category: string): Promise<Partner[]> {
+  return sanityClient.fetch(
+    `*[_type == "partner" && category == $category] | order(featured desc, order asc) {
+      _id,
+      name,
+      slug,
+      tagline,
+      description,
+      category,
+      image,
+      verified,
+      featured,
+      website,
+      location,
+      specialties,
+      order
+    }`,
+    { category }
+  );
+}
+
+export async function getPartnerBySlug(slug: string): Promise<Partner | null> {
+  return sanityClient.fetch(
+    `*[_type == "partner" && slug.current == $slug][0] {
+      _id,
+      name,
+      slug,
+      tagline,
+      description,
+      category,
+      image,
+      verified,
+      featured,
+      website,
+      location,
+      specialties,
+      contactEmail,
+      order
+    }`,
+    { slug }
   );
 }
