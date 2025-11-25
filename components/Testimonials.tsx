@@ -9,8 +9,8 @@ const featuredTestimonial = {
   quote: "Working with Innovista has been nothing but a breeze, they helped take our restoration website to the next level.",
   author: "Bryan Jerimiah",
   role: "Manager",
-  company: "Attention",
-  image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=2340&auto=format&fit=crop"
+  company: "Brylex Restoration",
+  image: "/images/client2.png"
 };
 
 const scrollTestimonials = [
