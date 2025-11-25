@@ -31,6 +31,13 @@ export default defineConfig({
                   .title('Case Studies')
                   .defaultOrdering([{ field: 'projectDate', direction: 'desc' }])
               ),
+            S.listItem()
+              .title('Partner Directory')
+              .child(
+                S.documentTypeList('partner')
+                  .title('Partners')
+                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+              ),
             S.divider(),
             S.listItem()
               .title('Authors')
