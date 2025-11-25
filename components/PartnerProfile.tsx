@@ -84,18 +84,20 @@ const PartnerProfile: React.FC<PartnerProfileProps> = ({ partner }) => {
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {/* Profile Image */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="flex-shrink-0"
-              >
-                <img
-                  src={urlForImage(partner.image).width(300).height(300).url()}
-                  alt={partner.name}
-                  className="w-40 h-40 md:w-48 md:h-48 rounded-2xl object-cover shadow-xl"
-                />
-              </motion.div>
+              {partner.image && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="flex-shrink-0"
+                >
+                  <img
+                    src={urlForImage(partner.image).width(300).height(300).url()}
+                    alt={partner.name}
+                    className="w-40 h-40 md:w-48 md:h-48 rounded-2xl object-cover shadow-xl"
+                  />
+                </motion.div>
+              )}
 
               {/* Info */}
               <motion.div
@@ -201,7 +203,7 @@ const PartnerProfile: React.FC<PartnerProfileProps> = ({ partner }) => {
                         transition={{ duration: 0.3 }}
                         className="absolute inset-0"
                       >
-                        {partner.portfolio![currentSlide]._type === 'portfolioImage' ? (
+                        {partner.portfolio![currentSlide]._type === 'portfolioImage' && partner.portfolio![currentSlide].image ? (
                           <button
                             onClick={() => openLightbox(currentSlide)}
                             className="w-full h-full cursor-pointer group"
@@ -212,7 +214,7 @@ const PartnerProfile: React.FC<PartnerProfileProps> = ({ partner }) => {
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                           </button>
-                        ) : (
+                        ) : partner.portfolio![currentSlide]._type === 'portfolioVideo' ? (
                           <iframe
                             src={getEmbedUrl(partner.portfolio![currentSlide].videoUrl!) || ''}
                             className="w-full h-full"
@@ -220,6 +222,10 @@ const PartnerProfile: React.FC<PartnerProfileProps> = ({ partner }) => {
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
                           />
+                        ) : (
+                          <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                            <p className="text-gray-400">No media available</p>
+                          </div>
                         )}
                       </motion.div>
                     </AnimatePresence>
@@ -272,15 +278,19 @@ const PartnerProfile: React.FC<PartnerProfileProps> = ({ partner }) => {
                               : 'border-transparent opacity-60 hover:opacity-100'
                           }`}
                         >
-                          {item._type === 'portfolioImage' ? (
+                          {item._type === 'portfolioImage' && item.image ? (
                             <img
-                              src={urlForImage(item.image!).width(160).height(160).url()}
+                              src={urlForImage(item.image).width(160).height(160).url()}
                               alt={item.caption || `Thumbnail ${idx + 1}`}
                               className="w-full h-full object-cover"
                             />
-                          ) : (
+                          ) : item._type === 'portfolioVideo' ? (
                             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
                               <span className="text-xs text-gray-500">Video</span>
+                            </div>
+                          ) : (
+                            <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                              <span className="text-xs text-gray-400">N/A</span>
                             </div>
                           )}
                         </button>
@@ -296,7 +306,7 @@ const PartnerProfile: React.FC<PartnerProfileProps> = ({ partner }) => {
 
       {/* Lightbox for Images */}
       <AnimatePresence>
-        {lightboxOpen && partner.portfolio![lightboxIndex]._type === 'portfolioImage' && (
+        {lightboxOpen && partner.portfolio![lightboxIndex]._type === 'portfolioImage' && partner.portfolio![lightboxIndex].image && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
