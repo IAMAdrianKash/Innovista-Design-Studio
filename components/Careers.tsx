@@ -1,30 +1,26 @@
 'use client'
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Heart, Globe, Coffee } from 'lucide-react';
+import { getAllActiveJobs, type Job } from '@/lib/sanity';
+import Link from 'next/link';
 
 const Careers: React.FC = () => {
-  const roles = [
-    {
-      title: "Senior Frontend Developer",
-      type: "Full-time",
-      location: "Remote (Canada)",
-      dept: "Engineering"
-    },
-    {
-      title: "UI/UX Designer",
-      type: "Contract",
-      location: "Edmonton / Hybrid",
-      dept: "Design"
-    },
-    {
-      title: "Digital Strategist",
-      type: "Full-time",
-      location: "Remote",
-      dept: "Strategy"
-    }
-  ];
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getAllActiveJobs()
+      .then((data) => {
+        setJobs(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Failed to fetch jobs:', err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="pt-12">
@@ -78,30 +74,51 @@ const Careers: React.FC = () => {
       {/* Open Roles */}
       <section className="py-24 px-6 md:px-12 max-w-5xl mx-auto">
         <h2 className="font-heading font-bold text-3xl md:text-4xl mb-12">Open Positions</h2>
-        <div className="space-y-4">
-          {roles.map((role, idx) => (
-            <div key={idx} className="group flex items-center justify-between p-8 bg-white border border-gray-100 rounded-2xl hover:border-dark hover:shadow-lg transition-all cursor-pointer">
-              <div>
-                <h3 className="font-heading font-bold text-2xl mb-1 group-hover:text-gray-600 transition-colors">{role.title}</h3>
-                <div className="flex gap-4 text-sm text-gray-500">
-                  <span>{role.dept}</span>
-                  <span>•</span>
-                  <span>{role.type}</span>
-                  <span>•</span>
-                  <span>{role.location}</span>
-                </div>
-              </div>
-              <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-dark group-hover:text-white transition-colors">
-                <ArrowUpRight size={20} />
-              </div>
-            </div>
-          ))}
-          
-          <div className="mt-8 p-8 bg-gray-50 rounded-2xl text-center">
-             <h3 className="font-bold text-xl mb-2">Don't see your role?</h3>
-             <p className="text-gray-600 mb-6">We're always looking for talent. Send your portfolio to <a href="mailto:hello@innovista.design" className="text-dark font-bold underline">hello@innovista.design</a></p>
+
+        {loading ? (
+          <div className="flex justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-forest"></div>
           </div>
-        </div>
+        ) : jobs.length > 0 ? (
+          <div className="space-y-4">
+            {jobs.map((job) => (
+              <Link
+                key={job._id}
+                href={job.applicationUrl || `/careers/${job.slug.current}`}
+                target={job.applicationUrl ? "_blank" : undefined}
+                rel={job.applicationUrl ? "noopener noreferrer" : undefined}
+                className="group flex items-center justify-between p-8 bg-white border border-gray-100 rounded-2xl hover:border-dark hover:shadow-lg transition-all cursor-pointer"
+              >
+                <div>
+                  <h3 className="font-heading font-bold text-2xl mb-1 group-hover:text-gray-600 transition-colors">{job.title}</h3>
+                  <div className="flex gap-4 text-sm text-gray-500">
+                    <span>{job.department}</span>
+                    <span>•</span>
+                    <span>{job.employmentType}</span>
+                    <span>•</span>
+                    <span>{job.location}</span>
+                  </div>
+                </div>
+                <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-dark group-hover:text-white transition-colors">
+                  <ArrowUpRight size={20} />
+                </div>
+              </Link>
+            ))}
+
+            <div className="mt-8 p-8 bg-gray-50 rounded-2xl text-center">
+              <h3 className="font-bold text-xl mb-2">Don't see your role?</h3>
+              <p className="text-gray-600 mb-6">We're always looking for talent. Send your portfolio to <a href="mailto:hello@innovista.design" className="text-dark font-bold underline">hello@innovista.design</a></p>
+            </div>
+          </div>
+        ) : (
+          <div className="p-12 bg-gray-50 rounded-2xl text-center">
+            <h3 className="font-bold text-xl mb-2">No open positions at the moment</h3>
+            <p className="text-gray-600 mb-6">
+              We're not actively hiring right now, but we're always interested in connecting with talented people.
+              Send your portfolio to <a href="mailto:hello@innovista.design" className="text-dark font-bold underline">hello@innovista.design</a> and we'll keep you in mind for future opportunities.
+            </p>
+          </div>
+        )}
       </section>
     </div>
   );
