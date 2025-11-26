@@ -38,6 +38,13 @@ export default defineConfig({
                   .title('Partners')
                   .defaultOrdering([{ field: 'order', direction: 'asc' }])
               ),
+            S.listItem()
+              .title('Job Postings')
+              .child(
+                S.documentTypeList('job')
+                  .title('Job Postings')
+                  .defaultOrdering([{ field: 'order', direction: 'asc' }])
+              ),
             S.divider(),
             S.listItem()
               .title('Authors')
