@@ -124,6 +124,25 @@ export interface Partner {
   order: number;
 }
 
+export interface Job {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  department: string;
+  employmentType: string;
+  location: string;
+  description?: any[];
+  responsibilities?: string[];
+  requirements?: string[];
+  niceToHave?: string[];
+  benefits?: string[];
+  salary?: string;
+  applicationUrl?: string;
+  isActive: boolean;
+  order: number;
+  publishedAt?: string;
+}
+
 // Helper functions for fetching content
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
   return sanityClient.fetch(
@@ -348,6 +367,47 @@ export async function getPartnerBySlug(slug: string): Promise<Partner | null> {
         caption
       },
       order
+    }`,
+    { slug }
+  );
+}
+
+// Job Posting Functions
+export async function getAllActiveJobs(): Promise<Job[]> {
+  return sanityClient.fetch(
+    `*[_type == "job" && isActive == true] | order(order asc, publishedAt desc) {
+      _id,
+      title,
+      slug,
+      department,
+      employmentType,
+      location,
+      isActive,
+      order,
+      publishedAt
+    }`
+  );
+}
+
+export async function getJobBySlug(slug: string): Promise<Job | null> {
+  return sanityClient.fetch(
+    `*[_type == "job" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      department,
+      employmentType,
+      location,
+      description,
+      responsibilities,
+      requirements,
+      niceToHave,
+      benefits,
+      salary,
+      applicationUrl,
+      isActive,
+      order,
+      publishedAt
     }`,
     { slug }
   );
