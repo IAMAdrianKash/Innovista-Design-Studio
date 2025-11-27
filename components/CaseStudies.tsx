@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import ContentSection from './ContentSection';
-import { CaseStudy, Category, urlForImage } from '../lib/sanity';
+import { CaseStudy, urlForImage } from '../lib/sanity';
 
 interface ProjectCardProps {
   caseStudy: CaseStudy;
@@ -100,22 +100,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ caseStudy, index }) => {
 
 interface CaseStudiesProps {
   caseStudies: CaseStudy[];
-  categories: Category[];
 }
 
-const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies, categories }) => {
+const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies }) => {
   const [filteredCaseStudies, setFilteredCaseStudies] = useState<CaseStudy[]>(caseStudies);
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeService, setActiveService] = useState<string>('all');
+
+  // Service filter options matching Sanity schema
+  const services = [
+    { label: 'All', value: 'all' },
+    { label: 'Web Design', value: 'web-design' },
+    { label: 'Lead Generation', value: 'lead-generation' },
+    { label: 'SEO Optimization', value: 'seo' },
+    { label: 'Automation', value: 'automation' },
+    { label: 'Branding', value: 'branding' },
+    { label: 'Content Strategy', value: 'content-strategy' },
+  ];
 
   useEffect(() => {
-    if (activeCategory === 'all') {
+    if (activeService === 'all') {
       setFilteredCaseStudies(caseStudies);
     } else {
       setFilteredCaseStudies(caseStudies.filter(cs =>
-        cs.categories?.some(cat => cat._id === activeCategory)
+        cs.services?.includes(activeService)
       ));
     }
-  }, [activeCategory, caseStudies]);
+  }, [activeService, caseStudies]);
 
   return (
     <div className="pt-12">
@@ -137,30 +147,20 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies, categories }) =>
       </section>
 
       {/* Filter Pills */}
-      {categories.length > 0 && (
+      {caseStudies.length > 0 && (
         <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-12">
           <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
-            <button
-              onClick={() => setActiveCategory('all')}
-              className={`px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                activeCategory === 'all'
-                  ? 'bg-forest text-white shadow-lg shadow-forest/20'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              All
-            </button>
-            {categories.map((category) => (
+            {services.map((service) => (
               <button
-                key={category._id}
-                onClick={() => setActiveCategory(category._id)}
+                key={service.value}
+                onClick={() => setActiveService(service.value)}
                 className={`px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                  activeCategory === category._id
+                  activeService === service.value
                     ? 'bg-forest text-white shadow-lg shadow-forest/20'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                {category.title}
+                {service.label}
               </button>
             ))}
           </div>
@@ -182,12 +182,12 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies, categories }) =>
                 <p className="text-xl text-gray-500">
                   {caseStudies.length === 0
                     ? 'No case studies available yet. Check back soon!'
-                    : 'No case studies in this category yet.'}
+                    : 'No case studies with this service yet.'}
                 </p>
               </motion.div>
             ) : (
               <motion.div
-                key={activeCategory}
+                key={activeService}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
