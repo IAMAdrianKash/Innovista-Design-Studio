@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import ContentSection from './ContentSection';
 import { CaseStudy, urlForImage } from '../lib/sanity';
 
@@ -103,10 +103,34 @@ interface CaseStudiesProps {
 }
 
 const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies }) => {
+  const [filteredCaseStudies, setFilteredCaseStudies] = useState<CaseStudy[]>(caseStudies);
+  const [activeIndustry, setActiveIndustry] = useState<string>('all');
+
+  // Industry filter options
+  const industries = [
+    { label: 'All', value: 'all' },
+    { label: 'Law Firms', value: 'law' },
+    { label: 'Engineering', value: 'engineering' },
+    { label: 'Manufacturing', value: 'manufacturing' },
+    { label: 'Healthcare', value: 'healthcare' },
+    { label: 'Real Estate', value: 'real-estate' },
+    { label: 'Consulting', value: 'consulting' },
+    { label: 'Technology', value: 'technology' },
+    { label: 'Other', value: 'other' },
+  ];
+
+  useEffect(() => {
+    if (activeIndustry === 'all') {
+      setFilteredCaseStudies(caseStudies);
+    } else {
+      setFilteredCaseStudies(caseStudies.filter(cs => cs.industry === activeIndustry));
+    }
+  }, [activeIndustry, caseStudies]);
+
   return (
     <div className="pt-12">
       {/* Hero */}
-      <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-24">
+      <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -122,24 +146,63 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies }) => {
         </motion.div>
       </section>
 
+      {/* Filter Pills */}
+      {caseStudies.length > 0 && (
+        <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-12">
+          <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
+            {industries.map((industry) => (
+              <button
+                key={industry.value}
+                onClick={() => setActiveIndustry(industry.value)}
+                className={`px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                  activeIndustry === industry.value
+                    ? 'bg-forest text-white shadow-lg shadow-forest/20'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {industry.label}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Projects Grid */}
       <section className="py-12 md:py-24 bg-white border-t border-[#E6E6E6]">
         <div className="max-w-[90rem] mx-auto px-6 md:px-12">
-          {caseStudies.length === 0 ? (
-            <div className="text-center py-24">
-              <p className="text-xl text-gray-500">No case studies available yet. Check back soon!</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-              {caseStudies.map((caseStudy, idx) => (
-                <ProjectCard
-                  key={caseStudy._id}
-                  caseStudy={caseStudy}
-                  index={idx}
-                />
-              ))}
-            </div>
-          )}
+          <AnimatePresence mode="wait">
+            {filteredCaseStudies.length === 0 ? (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-center py-24"
+              >
+                <p className="text-xl text-gray-500">
+                  {caseStudies.length === 0
+                    ? 'No case studies available yet. Check back soon!'
+                    : 'No case studies in this industry yet.'}
+                </p>
+              </motion.div>
+            ) : (
+              <motion.div
+                key={activeIndustry}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20"
+              >
+                {filteredCaseStudies.map((caseStudy, idx) => (
+                  <ProjectCard
+                    key={caseStudy._id}
+                    caseStudy={caseStudy}
+                    index={idx}
+                  />
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
