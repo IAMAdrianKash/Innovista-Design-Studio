@@ -6,26 +6,44 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import ContentSection from './ContentSection';
-import { getAllBlogPosts, urlForImage, type BlogPost } from '../lib/sanity';
+import { getAllBlogPosts, getAllCategories, urlForImage, type BlogPost, type Category } from '../lib/sanity';
 
 const Insights: React.FC = () => {
   const router = useRouter();
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getAllBlogPosts();
-        setPosts(data);
+        const [postsData, categoriesData] = await Promise.all([
+          getAllBlogPosts(),
+          getAllCategories()
+        ]);
+        setPosts(postsData);
+        setFilteredPosts(postsData);
+        setCategories(categoriesData);
       } catch (error) {
         console.error('Error fetching blog posts:', error);
       } finally {
         setLoading(false);
       }
     };
-    fetchPosts();
+    fetchData();
   }, []);
+
+  useEffect(() => {
+    if (activeCategory === 'all') {
+      setFilteredPosts(posts);
+    } else {
+      setFilteredPosts(posts.filter(post =>
+        post.categories?.some(cat => cat._id === activeCategory)
+      ));
+    }
+  }, [activeCategory, posts]);
 
   if (loading) {
     return (
@@ -41,7 +59,7 @@ const Insights: React.FC = () => {
   return (
     <div className="pt-12">
       {/* Hero */}
-      <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-24">
+      <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -58,24 +76,74 @@ const Insights: React.FC = () => {
         </motion.div>
       </section>
 
+      {/* Filter Pills */}
+      {categories.length > 0 && (
+        <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-12">
+          <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
+            <button
+              onClick={() => setActiveCategory('all')}
+              className={`px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                activeCategory === 'all'
+                  ? 'bg-forest text-white shadow-lg shadow-forest/20'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              All
+            </button>
+            {categories.map((category) => (
+              <button
+                key={category._id}
+                onClick={() => setActiveCategory(category._id)}
+                className={`px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                  activeCategory === category._id
+                    ? 'bg-forest text-white shadow-lg shadow-forest/20'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {category.title}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Articles Grid */}
       <section className="py-12 md:py-24 bg-white border-t border-[#E6E6E6]">
         <div className="max-w-[90rem] mx-auto px-6 md:px-12">
-          {posts.length === 0 ? (
-            <div className="text-center py-24">
-              <p className="text-gray-600 text-lg">No blog posts yet. Create your first post in Sanity Studio!</p>
-              <a
-                href="https://innovistadesign.sanity.studio"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-6 px-8 py-3 bg-forest text-white rounded-full font-bold hover:bg-forest/90 transition-colors"
+          <AnimatePresence mode="wait">
+            {filteredPosts.length === 0 ? (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-center py-24"
               >
-                Open Sanity Studio
-              </a>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-              {posts.map((post, idx) => {
+                <p className="text-xl text-gray-500">
+                  {posts.length === 0
+                    ? 'No blog posts yet. Create your first post in Sanity Studio!'
+                    : 'No posts in this category yet.'}
+                </p>
+                {posts.length === 0 && (
+                  <a
+                    href="https://innovistadesign.sanity.studio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-6 px-8 py-3 bg-forest text-white rounded-full font-bold hover:bg-forest/90 transition-colors"
+                  >
+                    Open Sanity Studio
+                  </a>
+                )}
+              </motion.div>
+            ) : (
+              <motion.div
+                key={activeCategory}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
+              >
+                {filteredPosts.map((post, idx) => {
                 const imageUrl = post.featuredImage ? urlForImage(post.featuredImage).width(800).height(500).url() : '';
                 const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-US', {
                   year: 'numeric',
@@ -135,8 +203,9 @@ const Insights: React.FC = () => {
                   </motion.article>
                 );
               })}
-            </div>
-          )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
