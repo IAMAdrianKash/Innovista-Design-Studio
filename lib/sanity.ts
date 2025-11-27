@@ -76,6 +76,7 @@ export interface CaseStudy {
   title: string;
   slug: { current: string };
   excerpt: string;
+  categories: Category[];
   industry: string;
   services: string[];
   projectDate: string;
@@ -217,6 +218,12 @@ export async function getAllCaseStudies(): Promise<CaseStudy[]> {
       title,
       slug,
       excerpt,
+      categories[]->{
+        _id,
+        title,
+        slug,
+        description
+      },
       industry,
       services,
       projectDate,
@@ -238,6 +245,12 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null
       title,
       slug,
       excerpt,
+      categories[]->{
+        _id,
+        title,
+        slug,
+        description
+      },
       industry,
       services,
       projectDate,
@@ -262,6 +275,12 @@ export async function getFeaturedCaseStudies(limit: number = 3): Promise<CaseStu
       title,
       slug,
       excerpt,
+      categories[]->{
+        _id,
+        title,
+        slug,
+        description
+      },
       industry,
       services,
       featuredImage,
