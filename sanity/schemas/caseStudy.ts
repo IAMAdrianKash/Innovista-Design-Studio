@@ -37,6 +37,13 @@ export default defineType({
       validation: (Rule) => Rule.required().max(200),
     }),
     defineField({
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'category' }] }],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    defineField({
       name: 'industry',
       title: 'Industry',
       type: 'string',

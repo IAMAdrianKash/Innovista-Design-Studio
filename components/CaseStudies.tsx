@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import ContentSection from './ContentSection';
-import { CaseStudy, urlForImage } from '../lib/sanity';
+import { CaseStudy, Category, urlForImage } from '../lib/sanity';
 
 interface ProjectCardProps {
   caseStudy: CaseStudy;
@@ -100,32 +100,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ caseStudy, index }) => {
 
 interface CaseStudiesProps {
   caseStudies: CaseStudy[];
+  categories: Category[];
 }
 
-const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies }) => {
+const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies, categories }) => {
   const [filteredCaseStudies, setFilteredCaseStudies] = useState<CaseStudy[]>(caseStudies);
-  const [activeIndustry, setActiveIndustry] = useState<string>('all');
-
-  // Industry filter options
-  const industries = [
-    { label: 'All', value: 'all' },
-    { label: 'Law Firms', value: 'law' },
-    { label: 'Engineering', value: 'engineering' },
-    { label: 'Manufacturing', value: 'manufacturing' },
-    { label: 'Healthcare', value: 'healthcare' },
-    { label: 'Real Estate', value: 'real-estate' },
-    { label: 'Consulting', value: 'consulting' },
-    { label: 'Technology', value: 'technology' },
-    { label: 'Other', value: 'other' },
-  ];
+  const [activeCategory, setActiveCategory] = useState<string>('all');
 
   useEffect(() => {
-    if (activeIndustry === 'all') {
+    if (activeCategory === 'all') {
       setFilteredCaseStudies(caseStudies);
     } else {
-      setFilteredCaseStudies(caseStudies.filter(cs => cs.industry === activeIndustry));
+      setFilteredCaseStudies(caseStudies.filter(cs =>
+        cs.categories?.some(cat => cat._id === activeCategory)
+      ));
     }
-  }, [activeIndustry, caseStudies]);
+  }, [activeCategory, caseStudies]);
 
   return (
     <div className="pt-12">
@@ -147,20 +137,30 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies }) => {
       </section>
 
       {/* Filter Pills */}
-      {caseStudies.length > 0 && (
+      {categories.length > 0 && (
         <section className="px-6 md:px-12 max-w-[90rem] mx-auto pb-12">
           <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
-            {industries.map((industry) => (
+            <button
+              onClick={() => setActiveCategory('all')}
+              className={`px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                activeCategory === 'all'
+                  ? 'bg-forest text-white shadow-lg shadow-forest/20'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              All
+            </button>
+            {categories.map((category) => (
               <button
-                key={industry.value}
-                onClick={() => setActiveIndustry(industry.value)}
+                key={category._id}
+                onClick={() => setActiveCategory(category._id)}
                 className={`px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                  activeIndustry === industry.value
+                  activeCategory === category._id
                     ? 'bg-forest text-white shadow-lg shadow-forest/20'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                {industry.label}
+                {category.title}
               </button>
             ))}
           </div>
@@ -182,12 +182,12 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies }) => {
                 <p className="text-xl text-gray-500">
                   {caseStudies.length === 0
                     ? 'No case studies available yet. Check back soon!'
-                    : 'No case studies in this industry yet.'}
+                    : 'No case studies in this category yet.'}
                 </p>
               </motion.div>
             ) : (
               <motion.div
-                key={activeIndustry}
+                key={activeCategory}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
