@@ -372,6 +372,18 @@ export async function getPartnerBySlug(slug: string): Promise<Partner | null> {
   );
 }
 
+// Category Functions
+export async function getAllCategories(): Promise<Category[]> {
+  return sanityClient.fetch(
+    `*[_type == "category"] | order(title asc) {
+      _id,
+      title,
+      slug,
+      description
+    }`
+  );
+}
+
 // Job Posting Functions
 export async function getAllActiveJobs(): Promise<Job[]> {
   return sanityClient.fetch(
