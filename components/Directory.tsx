@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, ExternalLink, MapPin, X, ChevronRight, Eye, Users } from 'lucide-react';
-import { getAllPartners, type Partner, urlForImage } from '@/lib/sanity';
+import { getAllPartners, type Partner, urlForImage } from '@/lib/content';
 
 interface RequestIntroModalProps {
   isOpen: boolean;

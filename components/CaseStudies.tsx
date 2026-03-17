@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import ContentSection from './ContentSection';
-import { CaseStudy, urlForImage } from '../lib/sanity';
+import { CaseStudy, urlForImage } from '../lib/content';
 
 interface ProjectCardProps {
   caseStudy: CaseStudy;
@@ -106,7 +106,7 @@ const CaseStudies: React.FC<CaseStudiesProps> = ({ caseStudies }) => {
   const [filteredCaseStudies, setFilteredCaseStudies] = useState<CaseStudy[]>(caseStudies);
   const [activeService, setActiveService] = useState<string>('all');
 
-  // Service filter options matching Sanity schema
+  // Service filter options
   const services = [
     { label: 'All', value: 'all' },
     { label: 'Web Design', value: 'web-design' },

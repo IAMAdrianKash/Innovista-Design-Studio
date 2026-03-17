@@ -67,11 +67,6 @@ const Capabilities: React.FC = () => {
           desc: "Scalable database and authentication.",
           logo: "/images/icons/supabase.svg"
         },
-        {
-          name: "Sanity.io",
-          desc: "A headless CMS for structured content delivery.",
-          logo: "/images/icons/sanity-light.svg"
-        }
       ]
     },
     {

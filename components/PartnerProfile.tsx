@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, Globe, MapPin, Tag, ChevronLeft, ChevronRight, X, CheckCircle2 } from 'lucide-react';
-import { Partner, urlForImage } from '@/lib/sanity';
+import { Partner, urlForImage } from '@/lib/content';
 import Link from 'next/link';
 
 interface PartnerProfileProps {

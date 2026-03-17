@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPartnerBySlug, getAllPartners } from '@/lib/sanity'
+import { getPartnerBySlug, getAllPartners } from '@/lib/content'
 import PartnerProfile from '@/components/PartnerProfile'
 
 type Props = {

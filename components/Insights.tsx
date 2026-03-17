@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import ContentSection from './ContentSection';
-import { getAllBlogPosts, getAllCategories, urlForImage, type BlogPost, type Category } from '../lib/sanity';
+import { getAllBlogPosts, getAllCategories, urlForImage, type BlogPost, type Category } from '../lib/content';
 
 const Insights: React.FC = () => {
   const router = useRouter();
@@ -121,17 +121,17 @@ const Insights: React.FC = () => {
               >
                 <p className="text-xl text-gray-500">
                   {posts.length === 0
-                    ? 'No blog posts yet. Create your first post in Sanity Studio!'
+                    ? 'No blog posts are published yet. Add entries in the local content source.'
                     : 'No posts in this category yet.'}
                 </p>
                 {posts.length === 0 && (
                   <a
-                    href="https://innovistadesign.sanity.studio"
+                    href="/insights"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block mt-6 px-8 py-3 bg-forest text-white rounded-full font-bold hover:bg-forest/90 transition-colors"
                   >
-                    Open Sanity Studio
+                    View Insights
                   </a>
                 )}
               </motion.div>

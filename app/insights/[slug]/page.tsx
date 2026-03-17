@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, ArrowLeft, Tag, User } from 'lucide-react'
-import { getBlogPostBySlug, getAllBlogPosts, getRelatedBlogPosts, urlForImage, type BlogPost } from '@/lib/sanity'
+import { getBlogPostBySlug, getAllBlogPosts, getRelatedBlogPosts, urlForImage, type BlogPost } from '@/lib/content'
 import ShareButtons from '@/components/blog/ShareButtons'
 import RelatedArticles from '@/components/blog/RelatedArticles'
 

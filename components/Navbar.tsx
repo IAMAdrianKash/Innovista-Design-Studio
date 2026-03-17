@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
   const [searchIndex, setSearchIndex] = useState<SearchResult[]>(STATIC_PAGES);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // Fetch Sanity content for search when component mounts
+  // Fetch search content when component mounts
   useEffect(() => {
     getSearchableContent().then((content) => {
       setSearchIndex([...STATIC_PAGES, ...content]);

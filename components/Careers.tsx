@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Heart, Globe, Coffee } from 'lucide-react';
-import { getAllActiveJobs, type Job } from '@/lib/sanity';
+import { getAllActiveJobs, type Job } from '@/lib/content';
 import Link from 'next/link';
 
 const Careers: React.FC = () => {

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { getPartnerBySlug } from '@/lib/sanity';
+import { getPartnerBySlug } from '@/lib/content';
 
 const FROM_EMAIL = 'leads@innovista.design';
 const TO_EMAIL = 'hello@innovista.design';

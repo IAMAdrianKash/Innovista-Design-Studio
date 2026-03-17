@@ -28,7 +28,7 @@ const Process: React.FC = () => {
       name: "Development",
       icon: <Code size={24} />,
       desc: "We build your site using modern frameworks (React/Next.js). Clean code, semantic structure, and component-based architecture ensure it scales as you grow.",
-      deliverables: ["Custom Development", "CMS Setup (Sanity/Webflow)", "Animation Implementation"]
+      deliverables: ["Custom Development", "CMS Setup (Headless CMS/Webflow)", "Animation Implementation"]
     },
     {
       id: "04",

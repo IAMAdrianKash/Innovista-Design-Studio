@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, Tag } from 'lucide-react';
-import { getBlogPostBySlug, BlogPost as BlogPostType, urlForImage } from '../lib/sanity';
+import { getBlogPostBySlug, BlogPost as BlogPostType, urlForImage } from '../lib/content';
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
