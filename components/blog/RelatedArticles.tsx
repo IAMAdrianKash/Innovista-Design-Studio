@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
-import { BlogPost, urlForImage } from '@/lib/sanity';
+import { BlogPost, urlForImage } from '@/lib/content';
 
 interface RelatedArticlesProps {
   articles: BlogPost[];

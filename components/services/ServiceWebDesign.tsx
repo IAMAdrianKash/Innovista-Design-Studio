@@ -111,7 +111,7 @@ const ServiceWebDesign: React.FC = () => {
             {[
               "Custom UI/UX Design (Figma)",
               "React / Next.js Development",
-              "CMS Integration (Sanity/Contentful)",
+              "CMS Integration (Headless CMS / Contentful)",
               "On-Page SEO Optimization",
               "Google Analytics 4 Setup",
               "Contact Form & CRM Integration",

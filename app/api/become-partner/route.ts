@@ -1,21 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@sanity/client';
+import { Resend } from 'resend';
 
-// Create a Sanity client with write token for creating drafts
-const sanityWriteClient = createClient({
-  projectId: process.env.SANITY_PROJECT_ID || 'thhy1crr',
-  dataset: process.env.SANITY_DATASET || 'production',
-  useCdn: false, // Must be false for write operations
-  apiVersion: '2025-01-01',
-  token: process.env.SANITY_WRITE_TOKEN, // Write token from environment variables
-});
+const FROM_EMAIL = 'leads@innovista.design';
+const TO_EMAIL = 'hello@innovista.design';
+
+let resendInstance: Resend | null = null;
+
+function getResend(): Resend {
+  if (!resendInstance) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY is not set in environment variables');
+    }
+    resendInstance = new Resend(apiKey);
+  }
+  return resendInstance;
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, website, location, category, tagline, description, specialties, avatar, portfolioLinks } = body;
+    const { name, email, website, location, category, tagline, description, specialties, portfolioLinks } = body;
 
-    // Validate required fields
     if (!name || !email || !location || !category || !tagline || !description) {
       return NextResponse.json(
         { success: false, error: 'Missing required fields' },
@@ -23,101 +29,48 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate a slug from the business name
-    const slug = name
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '');
+    const portfolioItems = Array.isArray(portfolioLinks)
+      ? portfolioLinks
+          .filter((item: { url?: string }) => item?.url)
+          .map((item: { url: string; description?: string }) => `<li><a href="${item.url}">${item.url}</a>${item.description ? ` — ${item.description}` : ''}</li>`)
+          .join('')
+      : '';
 
-    // Parse specialties from comma-separated string to array
-    const specialtiesArray = specialties
-      ? specialties.split(',').map((s: string) => s.trim()).filter(Boolean)
-      : [];
+    const emailHtml = `
+      <div style="font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto;">
+        <h2 style="color: #2D5F4E; border-bottom: 3px solid #2D5F4E; padding-bottom: 10px;">New Partner Application</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+        <p><strong>Website:</strong> ${website ? `<a href="${website}">${website}</a>` : 'Not provided'}</p>
+        <p><strong>Location:</strong> ${location}</p>
+        <p><strong>Category:</strong> ${category}</p>
+        <p><strong>Tagline:</strong> ${tagline}</p>
+        <p><strong>Description:</strong><br/>${description}</p>
+        <p><strong>Specialties:</strong> ${specialties || 'Not provided'}</p>
+        ${portfolioItems ? `<h3>Portfolio Links</h3><ul>${portfolioItems}</ul>` : ''}
+      </div>
+    `;
 
-    // Handle avatar upload if present
-    let imageAsset = undefined;
-    if (avatar) {
-      try {
-        // Extract base64 data and mime type
-        const matches = avatar.match(/^data:(.+);base64,(.+)$/);
-        if (matches) {
-          const mimeType = matches[1];
-          const base64Data = matches[2];
-          const buffer = Buffer.from(base64Data, 'base64');
-
-          // Upload to Sanity
-          const uploadedAsset = await sanityWriteClient.assets.upload('image', buffer, {
-            filename: `${slug}-avatar.${mimeType.split('/')[1]}`,
-          });
-
-          imageAsset = {
-            _type: 'image',
-            asset: {
-              _type: 'reference',
-              _ref: uploadedAsset._id,
-            },
-          };
-        }
-      } catch (uploadError) {
-        console.error('Error uploading avatar:', uploadError);
-        // Continue without avatar if upload fails
-      }
-    }
-
-    // Format portfolio links for Sanity
-    const formattedPortfolioLinks = portfolioLinks && portfolioLinks.length > 0
-      ? portfolioLinks.map((link: { url: string; description: string }) => ({
-          url: link.url,
-          description: link.description || undefined,
-        }))
-      : undefined;
-
-    // Generate a unique draft ID
-    const timestamp = Date.now();
-    const randomStr = Math.random().toString(36).substring(2, 9);
-    const draftId = `drafts.${slug}-${timestamp}-${randomStr}`;
-
-    // Create the draft partner document
-    const draftPartner: any = {
-      _id: draftId,
-      _type: 'partner',
-      name,
-      slug: {
-        _type: 'slug',
-        current: slug,
-      },
-      tagline,
-      description,
-      category,
-      contactEmail: email,
-      website: website || undefined,
-      location,
-      specialties: specialtiesArray.length > 0 ? specialtiesArray : undefined,
-      portfolioLinks: formattedPortfolioLinks,
-      verified: false, // Draft partners start unverified
-      featured: false, // Draft partners start unfeatured
-      order: 999, // Default order, can be changed in Sanity
-    };
-
-    // Add image only if uploaded successfully
-    if (imageAsset) {
-      draftPartner.image = imageAsset;
-    }
-
-    // Create the document in Sanity as a draft
-    const result = await sanityWriteClient.create(draftPartner, {
-      autoGenerateArrayKeys: true,
+    const resend = getResend();
+    const { data, error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: TO_EMAIL,
+      replyTo: email,
+      subject: `🤝 Partner Application: ${name}`,
+      html: emailHtml,
     });
 
-    console.log('Partner application submitted as draft:', result._id);
+    if (error) {
+      throw new Error(error.message);
+    }
 
     return NextResponse.json({
       success: true,
       message: 'Partner application submitted successfully',
-      draftId: result._id,
+      messageId: data?.id,
     });
   } catch (error) {
-    console.error('Error creating partner draft:', error);
+    console.error('Error handling partner application:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to submit application' },
       { status: 500 }

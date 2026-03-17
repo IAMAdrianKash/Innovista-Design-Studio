@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Tag, Quote } from 'lucide-react';
-import { CaseStudy as CaseStudyType, urlForImage } from '../lib/sanity';
+import { CaseStudy as CaseStudyType, urlForImage } from '../lib/content';
 
 interface CaseStudyDetailProps {
   caseStudy: CaseStudyType;

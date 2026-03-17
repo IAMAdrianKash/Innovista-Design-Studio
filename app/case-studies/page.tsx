@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import CaseStudies from '@/components/CaseStudies'
-import { getAllCaseStudies } from '@/lib/sanity'
+import { getAllCaseStudies } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Case Studies | Innovista Design Studio',

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getCaseStudyBySlug, getAllCaseStudies } from '@/lib/sanity'
+import { getCaseStudyBySlug, getAllCaseStudies } from '@/lib/content'
 import CaseStudyDetail from '@/components/CaseStudyDetail'
 
 // Generate static paths for all case studies at build time

@@ -1,9 +1,9 @@
 /**
  * Helper functions for search functionality
- * Fetches searchable content from Sanity CMS
+ * Fetches searchable content from local content source
  */
 
-import { sanityClient } from './sanity';
+import { getAllBlogPosts, getAllCaseStudies } from './content';
 
 export interface SearchResult {
   title: string;
@@ -12,46 +12,25 @@ export interface SearchResult {
   desc: string;
 }
 
-/**
- * Fetch all searchable content from Sanity for search index
- */
 export async function getSearchableContent(): Promise<SearchResult[]> {
   try {
-    // Fetch blog posts and case studies from Sanity
     const [blogPosts, caseStudies] = await Promise.all([
-      sanityClient.fetch(`
-        *[_type == "post"] | order(publishedAt desc) {
-          _id,
-          title,
-          slug,
-          excerpt
-        }
-      `),
-      sanityClient.fetch(`
-        *[_type == "caseStudy"] | order(projectDate desc) {
-          _id,
-          client,
-          title,
-          slug,
-          excerpt
-        }
-      `)
+      getAllBlogPosts(),
+      getAllCaseStudies(),
     ]);
 
-    // Map blog posts to search results
-    const blogResults: SearchResult[] = blogPosts.map((post: any) => ({
+    const blogResults: SearchResult[] = blogPosts.map((post) => ({
       title: post.title,
-      type: 'Insight' as const,
+      type: 'Insight',
       path: `/insights/${post.slug.current}`,
-      desc: post.excerpt || ''
+      desc: post.excerpt || '',
     }));
 
-    // Map case studies to search results
-    const caseStudyResults: SearchResult[] = caseStudies.map((study: any) => ({
+    const caseStudyResults: SearchResult[] = caseStudies.map((study) => ({
       title: study.client,
-      type: 'Work' as const,
+      type: 'Work',
       path: `/case-studies/${study.slug.current}`,
-      desc: study.title || study.excerpt || ''
+      desc: study.title || study.excerpt || '',
     }));
 
     return [...blogResults, ...caseStudyResults];

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { Check, ChevronRight, ArrowRight, Monitor, Smartphone, Zap, TrendingUp, Award, Clock, DollarSign, Users, Plus, Minus } from 'lucide-react';
-import { getFeaturedCaseStudies, type CaseStudy, urlForImage } from '@/lib/sanity';
+import { getFeaturedCaseStudies, type CaseStudy, urlForImage } from '@/lib/content';
 
 interface FAQItemProps {
   question: string;
@@ -445,7 +445,7 @@ const WebDesignEdmonton: React.FC = () => {
                 "React & Next.js Development",
                 "Mobile-First Responsive Design",
                 "On-Page SEO Optimization",
-                "CMS Integration (Sanity/WordPress)",
+                "CMS Integration (Headless CMS / WordPress)",
                 "Google Analytics 4 Setup",
                 "Contact Forms & CRM Integration",
                 "SSL Certificate & Security",
