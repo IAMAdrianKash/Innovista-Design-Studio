@@ -3,7 +3,7 @@ import { Plus_Jakarta_Sans, Outfit, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ScrollProgress from '@/components/ui/ScrollProgress'
+// import ScrollProgress from '@/components/ui/ScrollProgress'
 import MobileStickyBar from '@/components/ui/MobileStickyBar'
 import CookieBanner from '@/components/CookieBanner'
 
@@ -73,7 +73,7 @@ export default function RootLayout({
       <body className="bg-cream min-h-screen font-sans text-dark selection:bg-dark selection:text-white overflow-x-hidden">
         <div className="relative">
           {/* Global UX Enhancements */}
-          <ScrollProgress />
+          {/* <ScrollProgress /> */}
 
           <Navbar />
 
